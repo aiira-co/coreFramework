@@ -217,7 +217,10 @@
         //this function is to set wheres for the statement
         public function where(string $field, string $opValue, string $value = null): self{
           if($field != null){
-            $field = $this->fieldExists(self::$s['table'], $field);
+            if(!isset(explode('.',$field)[1])){
+
+              $field = $this->fieldExists(self::$s['table'], $field);
+            }
 
             if($opValue == null){
               echo 'fill second arg';
@@ -254,7 +257,10 @@
           }
 
           if($field != null){
-            $field = $this->fieldExists(self::$s['table'], $field);
+            if(!isset(explode('.',$field)[1])){
+
+              $field = $this->fieldExists(self::$s['table'], $field);
+            }
 
             if($opValue == null){
               echo 'fill second arg';
@@ -295,7 +301,11 @@
               die('Call the method Where(\'id\',$id) before calling this method "andWhere()"');
             }
           if($field != null){
-            $field = $this->fieldExists(self::$s['table'], $field);
+
+            if(!isset(explode('.',$field)[1])){
+
+              $field = $this->fieldExists(self::$s['table'], $field);
+            }
 
             if($opValue == null){
               echo 'fill second arg';
@@ -437,7 +447,9 @@
         //this function is to set wheres for the statement
         function offset(int $n){
           self::$s['offset'] = $n;
-          $this->orderBy('id');
+          if(self::$s['order'] == null){
+            $this->orderBy('id');
+          }
           return $this->get();
         }
 
