@@ -17,7 +17,7 @@ class AdConfig{
 	public $password = '';
 	public $db = 'coredb';
 	public $dbprefix = '';
-	public $live_site = 'http://localhost/airCore/';
+	public $live_site = '/coreFramework/';
 	public $secret = 'Pi1gS3vrtWvNq3O0';
   public $template ="sleek";
   public $routerPath="./app.router.php";
