@@ -1,0 +1,132 @@
+.ad-left{
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    
+    width:200px;
+    background-color:$dark;
+    z-index: 10;
+    
+    overflow: hidden;
+    @include transEase(0.3s);
+    
+    
+    .ad-divider{
+        @include transEase(0.3s);
+    }
+    
+    &.ad-closed{
+        width: 48px;
+        
+        .ad-person{
+            .user{
+                width:38px;
+                height:38px;
+                margin-left:4.5px;
+            }
+        }
+        
+        .ad-divider{
+            opacity:0;
+        }    
+    }
+    
+    
+    .ad-logo{
+        width:200px;
+        height:48px;
+        background-color:white;
+        color:$pink;
+        
+        .logo{
+            // background:green;
+            display: inline-block;
+            vertical-align: middle;
+            
+            width:48px;
+            height:48px;
+            margin:0;
+            padding:0;
+            text-align: center;
+            
+            font-size: $baseFontSize + 7;
+            i{
+                margin-top:12px;
+            }
+        }
+    }
+    
+    .menu{
+      width:200px;
+      margin:0;
+      padding:0;
+      
+      .ad-item{
+          &:hover{
+              opacity:.7;
+              cursor:pointer;
+          }
+      }
+    }
+    
+    .ad-person{
+        width: 200px;
+        
+        .user{
+            @include transEase(0.3s);
+        }
+    }
+}
+
+
+.ad-right{
+    position:fixed;
+    top:0;
+    bottom:0;
+    right:0;
+    left:200px;
+    
+    // background-color:red;
+    overflow: auto;
+    
+    z-index: 20;
+    @include transEase(0.3s);
+    
+    &.ad-closed{
+        left:48px;
+    }
+    
+    .ad-middle{
+        background-color:white;
+        
+        position:absolute;
+        left:0;
+        top:0;
+        bottom:0;
+        
+        width:0;
+        z-index:30;
+        overflow: hidden;
+        
+         @include transEase(0.3s,0.2s);
+         
+        //  .ad-item{
+        //      opacity: 0;
+        //  }
+    }
+    
+        .ad-workspace{
+        // background-color:blue;
+        
+        position:absolute;
+        left:0;
+        top:0;
+        bottom:0;
+        right:0;
+        
+        z-index:20;
+        @include transEase(0.3s,0.2s);
+        
+    }
+}

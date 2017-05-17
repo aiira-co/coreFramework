@@ -1,0 +1,266 @@
+.ad-header{
+    height:56px;
+    padding:0 16px;
+    margin:0;
+    position: relative;
+    .down{
+        margin-top:16px;
+    }
+    
+    &.line:before{
+
+        content: '';
+        position: absolute;
+        display: block;
+        left:16px;
+        right:16px;
+        height:1px;
+        background-color:rgba(0,0,0,0.2);
+        bottom: 0;
+    
+    }
+    
+    .title{
+        font-size: $baseFontSize + 4;
+        color:inherit;
+        margin:0;
+        margin-top:16px;
+        display: inline-block;
+        vertical-align: top;
+        font-weight: 500;
+    }
+    .ad-fab{
+        // clear:both;
+     position:absolute;
+     top:30px;
+        &.ad-right{
+            right:0;
+           
+        }
+    }
+    .ad-btn{
+        background:transparent;
+        color:inherit;
+        padding:16px !important;
+        margin-top:5px;
+        // font-weight: 100;
+        opacity: 0.7;
+        
+        &:hover{
+            opacity:1;
+            color:inherit;
+        }
+    }
+    .ad-logo{
+        // background-color:red;
+        display: inline-block;
+        width:40px;
+        height:40px;
+        vertical-align: top;
+        
+        margin-top:8px;
+        margin-right:16px;
+        overflow:hidden;
+        
+        img{
+            width:100%;
+        }
+    }
+}
+
+.ad-header-fixed{
+    
+    @extend .ad-header;
+    
+    position:fixed;
+    left:0;
+    top:0;
+    right:0;
+    margin-bottom:56px;
+   }
+   
+   
+   
+   .ad-header-responsive{
+    
+    @extend .ad-header-fixed;
+    
+    height:400px;
+   }
+   
+   
+   .ad-subheader{
+    height:48px;
+    // width:100%;
+    background-color:$dark + 10;
+    color:$smoke;
+    //box-shadow: 0 2px 2px 1px grey;
+    @include shadow(0px, 2px, 2px, 1px, rgb(160,160,160));
+    //padding:0 16px;
+    padding:0 16px;
+    h1,h2{
+        margin:0;
+        font-weight: 400;
+        padding:10px 0;
+    }
+    
+    .ad-fab{
+        position:absolute;
+        top:24px;
+         &.ad-right{
+            right:0;
+           
+        }
+    }
+   }
+   
+   
+   
+   .ad-nav{
+    //    background-color:red;
+       width:100%;
+       height:48px;
+       
+       display: inline-block;
+       z-index: 100;
+       
+       .ad-logo{
+           background-color:black;
+           width:48px;
+           height:48px;
+           margin:0;
+           padding:0;
+           
+            display: inline-block;
+            vertical-align: top;
+       }
+       
+       
+       .ad-menu{
+        display: inline-block;  
+        vertical-align: top;
+        
+        width:auto;
+        height:48px;
+        
+        // background-color:blue;
+        
+        
+        ul{
+            list-style: none;
+            width:100%;
+            margin:0;
+            padding:0;
+            margin-top:12px;
+            
+            
+            li{
+                list-style: none;
+                float:left;
+                // background-color:green;
+                padding:5px 7px;
+            }
+            
+            
+        } 
+       }
+       
+       .ad-menuTrigger{
+           display: inline-block;
+           width:48px;
+           height:48px;
+        //    background-color:white;
+           text-align:center;
+           
+           i{
+                margin-top:40%; 
+           }
+       }
+       
+       //Positioning
+       //Positioning
+       //Positioning
+       
+       &.ad-fixed{
+           position:fixed;
+           left:0;
+           top:0;
+           right:0;
+       }
+       
+       &.ad-fixedAbsolute{
+           
+       }
+       
+       
+       
+       
+       //Navigation Behavior
+       //Navigation Behavior
+       //Navigation Behavior
+       //Navigation Behavior
+       
+       &.spread{
+           .ad-menu{
+               width:80%;
+               ul{
+                   li{
+                       margin:0 5%;
+                   }
+               }
+           }
+       }
+       
+       &.center{
+           
+       }
+       
+       
+       //Coloring
+       //Coloring
+       //Coloring
+       
+       &.black{
+        background-color:rgb(0,0,0);
+        color:whitesmoke;
+        
+        a{
+          &:hover{
+              color:white;
+          }  
+        }   
+       }
+       
+       &.dark{
+          background-color:$dark;
+        color:whitesmoke;
+        
+        a{
+          &:hover{
+              color:white;
+          }  
+        }  
+       }
+       
+       &.white{
+           background-color:white;
+        
+        
+        a{
+          &:hover{
+              color:black;
+          }  
+        } 
+       }
+       
+       &.transBlack{
+           background-color:rgba(0,0,0,.6);
+        color:whitesmoke;
+        
+        a{
+          &:hover{
+              color:white;
+          }  
+        } 
+       }
+   }

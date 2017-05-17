@@ -1,0 +1,196 @@
+@mixin transEase($time, $delay:0s)
+{
+	-webkit-transition: all $time ease-out $delay;
+    -moz-transition: all $time ease-out $delay;
+    -o-transition: all $time ease-out $delay;
+    transition: all $time ease-out $delay;
+}
+
+
+@mixin transform($skew)
+{
+    -webkit-transform:skew($skew);
+    -moz-transform:skew($skew);
+    -o-transform:skew($skew);
+    transition:skew($skew);
+}
+
+
+@mixin scale($value)
+{
+    -webkit-transform:scale($value);
+    -moz-transform:scale($value - 0.1);
+    -o-transform:scale($value);
+    transition:scale($value);
+}
+
+@mixin rotate($deg)
+{
+    -webkit-transform:rotate($deg);
+    -moz-transform:rotate($deg);
+    -o-transform:rotate($deg);
+    transition:rotate($deg);
+}
+
+
+@mixin shadow($val1, $topDown, $blurValue, $spreadValue, $color)
+{
+    -webkit-box-shadow: $val1 $topDown $blurValue $spreadValue $color;
+    -moz-box-shadow: $val1 $topDown $blurValue $spreadValue $color;
+    -o-box-shadow: $val1 $topDown $blurValue $spreadValue $color;
+    -mz-box-shadow: $val1 $topDown $blurValue $spreadValue $color;
+    box-shadow: $val1 $topDown $blurValue $spreadValue $color;
+    
+    
+}
+
+
+//Button Color
+
+@mixin btnColor($color, $text:white){
+    background-color:$color;
+    color:$text;
+    &:hover{
+        background-color:$color - 20;
+        color:$text;
+        
+        box-shadow: none;
+       
+    }
+    
+    &.clear{
+        color:$color;
+        background:transparent;
+        box-shadow: none;
+        
+        &:hover{
+                text-shadow: 0px 0px 2px $color + 20;
+        }
+    }
+    
+    &.outline{
+        color:$color;
+        background:transparent;
+        
+            box-shadow: 0px 0px 3px 0px rgba($color, 0.1) inset, 
+            0px 0px 0px 1px rgba($color, 0.5);
+        
+        &:hover{
+            box-shadow: none;
+            background-color:$color;
+            color:$text;
+        }
+        
+        
+    }
+}
+
+@mixin btnShine($color){
+    &:hover{
+        box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1) inset, 
+        0px 0px 0px 1px $color, 0px 0px 3px 1px $color - 20;
+    }
+    
+    &:focus, &:active{
+           box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1) inset, 
+            0px 0px 0px 1px $color;
+    }
+}
+
+@mixin cardColor($color, $text:white){
+    background-color:$color;
+    color:$text;
+    
+    &.hover:hover{
+        @include shadow(1px, 1px, 2px, 2px, rgba(0,0,0,0.3));
+    }
+}
+//Handels the slider and ranges
+
+
+@mixin rangeTrack(){
+  height: 1.5px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: grey + 50;
+  border-radius: 1.3px;
+    
+  &:focus{
+    background: $tGreen;  
+  }
+}
+
+
+@mixin rangeThumb(){
+ 
+ @include scale(.8);
+
+ @include shadow(0px, 0px, 0px, 0px, rgba(0,0,0,0));
+  border: 3px solid grey + 50;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  
+  margin-top: -11px;
+  
+  @include transEase(0.5s);
+  
+  &:hover{
+     background: $tGreen;
+  border-color:$tGreen;
+  @include shadow(0px, 0px, 0px, 10px, rgba(0,0,0,0.2));
+  }
+  
+  
+}
+
+
+
+
+//Handels the Video, Music ranges
+
+
+@mixin rangeTrackMedia(){
+  height: 10px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: rgba(black, .5);
+  border-radius: 5px;
+  border:none;
+  overflow:hidden;
+  &:focus{
+    background: $prim;  
+  }
+}
+
+
+@mixin rangeThumbMedia(){
+ 
+
+//  @include shadow(0px, 0px, 0px, 0px, rgba(0,0,0,0));
+border:none;
+  height: 10px;
+  width: 30px;
+  border-radius: 5px;
+  background: #ffffff;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  
+  margin-top:0px;
+  
+  
+  @include transEase(0.5s);
+  
+  &:hover{
+     background: $prim;
+
+  @include shadow(0, 0, 2px, 2px, rgba(0,0,0,0.2));
+  }
+  
+  
+}

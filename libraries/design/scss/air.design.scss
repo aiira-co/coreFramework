@@ -1,0 +1,36 @@
+/*
+   ** airDesign
+   ** Author: Kofi Owusu-Afriyie
+   **Version: 1.0.2
+
+*/
+
+/* BASE-- base, variables, mixins, normalize */
+
+@import "base/_variables.scss";
+@import "base/_mixins.scss";
+@import "base/_normalize.scss";
+@import "base/_base.scss";
+
+/* LAYOUTS --- Page layout styles*/
+@import "layout/_layout.scss";
+@import "layout/_header.scss";
+@import "layout/_nav.scss";
+@import "layout/_footer.scss";
+// @import "layout/_template.scss";
+
+/* MODULES --- Individual site components  */
+@import "modules/_typography.scss";
+@import "modules/_blocks.scss";
+@import "modules/_items.scss";
+@import "modules/_card.scss";
+@import "modules/_buttons.scss";
+@import "modules/_sections.scss";
+@import "modules/_components.scss";
+@import "modules/_form.scss";
+@import "modules/_mobile.scss";
+
+
+/*VENDOR -- exrternally included css*/
+// @import "vendor/_modalwindow.scss";
+// @import "vendor/_flaticon.scss";

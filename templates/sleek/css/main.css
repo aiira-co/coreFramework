@@ -1,0 +1,36 @@
+html,body{
+    /*font-size: 17px;*/
+}
+
+
+
+.ad-nav{
+
+    /*height:58px;*/
+    /*font-size: 16px;*/
+}
+
+
+.ad-nav .ad-logo{
+    background-color:transparent;
+    transform: scale(.8);
+
+}
+
+
+
+
+
+.banner{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:center;
+}
+
+
+
+/*.ad-input{
+  width:auto !important;
+  display: block !important;
+  background-color: red;
+}*/

@@ -1,0 +1,360 @@
+.tool-tip{
+	
+	font-size: 12px;
+	color:$smoke;
+	opacity: 0.9;
+	background-color:$dark;
+	padding:10px 8px;
+	display: inline-block;
+	
+	margin-top:14px;
+	@include shadow(0px, 0.5px, 1px, 1px, rgba(0,0,0,0.25));
+}
+
+.ad-tip{
+	 position:relative;
+}
+
+.ad-tip[ad-tip]:hover:after {
+  content: attr(ad-tip);
+  position: absolute;
+  left:20%;
+  margin-left:-20%;
+ z-index: 98;
+  opacity: 0;
+ /*max-width:auto;*/
+  animation: ad-tipAnim 0.3s ease 0s 1;
+  
+  @extend .tool-tip;
+  opacity: .9;
+  
+  
+  /*opacity: 0.9;*/
+  
+}
+
+
+@keyframes ad-tipAnim{
+    from{
+        height:0;
+        opacity:0;
+        margin-top:0px;
+    }
+    
+    from{
+        height:auto;
+        opacity:0.95;
+        margin-top:20px;
+        /*background-color:blue;*/
+    }
+    
+    
+}
+
+
+
+
+.ad-file{ 
+
+	.ad-fab{
+    top:-30px;
+    position: relative;
+    left:80%;
+	}
+	img{
+		display: block;
+		background-color:rgba(50,50,50,0.8);
+		height: 300px;
+	}
+}
+
+
+
+
+.ad-divider{
+    /*background-color:red;*/
+    padding:16px;
+    font-size: 13px;
+    opacity: 0.6;
+    color:inherit;
+    font-weight: bold;
+}
+
+
+
+
+.ad-snackbar{
+	height:48px;
+	min-width: 288px;
+	max-width: 568px;
+	border-radius: 2px;
+	font-size: 14px;
+	
+	background-color:$dark;
+	padding:0;
+	color:white;
+	margin:0 auto;
+	z-index :1000;
+	
+	p{
+		padding:14px 24px;
+	
+		display: inline-block;
+		margin:0;
+		margin-top:2px;
+		& + .ad-btn{
+			margin-left:24px;
+			margin-right:24px;
+		}
+	}
+	.ad-btn{
+		font-size: 14px;
+		
+	}
+	
+}
+
+
+
+
+
+//Loading Divs
+
+
+//Spinner
+.ad-loading{
+	width:100px;
+	height:100px;
+	
+	margin:16px;
+	background-color:transparent;
+	position: relative;
+	border-radius: 50%;
+	border:2px solid #575758;
+
+	animation: loadingSpin 0.9s linear infinite;
+}
+
+
+.ad-loading:before{
+	position: absolute;
+	top:0;
+	
+	content: '';
+	height:20%;
+	width:20%;
+	
+	background-color:#F0F0F0;
+	margin-left:40%;
+	margin-top:-5px;
+
+
+}
+
+
+@keyframes loadingSpin{
+	from{
+		@include rotate(0);
+	}
+
+	to{
+		@include rotate(360deg);
+	}
+}
+
+
+
+//File Loader
+
+
+.ad-loading-f[ad-count]{
+	background-color:rgba($dark,.4);
+	display: inline-block;
+	width:100%;
+	max-width: 200px;
+	height:4px;
+	border-radius: 2px;
+	position:relative;
+	margin:16px;
+	
+	
+	&:before{
+		content:'';
+		position:absolute;
+		background-color:$tGreen;
+		display:block;
+		width:22%;
+		height:100%;
+		border-radius: 2px;
+		top:0;
+		left:0;
+		
+		animation: fileLoader 2s ease infinite;
+	}
+		&:after{
+		content:attr(ad-count);
+		position:absolute;
+		// background-color:green;
+		display:block;
+
+
+	
+		top:-14px;
+		right:0;
+	}
+	
+	span{
+		display: block;
+		margin-top:-14px;
+		
+	}
+}
+
+
+@keyframes fileLoader{
+	0%{
+		background-color: royalblue;
+	}	
+	
+	50%{
+		background-color: $prim - 20;
+	}
+	
+	
+	100%{
+		background-color: royalblue;
+	}
+}
+
+//Image Loader
+
+
+.ad-loading-i[ad-count]{
+	position:relative;
+	width:100%;
+	max-width:200px;
+	height:56px;
+	background-color:rgba($dark,.1);
+	margin:16px;
+	
+	
+	&:before{
+		content:'';
+		position:absolute;
+		top:0;
+		left:0;
+		width:22%;
+		bottom:0;
+		height:100%;
+		margin:0;
+		padding:0;
+		opacity:.5;
+		
+		background-color:$green;
+		animation: fileLoader 2s ease infinite;
+	}
+	.img{
+		height:40px;
+		overflow:hidden;
+		display: inline-block;
+		width:auto;
+		vertical-align: top;
+		border-radius:3px;
+		background:$dark;
+		margin:8px 16px;
+		position:relative;
+			img{
+				height: 100%;
+				width:auto;
+			}
+	}
+	
+	span{
+		position:relative;
+		display: inline-block;
+		vertical-align: top;
+		color:inherit;
+		padding-top: 8px;
+		// background-color:red;
+		height:40px;
+		width:50%;
+		
+	}
+	
+	
+}
+
+//flower Loader
+
+
+.ad-loading-flower[ad-count]{
+	max-width:160px;
+	height:40px;
+	// background-color:red;
+	margin:16px;
+	
+	position:relative;
+	left:40px;
+	
+	&:before{
+		content:attr(ad-count);
+		position:absolute;
+		top:0;
+		bottom:0;
+		left:-44px;
+		
+		width:40px;
+		height:40px;
+		
+		background-color:$tGreen;
+		font-weight: bold;
+		text-align: center;
+		line-height: 3em;
+		
+		border-radius:50% 0 50% 50%;
+	}
+	
+	
+	
+	&:after{
+		content:'';
+		width:22%;
+		position:absolute;
+		bottom:0;
+		left:0;
+		
+		height:10px;
+		background-color:$tGreen;
+	}
+}
+
+
+
+
+
+
+.ad-loaded{
+	width:100px;
+	height:100px;
+	margin:16px;
+	background-color:blue;
+	position: relative;
+	border-radius: 50%;
+	opacity: 0;
+
+	animation: loaded 0.5s ease-in 1;
+}
+
+
+@keyframes loaded{
+	from{
+		@include scale(0);
+		opacity: 0;
+	}
+
+	to{
+		@include scale(1.5);
+		
+		opacity: 0.2;
+	}
+}
