@@ -1,0 +1,67 @@
+html,body{
+    /*font-size: 17px;*/
+}
+
+
+
+.ad-nav{
+
+    /*height:58px;*/
+    /*font-size: 16px;*/
+}
+
+.left{
+  overflow: hidden;
+}
+
+.ad-logo{
+    /*background-color:red;*/
+    margin:0;
+    padding: 0;
+    transform: scale(.5);
+    display: block !important;
+
+    width:200px;
+
+}
+
+.ad-logo img{
+
+}
+
+  .ad-menu{
+    width:100%;
+    /*background-color: red;*/
+    height:auto;
+    display: block !important;
+    padding: 0 !important;
+  }
+.ad-menu li{
+  float: none !important;
+  display: block !important;
+  padding:7px 5px;
+  margin:0 !important;
+}
+
+.ad-menu li:hover{
+  background-color: rgba(20,20,20,.8);
+
+}
+
+
+
+
+
+.banner{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:center;
+}
+
+
+
+/*.ad-input{
+  width:auto !important;
+  display: block !important;
+  background-color: red;
+}*/
