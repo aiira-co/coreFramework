@@ -83,7 +83,7 @@
         //Also set a second parameter for it to check the path
 
         public static function getModel($model, $path = null){
-    			
+
                 $file = $path??'components'. DS .'models'.DS.$model .'.model.php';
 
                 $class = ucfirst($model).'Model';
@@ -336,57 +336,58 @@
   // else require component and display its view with its component exploding
 
   public static function component($component){
-    $cPath  = 'components'.DS.$component.DS.$component.'.component.php';
-    $vPath  = 'components'.DS.$component.DS.$component.'.view.php';
+  $cPath  = 'components'.DS.$component.DS.$component.'.component.php';
+  $vPath  = 'components'.DS.$component.DS.$component.'.view.php';
 
-      if(file_exists($cPath)){
-        require_once $cPath;
-        $class = $component.'Component';
-        if(class_exists($class)){
-          $routeComponent = new $class;
+    if(file_exists($cPath)){
+      require_once $cPath;
+      $component = explode('-',$component);
+      $class = isset($component[1]) ? ucfirst($component[0]).ucfirst($component[1]).'Component' :ucfirst($component[0]).'Component';
+      if(class_exists($class)){
+        $routeComponent = new $class;
 
-          if(file_exists($vPath)){
-            if(method_exists($routeComponent,'constructor')){
-              $routeComponent->constructor();
-            }
+        if(file_exists($vPath)){
+          if(method_exists($routeComponent,'constructor')){
+            $routeComponent->constructor();
+          }
+          // Make Component variable available to View
+          $routeComponentData = json_decode(json_encode($routeComponent),true);
+          $routeComponentLength = count($routeComponentData);
+
+
+          if($routeComponentLength > 0){
+
+
+            $routeComponentFields= array_keys($routeComponentData);
+
+
+            // echo 'routeComponent is not empty';
+
             // Make Component variable available to View
-            $routeComponentData = json_decode(json_encode($routeComponent),true);
-            $routeComponentLength = count($routeComponentData);
+              for($i=0; $i < $routeComponentLength; $i++)
+              {
+                ${$routeComponentFields[$i]} = (is_array($routeComponentData[$routeComponentFields[$i]]) || ($routeComponentData[$routeComponentFields[$i]] instanceof Traversable))
+                ? json_decode(json_encode($routeComponentData[$routeComponentFields[$i]])) : $routeComponentData[$routeComponentFields[$i]];
 
 
-            if($routeComponentLength > 0){
+              }
 
 
-              $routeComponentFields= array_keys($routeComponentData);
-
-
-              // echo 'routeComponent is not empty';
-
-              // Make Component variable available to View
-                for($i=0; $i < $routeComponentLength; $i++)
-                {
-                  ${$routeComponentFields[$i]} = (is_array($routeComponentData[$routeComponentFields[$i]]) || ($routeComponentData[$routeComponentFields[$i]] instanceof Traversable))
-                  ? json_decode(json_encode($routeComponentData[$routeComponentFields[$i]])) : $routeComponentData[$routeComponentFields[$i]];
-
-
-                }
-
-
-            }
-
-            require_once $vPath;
-          }else{
-              echo '<h2>The View File <i>'.$vPath.'</i> Was Not Found</h2>';
           }
 
-        }else {
-          echo '<h2>The Components class <i>'.$class.' </i> does not exist</h2>';
+          require_once $vPath;
+        }else{
+            echo '<h2>The View File <i>'.$vPath.'</i> Was Not Found</h2>';
         }
-      }else{
-        echo '<h2>The Component File <i>'.$cPath.'</i> Was Not Found</h2>';
-      }
 
-  }
+      }else {
+        echo '<h2>The Components class <i>'.$class.' </i> does not exist</h2>';
+      }
+    }else{
+      echo '<h2>The Component File <i>'.$cPath.'</i> Was Not Found</h2>';
+    }
+
+}
 
 
 

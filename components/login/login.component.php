@@ -34,7 +34,7 @@
    function verify(){
 
     //  echo password_hash($_POST['upass'], PASSWORD_DEFAULT);
-     Session::SessionInit('user','email','username','hashword');
+     Session::SessionInit('user','email','username','hash_word');
       if(Session::SessionLogin($_POST['uname'],$_POST['uname'],$_POST['upass']))
         {
           $link = BaseUrl.$this->params->redirect ?? BaseUrl;
