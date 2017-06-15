@@ -19,6 +19,7 @@ $(document).ready(function () {
         }
     });
 
+
     // smoothScrolling
 
     $('a[href*="#"]:not([href="#"])').click(function(){
@@ -37,14 +38,6 @@ $(document).ready(function () {
     });
 
 
-    // //Select * .ad-input and append <hr> to it
-
-    // var adInput = $('.ad-input');
-    // adInput.append('<u></u>');
-
-    // var line = $('.ad-input u');
-    // var input = $(".ad-input input");
-
 
 
     //User Component
@@ -61,13 +54,38 @@ $(document).ready(function () {
 $('.ad-modal-trigger[ad-modal]').click(function(e){
    var $this = $(this);
 //    $('.ad-modal#'+$this.attr('ad-modal')).css({'left': e.pageX},{'top': e.pageX});
-   $('.ad-modal#'+$this.attr('ad-modal')).addClass('ad-show');
-    console.log('x value is: '+ e.pageX + '; Y value is: '+ e.pageY);
+  var $modal = $('.ad-modal#'+$this.attr('ad-modal'));
+
+   var triggerPosition = {top: e.pageY - window.pageYOffset + 'px', left: e.pageX + 'px'} ;
+
+   $modal.css('left',triggerPosition.left);
+   $modal.css('top',triggerPosition.top);
+
+   $modal.hasClass('ad-blur') ? $('.wrapper, .wrapper-fluid').css('filter','blur(3px)'):'';
+
+   $modal.addClass('ad-show');
+
+   $modal.removeAttr('style');
+
+  //  $modal.animate({'top':window.innerHeight * .3} ,6000);
+  //  $modal.animate({'left':window.innerWidth * .5 } ,6000);
+  // //  $modal.css('top','20%');
+    // console.log('e.pageX value is: '+ e.pageX + ' e.pageX value is: '+ e.pageY);
+
+    console.log(triggerPosition.top);
 });
 
-$('.close-modal').click(function(){
-   $('.ad-modal').removeClass('ad-show');
+$('.ad-close-modal').click(function(){
+  var $modal = $('.ad-modal');
+   $modal.removeClass('ad-show');
+   $modal.removeAttr('style');
+   $modal.hasClass('ad-blur') ? $('.wrapper, .wrapper-fluid').css('filter','blur(0)'):'';
 });
+
+
+
+
+
 
 
 //ad-accordian
@@ -75,39 +93,30 @@ $('.close-modal').click(function(){
 $('.ad-accordian .ad-head').click(function(){
     var $this = $(this);
     $this.toggleClass('ad-show');
-})
+});
+
+
+
+
+
 
 
 // ad-tab
 
 $('.ad-tab .ad-head li').click(function(){
     var $this = $(this);
-    $('.ad-tab .ad-head li.active').removeClass('active');
+    $this.parents('.ad-tab').find('li[ad-tab]').removeClass('active');
     $this.addClass('active');
     $this.parents('.ad-tab').find('.ad-body div.ad-show').removeClass('ad-show')
     $this.parents('.ad-tab').find('.ad-body #'+$this.attr('ad-tab')+'').addClass('ad-show');
-})
-
-
-
-
-    //SideMenu Menu-Bar trigger
-    ////Responsive
-    // Optimalisation: Store the references outside the event handler:
-    var $window = $(window);
-
-
-
-    //Toggle List View
+});
 
 
     //ad-cardView Toggle
 
     $('.ad-cardView .ad-data').click(function($e){
-
         $(this).find('.ad-front').toggleClass('ad-slideUp');
-
-    })
+    });
 
 
     //Dropdown

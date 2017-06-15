@@ -1,8 +1,6 @@
 <?php
 
-// require_once('./components/practice/practice.component.php');
-// $c = new PracticeComponent;
-// echo $c->title;
+
 
 
 $base = array('path'=>'/', 'component'=>'app', 'title'=>'Welcome Home');
