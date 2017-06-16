@@ -29,11 +29,11 @@
 // Parent Class for Controllers
 
     class CoreComponent{
-         private $router= array();
+         private $router= [];
          private $routerExist = false;
          private $component;
 
-         private static $c = array();
+         private static $c = [];
 
         function __construct($component, $router){
             $this->router = $router;
@@ -143,13 +143,13 @@
         public static $postId;
         protected $error;
 
-        private static $bindParam = array();
+        private static $bindParam = [];
 
 
         //A static variable to hold all values of the chain methods for use in
         // the createStatement() Method
 
-        private static $s =[
+        private static $s = [
           'table'=>'',
           'field'=>'t.*',
           'where'=>null,
@@ -192,8 +192,8 @@
             'order'=>null,
             'limit'=>null,
             'offset'=>null,
-            'joinTables'=>array(),
-            'joinOn'=>array(),
+            'joinTables'=>[],
+            'joinOn'=>[],
             'groupBy'=>null
           ];
 
@@ -528,7 +528,7 @@
 
           if(self::tableExists($table)){
 
-            $join = array(' INNER JOIN '.self::$prefix.$table.' '.$alias);
+            $join = [' INNER JOIN '.self::$prefix.$table.' '.$alias];
             self::$s['joinTables'] = array_merge(self::$s['joinTables'], $join);
 
 
@@ -546,7 +546,7 @@
 
           if(self::tableExists($table)){
 
-            $join = array(' LEFT JOIN '.self::$prefix.$table.' '.$alias);
+            $join = [' LEFT JOIN '.self::$prefix.$table.' '.$alias];
             self::$s['joinTables'] = array_merge(self::$s['joinTables'], $join);
 
 
@@ -567,7 +567,7 @@
 
           if(self::tableExists($table)){
 
-            $join = array(' RIGHT JOIN '.self::$prefix.$table.' '.$alias);
+            $join = [' RIGHT JOIN '.self::$prefix.$table.' '.$alias];
             self::$s['joinTables'] = array_merge(self::$s['joinTables'], $join);
 
 
@@ -585,7 +585,7 @@
         //i.e JOIN 'table2' q ON t.q_id = q.id
         function on(string $jField, string $tField):self{
           // check if fields exists
-          $on = array(' ON '.$jField.' = '.$tField);
+          $on = [' ON '.$jField.' = '.$tField];
             self::$s['joinOn'] = array_merge(self::$s['joinOn'], $on);
           return new CoreModel;
         }
@@ -802,7 +802,7 @@
 
                 // print_r($bindParam);
                 //Empty bindParam;
-                self::$bindParam = array();
+                self::$bindParam = [];
 
               if($query->execute())
               {
@@ -968,7 +968,7 @@
         $sql = 'SELECT * FROM '.$prefix.self::$table.' WHERE ('.self::$usernameField.'=:uname || '.self::$emailField.'=:umail)  LIMIT 1';
           // echo $sql;
           $query = $pdo->prepare($sql);
-          $query->execute(array(':uname'=>$uname, ':umail'=>$umail));
+          $query->execute([':uname'=>$uname, ':umail'=>$umail]);
           $userRow=$query->fetch(5);
 
 
@@ -988,10 +988,10 @@
                     CoreModel::table(self::$table)
                     ->where('id',$userRow->id)
                     ->update(
-                              array(
+                              [
                                 'lockout_enabled' => false,
                                 'lockout_end'=> 0
-                              )
+                              ]
                             );
 
                     self::$error = '';
@@ -1012,11 +1012,11 @@
                     CoreModel::table(self::$table)
                     ->where('id',$userRow->id)
                     ->update(
-                              array(
+                              [
                                 'access_failed_count'=>0,
                                 'lockout_enabled' => false ,
                                 'lockout_end'=> 0
-                              )
+                              ]
                             );
 
                       $_SESSION['user_session'] = $userRow->id;
@@ -1042,29 +1042,29 @@
                       CoreModel::table(self::$table)
                       ->where('id',$userRow->id)
                       ->update(
-                                array(
+                                [
                                   'access_failed_count'=>$userRow->access_failed_count + 1,
                                   'lockout_enabled' => true ,
                                   'lockout_end'=> strtotime(date('Y-m-d h:i:s')) + 300
-                                )
+                                ]
                               );
                     }
                     elseif($userRow->access_failed_count < 10){
 
                       CoreModel::table(self::$table)
                       ->where('id',$userRow->id)
-                      ->update(array('access_failed_count'=>$userRow->access_failed_count + 1));
+                      ->update(['access_failed_count'=>$userRow->access_failed_count + 1]);
                     }
                     elseif($userRow->access_failed_count == 10) {
                       CoreModel::table(self::$table)
                       ->where('id',$userRow->id)
                       ->update(
-                                array(
+                                [
                                   'account_enabled' => false,
                                   'access_failed_count'=>$userRow->access_failed_count + 1,
                                   'lockout_enabled' => true ,
                                   'lockout_end'=> strtotime(date('Y-m-d h:i:s')) + 86700
-                                )
+                                ]
                               );
                     }
                     return false;
@@ -1221,7 +1221,7 @@ class middleWare{
           }
         }
 
-        return $update?? array();
+        return $update?? [];
 
   }
 

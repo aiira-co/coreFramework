@@ -2,8 +2,8 @@
 
 class Router{
 
-  private $routers = array();
-  private $path = array();
+  private $routers = [];
+  private $path = [];
 
   function setRouter(array ...$r){
     $this->routers = $r;
@@ -61,7 +61,7 @@ class Router{
   function pathGen(){
 
     // /case ONE
-    $path = array();
+    $path = [];
     $found = false;
 
 
@@ -142,7 +142,7 @@ class Router{
 
 
   function checkParams(array $u, array $p){
-    
+
     for($i = 1; $i < count($p); $i++){
 
       if(isset($u[$i]))

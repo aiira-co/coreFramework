@@ -3,8 +3,8 @@
 
 class Node{
 
-    private $route = array('0'=>'aleph','1'=>'beth','2'=>'gimmel','3'=>'daleth','4'=>'hey');
-    public $router = array();
+    private $route = ['0'=>'aleph','1'=>'beth','2'=>'gimmel','3'=>'daleth','4'=>'hey'];
+    public $router = [];
     private $adConfig;
     public $aleph;
 

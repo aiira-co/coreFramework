@@ -1,7 +1,7 @@
 /*
    ** airDesign
    ** Author: Kofi Owusu-Afriyie
-   **Version: 1.0.2
+   **Version: 1.0.3
 
 */
 /* BASE-- base, variables, mixins, normalize */
@@ -2006,6 +2006,7 @@ footer {
 .ad-table .ad-footer {
   height: 48px; }
 .ad-table table {
+  width: 100%;
   border-spacing: 0;
   border-collapse: collapse;
   background-color: transparent;
@@ -2013,7 +2014,7 @@ footer {
   min-height: .01%;
   overflow-x: auto; }
   .ad-table table thead th, .ad-table table td {
-    opacity: 0.7; }
+    opacity: 0.8; }
   .ad-table table th, .ad-table table td {
     padding: 14px 16px !important;
     max-height: 48px !important;
@@ -2041,11 +2042,12 @@ footer {
   .ad-table table > thead > tr > th, .ad-table table > tbody > tr > th, .ad-table table > tfoot > tr > th, .ad-table table > thead > tr > td, .ad-table table > tbody > tr > td, .ad-table table > tfoot > tr > td {
     padding: 8px;
     line-height: 1.42857143;
-    vertical-align: top;
-    border-top: 1px solid #ddd; }
+    vertical-align: top; }
   .ad-table table > thead > tr > th {
     vertical-align: bottom;
     border-bottom: 2px solid #ddd; }
+  .ad-table table > tbody > tr {
+    border-bottom: 1px solid #ddd; }
   .ad-table table > tbody + tbody {
     border-top: 2px solid #ddd; }
   .ad-table table table {

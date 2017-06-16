@@ -3,17 +3,17 @@
 
 
 
-$base = array('path'=>'/', 'component'=>'app', 'title'=>'Welcome Home');
-$about = array('path'=>'about', 'redirectTo'=>BaseUrl);
-$practice = array('path'=>'practice', 'component'=>'practice', 'title'=>'Practice With Data');
-$contact = array('path'=>'contact', 'component'=>'contact', 'title'=>'Get In Touch');
-$account = array('path'=>'account', 'component'=>'account', 'title'=>'Profile', 'auth'=>[true,'account/login']);
-$loginPage = array('path'=>'account/login', 'component'=>'login','title'=>'Please Login');
-$logout = array('path'=>'account/logout', 'component'=>'logout');
+$base = ['path'=>'/', 'component'=>'app', 'title'=>'Welcome Home'];
+$about = ['path'=>'about', 'redirectTo'=>BaseUrl];
+$practice = ['path'=>'practice', 'component'=>'practice', 'title'=>'Practice With Data'];
+$contact = ['path'=>'contact', 'component'=>'contact', 'title'=>'Get In Touch'];
+$account = ['path'=>'account', 'component'=>'account', 'title'=>'Profile', 'auth'=>[true,'account/login']];
+$loginPage = ['path'=>'account/login', 'component'=>'login','title'=>'Please Login'];
+$logout = ['path'=>'account/logout', 'component'=>'logout'];
 
 
-$math = array('path'=>'math', 'title'=>'Mathematics', 'component'=>'math');
-$add = array('path'=>'add/:x/:y', 'title'=>'{{title}}', 'component'=>'add');
+$math = ['path'=>'math', 'title'=>'Mathematics', 'component'=>'math'];
+$add = ['path'=>'add/:x/:y', 'title'=>'{{title}}', 'component'=>'add'];
 
  $router = CORE::getInstance('Router');
 

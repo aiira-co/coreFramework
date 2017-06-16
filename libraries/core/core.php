@@ -4,7 +4,7 @@
     class Core{
 
 
-        private static $instance = array();
+        private static $instance = [];
 
 
         // This Method is called in the root index.php file.
@@ -149,7 +149,7 @@
         private static function autoload($class)
       	{
       		$node = CORE::getInstance('Node');
-      		$paths = array('libraries'.DS.'core','components'.DS.$node->aleph,'components'.DS.$node->aleph.DS.'models');
+      		$paths = ['libraries'.DS.'core','components'.DS.$node->aleph,'components'.DS.$node->aleph.DS.'models'];
       		foreach ($paths as $path)
       		{
       			$file = $path.DS.strtolower($class).'.php';
