@@ -22,6 +22,9 @@ class AdConfig{
   public $template ="sleek";
   public $routerPath="./app.router.php";
 
+  public $airJax = 1;
+  public $cors = ['127.0.0.1'];
+
 }
 
 

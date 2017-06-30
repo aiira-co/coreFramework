@@ -161,7 +161,7 @@ class Router{
   function checkSession($url, $returnTo){
 
        if(!CoreSession::IsLoggedIn()){
-           Core::Redirect(BaseUrl.$url.'?redirect='.$returnTo);
+           Core::redirect(BaseUrl.$url, $returnTo);
        }
 
     }

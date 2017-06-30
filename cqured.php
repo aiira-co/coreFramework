@@ -34,7 +34,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  * @package     [ coreFramework ]
- * @subpackage  [ airCore ]
+ * @subpackage  [ cqured ]
  * @author      Owusu-Afriyie Kofi <koathecedi@gmail.com>
  * @copyright   2017 airDesign.
  * @license     http://www.opensource.org/licenses/bsd-license.php  BSD License
@@ -63,16 +63,47 @@ declare(strict_types=1);
     define('AirJax',$adConfig->airJax);
 
 
+
+
+
     if($adConfig->offline){
-        require_once 'templates'.DS.$adConfig->template.DS.'offline.php';
+        echo json_encode(["noti"=>"success","result"=>$adConfig->offline_message]);
     }
     else{
 
-         require_once 'libraries'.DS.'core'.DS.'core.php';
-         $site = new Core;
+      require_once 'libraries'.DS.'core'.DS.'core.php';
+      //Check Restrictions
 
-         $site->Route();
+      if($_SERVER['SERVER_ADDR'] == $_SERVER['REMOTE_ADDR']){
+        require_once 'libraries'.DS.'core'.DS.'airjax.php';
+        $airJax = new AirJax();
+      }elseif(authorization()){
+        require_once 'libraries'.DS.'core'.DS.'airjax.php';
+        $airJax = new AirJax();
+      }else{
+        die('WHO ARE YOU');
+      }
 
     }
+
+
+
+    //CrossOringin Checks
+    function authorization():bool{
+      if(isset($adConfig->cors)){
+
+        for($i=0;$i < count($adConfig->cors); $i++){
+          if($adConfig->cors[$i] == $_SERVER['REMOTE_ADDR']){
+            return true;
+          }
+
+          return false;
+        }
+
+      }else{
+        return false;
+      }
+  }
+
 
 ?>

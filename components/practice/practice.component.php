@@ -1,6 +1,6 @@
 <?php
 
-import('./practice/practice.model');
+// import('./practice/practice.model');
 
 use CoreComponent as Component;
 use middleWare as MW;
@@ -13,19 +13,35 @@ Component::init([
 class PracticeComponent{
 
     public $model;
-    public $data;
+    public $count;
     public $personData;
-    public $title ='THE PRACTICE VIEW';
+    public $title ='Add New Person';
     public $params;
     public $clear = false;
 
 
     function constructor(){
-      $this->model = new PracticeModel;
+      $this->model = CORE::getModel('practice');
       $this->params =  CORE::getInstance('Params');
       $this->check();
 
+
     }
+
+      function searchPerson(){
+        $this->params->key = $_POST['key'];
+        return CORE::component('practicedata');
+      }
+
+        function countData(){
+          $this->count = $this->model->countPersons();
+
+          return $this->count;
+        }
+
+        function blurMe(){
+          return 'My email is <span class="colorYellow">'.$_POST['email'].'</span>';
+        }
 
     function check(){
 
@@ -46,15 +62,15 @@ class PracticeComponent{
 
         $this->person();
       }
-      $this->persons();
+      // $this->persons();
 
     }
 
 
 
-    function persons(){
-      $this->data = $this->model->getPersons();
-    }
+    // function persons(){
+    //   $this->data = $this->model->getPersons();
+    // }
 
 
 
@@ -62,6 +78,15 @@ class PracticeComponent{
       echo 'talking here';
     }
 
+    function ajaxPerson(){
+      if($this->savePerson()){
+        $notfy = 'successfully saved';
+      }else{
+        $notify = 'failed to save to db';
+      }
+
+      return $notify;
+    }
 
 
 
@@ -77,7 +102,13 @@ class PracticeComponent{
           'email'=>$email
           ];
 
-      $this->model->addPerson($data);
+      if($this->model->addPerson($data)){
+        return 'successfully saved';
+      }else{
+        return 'failed to save to db';
+      }
+
+
     }
 
 
@@ -98,6 +129,13 @@ class PracticeComponent{
     }
 
 
+    function deletePerson($id){
+      if($this->model->deletePerson($id)){
+        return 'Person <span class="colorTgreen">successfully</span> deleted';
+      }else{
+        return 'Person <span class="colorYellow">could not</span> be deleted';
+      }
+    }
 
 
     function person(){

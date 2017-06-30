@@ -1,3 +1,17 @@
+<section class="ad-section">
+  <div class="wrapper">
+    <div class="ad-row">
+      <div class="ad-cols-12">
+        <div class="ad-card ad-block darkBG">
+          dfjdjf
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <section class="ad-section contact">
   <div class="wrapper">
     <div class="ad-row">
@@ -42,7 +56,7 @@
             <textarea name="name" rows="8" cols="80"></textarea>
           </div>
 
-          <button type="button" name="button" class="ad-btn ad-md btn-dark ad-block ad-flat">Send Message</button>
+          <button type="button" name="button" adClick='yoo()' class="ad-btn ad-md btn-dark ad-block ad-flat">Send Message</button>
         </div>
       </div>
     </div>

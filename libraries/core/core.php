@@ -148,8 +148,9 @@
         // Automatically load required for to instatiate the class
         private static function autoload($class)
       	{
-      		$node = CORE::getInstance('Node');
-      		$paths = ['libraries'.DS.'core','components'.DS.$node->aleph,'components'.DS.$node->aleph.DS.'models'];
+          // echo memory_get_usage();
+          $node = CORE::getInstance('Node'); //check to see if you can reduced memory usage here
+      		$paths = ['libraries'.DS.'core','components'.DS.$node->aleph];
       		foreach ($paths as $path)
       		{
       			$file = $path.DS.strtolower($class).'.php';
@@ -159,7 +160,7 @@
       			if (file_exists($file))
       			{
       			require_once $file;
-      			// exit();
+      			   return true;
       			}
 
       		}
@@ -213,11 +214,13 @@
 
 		if (($params->get('api')) == 'json' && ($params->get('hash')) == ($adConfig->secret))
 		{
-      echo 'JSON of component';
+
 			echo json_encode($component);
 
-		}elseif (($params->get('api')) == 'html' && ($params->get('hash')) == ($adConfig->secret))
+		}elseif ( ($adConfig->airJax && $params->get('api') == 'airJax') || ( ($params->get('api')) == 'html' && ($params->get('hash')) == ($adConfig->secret) ))
 		{
+
+
 
       $routeComponent= $component;
       // print_r($routeComponent);
@@ -245,7 +248,28 @@
 
 
       }
-			require_once 'components'.$view.'.php';
+
+
+      if($url){
+
+        require_once 'components'.DS.$view.'.php';
+
+
+      }else{
+        // echo str_replace('{{'.$search.'}}', $replace, $coreLegacy->view);
+        // Replace vairbles in template words with component vairbles
+            for($i=0; $i < $routeComponentLength; $i++)
+            {
+              // echo ${$routeComponentData[$i]};
+              $view = str_replace("{{".$routeComponentFields[$i]."}}", $routeComponentData[$routeComponentFields[$i]], $view);
+
+            }
+            // echo $edited;
+        echo '<br/>'.$view;
+      }
+
+
+
 		}else{
 
 			require_once 'templates'.DS.$tmpl.DS.'index.php';
@@ -316,7 +340,7 @@
         for($i=0; $i < $routeComponentLength; $i++)
         {
           // echo ${$routeComponentData[$i]};
-          $coreLegacy->view = str_replace("{{".$routeComponentFields[$i]."}}", $routeComponentData[$basketFields[$i]], $coreLegacy->view);
+          $coreLegacy->view = str_replace("{{".$routeComponentFields[$i]."}}", $routeComponentData[$routeComponentFields[$i]], $coreLegacy->view);
 
         }
         // echo $edited;
@@ -430,8 +454,19 @@
   // Method for redirecting.
   // This method is also used in the node class for redirecting routes
 
-	public static function redirect($url, $code = 302)
+	public static function redirect($url, $redirectTo = false, $code = 302)
 	{
+      $adConfig = new AdConfig;
+
+      if($redirectTo){
+        $airJaxURL = '&api=airJax';
+        $url = $adConfig->airJax ? $url.$redirectTo.$airJaxURL : $url.$redirectTo;
+      }else{
+        $airJaxURL = '?api=airJax';
+        $url = $adConfig->airJax ? $url.$airJaxURL : $url;
+      }
+
+
 	    if (strncmp('cli', PHP_SAPI, 3) !== 0)
 	    {
 		if (headers_sent() !== true)
@@ -457,7 +492,14 @@
 
 
 
+  public static function airJax(){
 
+    require_once 'node.php';
+    require_once 'legacy.php';
+    $node = new node;
+    $node->airJaxRouter();
+
+  }
 
     }
 

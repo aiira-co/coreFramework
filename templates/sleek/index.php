@@ -6,19 +6,15 @@
 
     require_once 'features/menu.php';
 
-   
-   
-   CORE::CoreApp(); 
-   
+
+
+    echo AirJax?'<ad-router  animate="true" >':null;
+     CORE::CoreApp();
+     echo AirJax?'</ad-router>':null;
    require_once 'features/footer.php';
-   
+
    ?>
 
 
     </body>
 </html>
-
-
-
-
-

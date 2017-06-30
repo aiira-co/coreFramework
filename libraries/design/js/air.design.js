@@ -1,6 +1,52 @@
-
-
 $(document).ready(function () {
+
+
+  var wrapper = $('body');
+  var airlement = { "1":"ad-router",
+                    "2":"ad-loading",
+                    "3":"ad-header",
+                    "4":"ad-subheader",
+                    "5":"ad-nav",
+                    "6":"ad-footer",
+                    "7":"ad-section",
+                    "8":"ad-card",
+                    "9":"ad-modal",
+                    "10":"ad-table",
+                    "11":"ad-list",
+                    "12":"ad-item",
+                    "13":"ad-avatar",
+                    "14":"ad-thumbnail",
+                    "15":"ad-input",
+                    "16":"ad-tab",
+                    "17":"ad-accordian",
+                    "18":"ad-head",
+                    "19":"ad-body",
+                    "20":"ad-content"
+                  };
+
+console.log(airlement.size);
+// <ad-router>
+
+// <ad-header>
+// <ad-nav>
+// <ad-footer>
+
+// <ad-accordian>
+// <ad-tab>
+// <ad-head>
+// <ad-content>
+
+// <ad-section>
+// <ad-card>
+
+// <ad-avatar>
+// <ad-thumbnail>
+
+// <ad-list>
+// <ad-item>
+// <ad-input>
+
+
 
        //Header Fixed
     $(window).scroll(function(){
@@ -39,16 +85,6 @@ $(document).ready(function () {
 
 
 
-
-    //User Component
-
-    var userComp = $('.ad-user[ad-count]');
-    userComp.append('<span>' + userComp.attr('ad-count') + '</span>');
-    var userCount = $('.ad-user[ad-count] span');
-
-    userCount.css('margin-left', userComp.width())
-
-
 //ad-modal popUp
 
 $('.ad-modal-trigger[ad-modal]').click(function(e){
@@ -72,11 +108,12 @@ $('.ad-modal-trigger[ad-modal]').click(function(e){
   // //  $modal.css('top','20%');
     // console.log('e.pageX value is: '+ e.pageX + ' e.pageX value is: '+ e.pageY);
 
-    console.log(triggerPosition.top);
+    // console.log(triggerPosition.top);
 });
 
-$('.ad-close-modal').click(function(){
-  var $modal = $('.ad-modal');
+wrapper.on('click','.ad-close-modal',function(){
+  console.log('clicked');
+  var $modal = $('.ad-modal, ad-modal');
    $modal.removeClass('ad-show');
    $modal.removeAttr('style');
    $modal.hasClass('ad-blur') ? $('.wrapper, .wrapper-fluid').css('filter','blur(0)'):'';
@@ -90,47 +127,42 @@ $('.ad-close-modal').click(function(){
 
 //ad-accordian
 
-$('.ad-accordian .ad-head').click(function(){
+wrapper.on('click','.ad-accordian .ad-head, ad-accordian ad-head',function(){
     var $this = $(this);
     $this.toggleClass('ad-show');
 });
 
 
-
-
-
-
-
 // ad-tab
 
-$('.ad-tab .ad-head li').click(function(){
+wrapper.on('click','.ad-tab .ad-head li, ad-tab ad-head li',function(){
     var $this = $(this);
-    $this.parents('.ad-tab').find('li[ad-tab]').removeClass('active');
+    $this.parents('.ad-tab, ad-tab').find('li').removeClass('active');
     $this.addClass('active');
-    $this.parents('.ad-tab').find('.ad-body div.ad-show').removeClass('ad-show')
-    $this.parents('.ad-tab').find('.ad-body #'+$this.attr('ad-tab')+'').addClass('ad-show');
+    $this.parents('.ad-tab, ad-tab').find('.ad-body div.ad-show, ad-body ad-content.ad-show').removeClass('ad-show')
+    $this.parents('.ad-tab, ad-tab').find('.ad-body #'+$this.attr('ad-tab')+','+'ad-body ad-content#'+$this.attr('ad-tab')+'').addClass('ad-show');
 });
 
 
     //ad-cardView Toggle
 
-    $('.ad-cardView .ad-data').click(function($e){
+    wrapper.on('click','.ad-cardView .ad-data',function(e){
         $(this).find('.ad-front').toggleClass('ad-slideUp');
     });
 
 
     //Dropdown
-    $('.ad-dropdown .ad-trigger').click(function(event){
-      event.stopPropagation();
-      $('.ad-dropdown .ad-content').removeClass('visible');
-      $(this).parent('.ad-dropdown').find('.ad-content').addClass('visible');
+    wrapper.on('click','.ad-dropdown .ad-trigger, ad-dropdown .ad-trigger',function(e){
+      e.stopPropagation();
+      $('.ad-dropdown .ad-content, ad-dropdown ad-content').removeClass('visible');
+      $(this).parent('.ad-dropdown, ad-dropdown').find('.ad-content, ad-content').addClass('visible');
 
     });
 
 
     // disable dropdown at body's click
-    $('body').click(function(){
-      $('.ad-dropdown .ad-content').removeClass('visible');
+    wrapper.click(function(){
+      $('.ad-dropdown .ad-content, ad-dropdown ad-content').removeClass('visible');
     });
 
 

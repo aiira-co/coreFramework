@@ -1,11 +1,10 @@
 <?php
 
 
-
-
 $base = ['path'=>'/', 'component'=>'app', 'title'=>'Welcome Home'];
 $about = ['path'=>'about', 'redirectTo'=>BaseUrl];
 $practice = ['path'=>'practice', 'component'=>'practice', 'title'=>'Practice With Data'];
+$practiceData = ['path'=>'persondata', 'component'=>'practicedata'];
 $contact = ['path'=>'contact', 'component'=>'contact', 'title'=>'Get In Touch'];
 $account = ['path'=>'account', 'component'=>'account', 'title'=>'Profile', 'auth'=>[true,'account/login']];
 $loginPage = ['path'=>'account/login', 'component'=>'login','title'=>'Please Login'];
@@ -20,6 +19,7 @@ $add = ['path'=>'add/:x/:y', 'title'=>'{{title}}', 'component'=>'add'];
  $router->setRouter(
                     $base,
                     $practice,
+                    $practiceData,
                     $contact,
                     $about,
                     $account,

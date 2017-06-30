@@ -25,25 +25,76 @@ class Node{
 
     function router(){
       $this->adConfig  =  new AdConfig;
-      if(isset($this->adConfig->routerPath)){
-          // echo 'manual on';
+
         if(file_exists($this->adConfig->routerPath)){
-          $this->manualRoute();
+          $this->airRoute();
         }else{
           echo 'The file '.$this->adConfig->routerPath.'was not found at the specified destination <br><h2>Check the routerPath variable in config.php<h2>';
         }
-      }else{
-        // echo 'auto on';
-        $this->autoRoute();
-      }
-
 
     }
 
 
 
 
-    private function manualRoute(){
+    function airJaxRouter(){
+      $this->adConfig  =  new AdConfig;
+      require_once $this->adConfig->routerPath;
+      $coreRouter = CORE::getInstance('Router');
+
+      $airJaxPath = $_POST['airJaxPath']??$_GET['airJaxPath'];
+      $routerPath = $coreRouter->getPath($airJaxPath);
+
+      //Check if it has a authentication property
+      if(isset($routerPath['auth'])){
+        if($routerPath['auth'][0]){
+          $coreRouter->checkSession($routerPath['auth'][1], $routerPath['path']);
+        }
+
+      }
+
+      $this->aleph = $routerPath['component'];
+      $this->router[0] = $routerPath['component'];
+
+      $legacy = CORE::getInstance('Legacy');
+      $legacy->set('routerPath',$routerPath);
+
+        $aleph = strtolower($this->aleph);
+        $path = 'components'.DS.$aleph.DS.$aleph.'.component.php';
+
+        if(file_exists($path)){
+            // echo'file exists';
+            require_once $path;
+              $i = explode('-',$aleph);
+
+              $class = isset($i[1]) ? ucfirst($i[0]).ucfirst($i[1]) : ucfirst($i[0]);
+
+
+                      // $aleph;
+            $class = $class.'Component';
+            // echo $class;
+
+            //echo '<br/>'.$class;
+            if(class_exists($class)){
+              $cc = new $class;
+              
+                AirJax::processAjaxToPHP(new $class);
+
+
+            }else{
+                echo '<br/> The class '.$class.'does not exist. File: '.$path;
+            }
+
+        }else{
+
+          echo 'file path to component not found';
+        }
+    }
+
+
+
+
+    private function airRoute(){
       // echo ' app router file exists';
       require_once $this->adConfig->routerPath;
       $coreRouter = CORE::getInstance('Router');
@@ -56,13 +107,17 @@ class Node{
       $routerPath = $coreRouter->getPath($url);
       $legacy = CORE::getInstance('Legacy');
 
+      $this->adConfig  =  new AdConfig;
+
 
       // Check if url was found in the coreRouter
       if($routerPath != null){
         //Check if it has a redirect property
         if(isset($routerPath['redirectTo'])){
-          CORE::Redirect($routerPath['redirectTo']);
+          CORE::redirect($routerPath['redirectTo']);
         }
+
+
 
         //Check if it has a authentication property
         if(isset($routerPath['auth'])){
@@ -119,107 +174,6 @@ class Node{
 
 
 
-    }
-
-
-
-
-
-
-    private function autoRoute(){
-
-
-      if(isset($_GET['url'])){
-
-          $url = explode('/',rtrim($_GET['url'],'/'));
-
-          foreach ($url as $key => $value)
-          {
-
-              if (isset($this->route[$key]))
-              {
-                  $this->set($this->route[$key], $value);
-              }
-              else
-              {
-                  $this->set($key, $value);
-              }
-
-              $this->router[$key] = $value;
-          }
-
-
-
-          if(isset($this->aleph)){
-              $aleph = strtolower($this->aleph);
-              // echo $aleph.'<br/>';
-              $path = 'components'.DS.$aleph.DS.$aleph.'.component.php';
-              // echo $path;
-              if(file_exists($path)){
-                  //echo'file exists';
-                  require_once $path;
-
-                  $class = ucfirst($aleph).'Component';
-                  //echo '<br/>'.$class;
-                  if(class_exists($class)){
-                      if(method_exists($class,'constructor')){
-                          $display = new $class;
-                          $display->constructor();
-                      }else{
-                          $display = new $class;
-                      }
-
-                  }else{
-                      echo '<br/> the class ',$class.'does not exist';
-                  }
-
-              }else{
-
-                require_once 'templates'.DS.$this->adConfig->template.DS.'error.php';
-              }
-
-
-          }
-
-
-
-
-      }else{
-          $aleph = 'app';
-          $this->set('aleph', $aleph);
-          $this->router[0] = $aleph;
-
-          $path = 'components'.DS.$aleph.DS.$aleph.'.component.php';
-          // echo 'yh';
-              if(file_exists($path)){
-                  //echo'file exists';
-                  require_once $path;
-                  // echo $path;
-
-                  $class = ucfirst($aleph).'Component';
-                  //echo '<br/>'.$class;
-                  if(class_exists($class)){
-                      if(method_exists($class,'constructor')){
-                          $display = new $class;
-                          $display->constructor();
-
-                      }else{
-
-                          $display = new $class;
-                      }
-
-                  }else{
-                      echo '<br/> the class ',$class.'does not exist';
-                  }
-              }
-                  else{
-                  require_once 'templates'.DS.$this->adConfig->template.DS.'error.php';
-              }
-
-
-      }
-
-      // print_r($url);
     }
 
 

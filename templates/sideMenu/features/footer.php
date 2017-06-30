@@ -10,3 +10,23 @@
         </div>
     </div>
 </footer>
+
+
+
+
+<!--Scritps-->
+<script src="<?=BaseUrl;?>libraries/design/js/jquery-3.2.1.min.js"></script>
+<script src="<?=BaseUrl;?>libraries/design/js/air.design.js"></script>
+<script src="<?=BaseUrl;?>templates/sideMenu/js/main.js"></script>
+
+
+<!-- Component Scripts -->
+<?php
+  if(isset($legacy->script)){
+    echo '<script>'.$legacy->script.'</script>';
+  }elseif(isset($legacy->scriptUrls)){
+    for($i =0; $i < count($legacy->scriptUrls); $i++){
+      echo '<script src="'.BaseUrl.'components/'.$legacy->scriptUrls[$i].'"></script>';
+    }
+  }
+?>

@@ -10,7 +10,7 @@
                   </p>
 
                     <br>
-                    <a href="<?=BaseUrl;?>account/logout" class="ad-btn ad-flat ad-round btn-dark ad-md">Logout</a>
+                    <a adRouter="<?=BaseUrl;?>account/logout" class="ad-btn ad-flat ad-round btn-dark ad-md">Logout</a>
 
               </div>
 

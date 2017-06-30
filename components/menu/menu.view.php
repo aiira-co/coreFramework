@@ -8,10 +8,10 @@
             </div>
               <div class="ad-menu">
                 <ul>
-                    <li><a href="<?=BaseUrl;?>">Home</a></li>
-                    <li><a href="<?=BaseUrl;?>about">About Us</a></li>
-                    <li><a href="<?=BaseUrl;?>practice">Practice</a></li>
-                    <li><a href="<?=BaseUrl;?>contact">Contact Us</a></li>
+                    <li><a adRouter="<?=BaseUrl;?>">Home</a></li>
+                    <li><a adRouter="<?=BaseUrl;?>about">About Us</a></li>
+                    <li><a adRouter="<?=BaseUrl;?>practice">Practice</a></li>
+                    <li><a adRouter="<?=BaseUrl;?>contact">Contact Us</a></li>
                 </ul>
             </div>
             <div class="ad-menuTrigger rFloat">

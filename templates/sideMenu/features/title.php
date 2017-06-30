@@ -55,10 +55,5 @@
     <!--Favicon-->
     <link href="<?=BaseUrl;?>media/images/logo/favicon.png" rel="icon" type="image/png"/>
 
-    <!--Scritps-->
-    <script src="<?=BaseUrl;?>libraries/design/js/jquery-3.0.0.min.js"></script>
-    <script src="<?=BaseUrl;?>libraries/design/js/air.design.js"></script>
-    <script src="<?=BaseUrl;?>templates/sideMenu/js/main.js"></script>
-
 </head>
 <body>

@@ -22,10 +22,10 @@
         </div>
         <br>
         <center>
-            <a href="<?=BaseUrl;?>account" class="ad-btn ad-md ad-flat ad-round btn-prim">My Account</a>
+            <a adRouter="<?=BaseUrl;?>account"  class="ad-btn ad-md ad-flat ad-round btn-prim">My Account</a>
         </center>
-        
-               
+
+
         </div>
     </div>
 </section>
