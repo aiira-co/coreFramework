@@ -14,7 +14,7 @@
                     <li><a adRouter="<?=BaseUrl;?>contact">Contact Us</a></li>
                 </ul>
             </div>
-            <div class="ad-menuTrigger rFloat">
+            <div class="ad-menuTrigger rFloat hidden">
                 <i class="fa fa-bars fa-lg"></i>
             </div>
         </div>

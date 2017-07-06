@@ -1,4 +1,4 @@
-<section class="banner ad-section" style="background-image:url('<?=BaseUrl;?>media/images/banner.jpg');height:400px;">
+<section class="banner ad-section" style="background-image:url('<?=BaseUrl;?>media/images/pcs.jpg');height:400px;">
     <div class="wrapper-fluid">
         <div class="ad-cols-12">
 
@@ -17,12 +17,12 @@
             </p>
         </center>
 <br>
-        <div class="ad-card ad-img ad-flat center">
-            <img src="<?=BaseUrl;?>media/images/flatdesktop.png" alt="">
+        <div class="ad-card ad-img ad-flat text-center">
+            <img src="<?=BaseUrl;?>media/images/suite.jpg" alt="">
         </div>
         <br>
         <center>
-            <a adRouter="<?=BaseUrl;?>account"  class="ad-btn ad-md ad-flat ad-round btn-prim">My Account</a>
+            <a adRouter="<?=BaseUrl;?>account"  class="ad-btn ad-md ad-flat btn-pink ad-round">My Account</a>
         </center>
 
 
@@ -30,11 +30,11 @@
     </div>
 </section>
 
-<section class="ad-section">
+<section class="ad-section darkBG">
     <div class="wrapper">
         <div class="ad-cols-12">
             <center>
-                <span style="display:block; font-size:25px; font-weight:light; padding:100px 0;">airDesign | MVC | airCorework</span>
+                <span style="display:block; font-size:25px; font-weight:light; padding:100px 0;">airDesign <span class="colorPink">(CSS Framework)</span> | MVC <span class="colorPink">(PHP Framework)</span> | airJax <span class="colorPink">(JS Framework)</span></span>
             </center>
         </div>
     </div>
