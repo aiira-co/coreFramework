@@ -11,12 +11,14 @@ class AdConfig{
 	public $access = '1';
 	public $debug = '0';
 	public $debug_lang = '0';
+
 	public $dbtype = 'mysqli';
 	public $host = 'localhost';
 	public $user = 'root';
 	public $password = '';
 	public $db = 'coredb';
 	public $dbprefix = '';
+
 	public $live_site = '/coreFramework/';
 	public $secret = 'Pi1gS3vrtWvNq3O0';
   public $template ="sleek";

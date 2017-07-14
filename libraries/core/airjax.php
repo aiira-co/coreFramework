@@ -6,6 +6,7 @@ class AirJax{
   private static $method;
   private static $params;
   private static $airJaxPath;
+  private static $type="application/json";
 
 
   function __construct(){
@@ -25,6 +26,11 @@ class AirJax{
       self::$params = $_GET['params']??null;
     }
 
+    if(isset($_SERVER['HTTP_ACCEPT']))
+    {
+      self::$type = explode(',',$_SERVER['HTTP_ACCEPT'])[0];
+    }
+
     $core = new core;
     $core->airJax();
 
@@ -39,7 +45,7 @@ class AirJax{
     $method = trim(self::$method, ' ');
     $params =self::$params;
 
-    
+
 
     if(method_exists($class, $method)){
       //call the constructor method if it exists
@@ -48,29 +54,54 @@ class AirJax{
       }
 
       if(is_null($params) || empty($params)){
-        $render = [
-          "notification"=>"Success",
-          "result" => $class->$method()
-        ];
-        echo self::renderJSON($render);
+
+        if(self::$type == 'text/html'){
+          header('Content-type:'.self::$type);
+          $class->$method();
+        }else{
+
+          $render = [
+            "notification"=>"Success",
+            "result" => $class->$method()
+          ];
+          echo self::renderJSON($render);
+        }
+
+
       }else{
 
-        $render = [
-          "notification"=>"Success",
-          "result" => call_user_func_array(array($class,$method),$params)
-        ];
+        if(self::$type == 'text/html'){
+          header('Content-type:'.self::$type);
+          call_user_func_array(array($class,$method),$params);
+        }else{
 
-        echo self::renderJSON($render);
+
+          $render = [
+            "notification"=>"Success",
+            "result" => call_user_func_array(array($class,$method),$params)
+          ];
+
+          echo self::renderJSON($render);
+        }
+
+
       }
 
 
     }else{
-      $render = [
-        "notification"=>"Failure",
-        "result" => 'The method '.$method.' does not exist in the component-> '.self::$airJaxPath
-      ];
 
-      echo self::renderJSON($render);
+      if(self::$type == 'text/html'){
+        header('Content-type:'.self::$type);
+        echo 'The method '.$method.' does not exist in the component-> '.self::$airJaxPath;
+      }else{
+
+        $render = [
+          "notification"=>"Failure",
+          "result" => 'The method '.$method.' does not exist in the component-> '.self::$airJaxPath
+        ];
+
+        echo self::renderJSON($render);
+      }
 
     }
   }
@@ -78,7 +109,8 @@ class AirJax{
 
 
   static function renderJSON($result){
-    header("Content-type: application/json");
+
+    header('Content-type:'.self::$type);
     return json_encode($result);
   }
 

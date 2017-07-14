@@ -696,7 +696,7 @@
 
           }
           // echo $sql;
-          print_r(self::$bindParam);
+          // print_r(self::$bindParam);
 
 
           if($this->query($sql)){

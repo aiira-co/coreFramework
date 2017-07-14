@@ -6,7 +6,7 @@
     </div>
 </section>
 
-<section class="intro ad-section whiteBG">
+<section class="intro ad-section whiteBG" >
     <div class="wrapper">
         <div class="ad-cols-12">
         <center>
@@ -22,7 +22,7 @@
         </div>
         <br>
         <center>
-            <a adRouter="<?=BaseUrl;?>account"  class="ad-btn ad-md ad-flat btn-pink ad-round">My Account</a>
+            <a adRouter="<?=BaseUrl;?>account"  class="ad-btn ad-md ad-flat btn-prim ad-round">My Account</a>
         </center>
 
 
@@ -34,7 +34,7 @@
     <div class="wrapper">
         <div class="ad-cols-12">
             <center>
-                <span style="display:block; font-size:25px; font-weight:light; padding:100px 0;">airDesign <span class="colorPink">(CSS Framework)</span> | MVC <span class="colorPink">(PHP Framework)</span> | airJax <span class="colorPink">(JS Framework)</span></span>
+                <span style="display:block; font-size:25px; font-weight:light; padding:100px 0;">airDesign <span class="colorPrim">(CSS Framework)</span> | MVC <span class="colorPrim">(PHP Framework)</span> | airJax <span class="colorPrim">(JS Framework)</span></span>
             </center>
         </div>
     </div>

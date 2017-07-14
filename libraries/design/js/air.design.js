@@ -24,29 +24,6 @@ $(document).ready(function () {
                     "20":"ad-content"
                   };
 
-console.log(airlement.size);
-// <ad-router>
-
-// <ad-header>
-// <ad-nav>
-// <ad-footer>
-
-// <ad-accordian>
-// <ad-tab>
-// <ad-head>
-// <ad-content>
-
-// <ad-section>
-// <ad-card>
-
-// <ad-avatar>
-// <ad-thumbnail>
-
-// <ad-list>
-// <ad-item>
-// <ad-input>
-
-
 
        //Header Fixed
     $(window).scroll(function(){

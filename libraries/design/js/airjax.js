@@ -296,6 +296,10 @@ function requestAirJax($url, $data, $type = 'POST', $dataType='json', $params=nu
 
   }).done(function(data){
     loadData(data, $params.outlet, $params.animate, $dataType);
+
+  }).fail(function(jqXHR, textStatus) {
+    //do fail stuff
+    console.log(textStatus);
   });
 
 
@@ -343,12 +347,22 @@ function loadData(page, outlet, aimate = false, type = 'html'){
     outlet.html(type=='html'?page:page.result);
   }
 
+  //scroll back to top
+  $(outlet).parent().animate({
+      scrollTop: 0
+  }, 1000);
+
+
   //update the browser tab title to page title if ajax call is the page
 
 }
 
 
 
+console.log('hello JWT');
 
+var kofi = 'hellos';
+// console.log(kofi.base64Encode());
+// hashAlgH256('amam','kjofi');
 // END OF DOM.READY
 });

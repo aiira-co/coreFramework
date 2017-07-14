@@ -87,8 +87,12 @@ declare(strict_types=1);
     }
 
 
+ // Also look for a way to generate TOKENS per each call(ajax) for verfication.
+ // To prevent spoofing, also check to see if the requested component requires authentication and if the person
+ // or client is authenticated, and the right user to make those changes
 
     //CrossOringin Checks
+    // This should be a separate class
     function authorization():bool{
       if(isset($adConfig->cors)){
 

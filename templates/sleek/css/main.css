@@ -28,9 +28,18 @@ html,body{
 }
 
 
+.intro{
+  position: relative;
+}
+.intro::before{
+  position: absolute;
+  top:-8px;
+  left:0;
+  right:0;
+  height:8px;
+  background-color:#28d0e8;;
+  display: block;
+  content:' ';
 
-/*.ad-input{
-  width:auto !important;
-  display: block !important;
-  background-color: red;
-}*/
+  opacity: .4;
+}
