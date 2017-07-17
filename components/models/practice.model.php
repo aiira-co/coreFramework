@@ -7,7 +7,7 @@ class PracticeModel{
   private $table = 'persons';
 
   //this is responsible for quering the database
-  function getPersons($key){
+  function getItems($key){
 
       return DB::table($this->table)
                       ->where('name','LIKE','%'.$key.'%')
@@ -17,30 +17,30 @@ class PracticeModel{
   }
 
 
-  function getPerson(int $id){
+  function getItem(int $id){
       return DB::table($this->table)->where('id',$id)->single();
 
   }
 
 
-  function countPersons(){
+  function countItems(){
     return DB::table($this->table)
                     ->count();
   }
 
-  function addPerson(array $data):bool{
+  function addItem(array $data):bool{
 
       return DB::table($this->table)->add($data);
 
   }
 
-  function updatePerson(array $data, int $id):bool{
+  function updateItem(array $data, int $id):bool{
 
       return DB::Table($this->table)->where('id',$id)->update($data);
   }
 
 
-  function deletePerson(int $n):bool{
+  function deleteItem(int $n):bool{
       return DB::table($this->table)->where('id',$n)->delete();
   }
 

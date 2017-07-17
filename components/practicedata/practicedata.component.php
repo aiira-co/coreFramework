@@ -15,12 +15,12 @@ class PracticedataComponent{
       $this->model = CORE::getModel('practice');
       $this->params =  CORE::getInstance('Params');
       $this->key = $_POST['key']??'';
-      $this->persons();
+      $this->items();
     }
 
-    function persons(){
+    function items(){
 
-      $this->data = $this->model->getPersons($this->key);
+      $this->data = $this->model->getItems($this->key);
     }
 
 

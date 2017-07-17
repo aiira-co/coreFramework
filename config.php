@@ -21,7 +21,7 @@ class AdConfig{
 
 	public $live_site = '/coreFramework/';
 	public $secret = 'Pi1gS3vrtWvNq3O0';
-  public $template ="sleek";
+  public $template ="simplex";
   public $routerPath="./app.router.php";
 
   public $airJax = 1;

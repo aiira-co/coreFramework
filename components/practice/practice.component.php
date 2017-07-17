@@ -1,96 +1,53 @@
 <?php
 
-// import('./practice/practice.model');
 
-use CoreComponent as Component;
 use middleWare as MW;
-Component::init([
-  'selector'=>'ad-practice',
-  'templateUrl'=>'./practice/practice.view'
-  // styleUrls=>['./practice/practice.component.css']
-]);
+
 
 class PracticeComponent{
 
     public $model;
     public $count;
     public $personData;
-    public $title ='Add New Person';
+    public $title ='Add New Item';
     public $params;
     public $clear = false;
 
 
     function constructor(){
       $this->model = CORE::getModel('practice');
-      $this->params =  CORE::getInstance('Params');
-      $this->check();
-
+      $this->params =  CORE::getInstance('params');
 
     }
 
-      function searchPerson(){
+      function searchItem(){
         $this->params->key = $_POST['key'];
         return CORE::component('practicedata');
       }
 
         function countData(){
-          $this->count = $this->model->countPersons();
+          $this->count = $this->model->countItems();
 
           return $this->count;
         }
 
-        function blurMe(){
-          return 'My email is <span class="colorYellow">'.$_POST['email'].'</span>';
-        }
-
-    function check(){
-
-      if(isset($_POST['submite'])){
-
-          $this->savePerson();
-
-
-      }elseif(isset($_POST['update'])){
-        $this->person();
-        $this->update();
-
-      }elseif(isset($_POST['deletePerson'])){
-
-        $this->del();
-
-      }elseif(isset($_GET['edit'])){
-
-        $this->person();
-      }
-      // $this->persons();
-
-    }
 
 
 
-    // function persons(){
-    //   $this->data = $this->model->getPersons();
-    // }
 
 
-
-    function talk(){
-      echo 'talking here';
-    }
-
-    function ajaxPerson(){
-      if($this->savePerson()){
-        $notfy = 'successfully saved';
-      }else{
-        $notify = 'failed to save to db';
+    function createNew(int $id=null){
+      if(!empty($id)){
+        $this->params->itemId = $id;
       }
 
-      return $notify;
+      return CORE::component('practice-new');
     }
 
 
 
-    function savePerson(){
+
+    function saveItem(){
 
       $name = isset($_POST['name']) ? $_POST['name'] : null;
       $gender = isset($_POST['gender']) ? $_POST['gender'] : null;
@@ -102,10 +59,10 @@ class PracticeComponent{
           'email'=>$email
           ];
 
-      if($this->model->addPerson($data)){
-        return 'successfully saved';
+      if($this->model->addItem($data)){
+        return 'Item <span class="colorTgreen">successfully</span> saved';
       }else{
-        return 'failed to save to db';
+        return 'Item <span class="colorYellow">could not</span>be to saved. Please try again';
       }
 
 
@@ -113,38 +70,29 @@ class PracticeComponent{
 
 
 
-    function update(){
+    function updateItem(){
       $data = MW::filterPost($this->personData);
+      if(!empty($data)){
 
-      $this->model->updatePerson($data, $this->params->edit);
-    }
-
-
-
-
-
-    function del(){
-      $deletePerson = $_POST['deletePerson'] ?? null;
-      $this->model->deletePerson($deletePerson);
-    }
-
-
-    function deletePerson($id){
-      if($this->model->deletePerson($id)){
-        return 'Person <span class="colorTgreen">successfully</span> deleted';
+        if($this->model->updateItem($data, $this->params->edit)){
+          return 'Item Info has <span class="colorTgreen">successfully<span> been updated';
+        }else{
+          return 'Item Info has <span class="colorYellow">could not<span> be updated. Please try again';
+        }
       }else{
-        return 'Person <span class="colorYellow">could not</span> be deleted';
+        return ' <span class="colorYellow">No Changes<span> were made to be updated.';
       }
     }
 
 
-    function person(){
-      $this->personData = $this->model->getPerson($this->params->edit);
-      $this->title = 'Editing Person';
-      $this->clear = !$this->clear;
-    }
-    //create a function that its name should equal the name of an input=btn or submite form.
 
+    function deleteItem($id){
+      if($this->model->deleteItem($id)){
+        return 'Item <span class="colorTgreen">successfully</span> deleted';
+      }else{
+        return 'Item <span class="colorYellow">could not</span> be deleted';
+      }
+    }
 
 }
 

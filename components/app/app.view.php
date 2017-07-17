@@ -1,4 +1,4 @@
-<section class="banner ad-section" style="background-image:url('<?=BaseUrl;?>media/images/pcs.jpg');height:400px;">
+<section class="banner ad-section" style="background-image:url('<?=BaseUrl;?>media/images/pcs.jpg'); height:400px; margin-top:-5px !important; z-index:100;">
     <div class="wrapper-fluid">
         <div class="ad-cols-12">
 
@@ -22,7 +22,7 @@
         </div>
         <br>
         <center>
-            <a adRouter="<?=BaseUrl;?>account"  class="ad-btn ad-md ad-flat btn-prim ad-round">My Account</a>
+            <a adRouter="<?=BaseUrl;?>account"  class="ad-btn ad-md ad-flat btn-dark text-upper ad-spread ad-block">My Account</a>
         </center>
 
 

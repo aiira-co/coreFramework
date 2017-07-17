@@ -2,29 +2,35 @@ $(document).ready(function () {
 
 
   var wrapper = $('body');
-  var airlement = { "1":"ad-router",
-                    "2":"ad-loading",
-                    "3":"ad-header",
-                    "4":"ad-subheader",
-                    "5":"ad-nav",
-                    "6":"ad-footer",
-                    "7":"ad-section",
-                    "8":"ad-card",
-                    "9":"ad-modal",
-                    "10":"ad-table",
-                    "11":"ad-list",
-                    "12":"ad-item",
-                    "13":"ad-avatar",
-                    "14":"ad-thumbnail",
-                    "15":"ad-input",
-                    "16":"ad-tab",
-                    "17":"ad-accordian",
-                    "18":"ad-head",
-                    "19":"ad-body",
-                    "20":"ad-content"
-                  };
+  // var airlement = { "1":"ad-router",
+  //                   "2":"ad-loading",
+  //                   "3":"ad-header",
+  //                   "4":"ad-subheader",
+  //                   "5":"ad-nav",
+  //                   "6":"ad-footer",
+  //                   "7":"ad-section",
+  //                   "8":"ad-card",
+  //                   "9":"ad-modal",
+  //                   "10":"ad-table",
+  //                   "11":"ad-list",
+  //                   "12":"ad-item",
+  //                   "13":"ad-avatar",
+  //                   "14":"ad-thumbnail",
+  //                   "15":"ad-input",
+  //                   "16":"ad-tab",
+  //                   "17":"ad-accordian",
+  //                   "18":"ad-head",
+  //                   "19":"ad-body",
+  //                   "20":"ad-content"
+  //                 };
+  //
+  //
 
-
+  // Button to hide and show the sideMenu
+  $('#ad-menu-toggle').click(function() {
+    $('ad-left').toggleClass('ad-hide');
+  });
+  
        //Header Fixed
     $(window).scroll(function(){
        var header = $('.scrollFixed'),
@@ -131,15 +137,19 @@ wrapper.on('click','.ad-tab .ad-head li, ad-tab ad-head li',function(){
     //Dropdown
     wrapper.on('click','.ad-dropdown .ad-trigger, ad-dropdown .ad-trigger',function(e){
       e.stopPropagation();
-      $('.ad-dropdown .ad-content, ad-dropdown ad-content').removeClass('visible');
-      $(this).parent('.ad-dropdown, ad-dropdown').find('.ad-content, ad-content').addClass('visible');
+      $('.ad-dropdown .ad-content, ad-dropdown ad-content').removeClass('ad-show');
+      $(this).parent('.ad-dropdown, ad-dropdown').find('.ad-content, ad-content').addClass('ad-show');
 
+    });
+
+    wrapper.on('click','.ad-dropdown .ad-content, ad-dropdown ad-content', function(e){
+      e.stopPropagation();
     });
 
 
     // disable dropdown at body's click
     wrapper.click(function(){
-      $('.ad-dropdown .ad-content, ad-dropdown ad-content').removeClass('visible');
+      $('.ad-dropdown .ad-content, ad-dropdown ad-content').removeClass('ad-show');
     });
 
 

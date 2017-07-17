@@ -12,7 +12,7 @@ Component::Init([
 class ContactComponent {
   private $params;
   public $test;
-  public $title='Contact Info';
+  public $title='Contact Form';
 
   function constructor(){
     $this->params = CORE::getInstance('Params');

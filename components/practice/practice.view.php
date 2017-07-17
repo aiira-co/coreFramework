@@ -6,15 +6,16 @@
 <div class="wrapper">
     <div class="ad-row">
       <div class="ad-cols-8">
-          <form adSubmit="searchPerson()" ad-data-type='html' ad-outlet="tbody" method="POST">
-              <div class="ad-table ad-card ad-block whiteBG">
-                  <div class="ad-header">
-                      <h2 class="title">Data Of Persons</h2>
+          <form adSubmit="searchItem()" ad-data-type='html' ad-outlet="tbody" method="POST">
+              <ad-table class="ad-block ad-flat whiteBG">
+                  <ad-header class="ad-flat">
+                      <h2 class="title"><i class="fa fa-shopping-cart"></i> &nbsp; Items in Cart</h2>
                       <span class="rFloat">
-                        <input type="search"  adKeyPress="searchPerson()" ad-data-type='html' ad-outlet="tbody" name="key" value="">
+                        <input type="search"  adKeyPress="searchItem()" ad-data-type='html' ad-outlet="tbody" name="key" value="">
                         <button type="submit" name="button" class="ad-btn ad-flat"><i class="fa fa-search"></i></button>
+                        <button type="button" name="button" class="ad-btn ad-flat ad-tip" ad-tip="Add Item" adClick="createNew()" ad-data-type='html' ad-outlet="#summaryView"><i class="fa fa-plus"></i></button>
                       </span>
-                  </div>
+                  </ad-header>
 
                   <table class="table">
                       <thead>
@@ -34,61 +35,25 @@
                   <div class="ad-footer">
 
                   </div>
-              </div>
+              </ad-table>
 
               </form>
 
 
       </div>
         <div class="ad-cols-4">
-          <div class="ad-card ad-block whiteBG">
+          <ad-card class="ad-round ad-shadow" id="summaryView">
 
-            <h2 class="title"><?=$title?></h2>
+            <h1 class="title">Item Detail</h1>
 
+            <p class="text-center" style="opacity:.5;">
+              <i class="fa fa-shopping-basket fa-5x"></i>
+              <br>
+              <br>
+              Select an item to view detail
+            </p>
 
-            <?php
-
-            if(isset($noti)){
-              echo '<div class="ad-card ad-flat ad-round tqBG"><p>'.$alert.'</p></div>';
-            }
-
-            // phpinfo();
-            // print_r($personData);
-
-            ?>
-
-            <form adSubmit="savePerson()">
-
-
-                <div class="ad-input ad-round ad-label">
-                  <label for="">Name:</label>
-                  <input type="text" name="name"  value="<?=isset($personData)? $personData->name :null;?>" required>
-                </div>
-                <div class="ad-input ad-round ad-label">
-                  <label for="">Gender:</label>
-                  <select name="gender" id="">
-                    <option value="1" <?=isset($personData) && ($personData->gender == 1 )? 'selected' :null;?>>Male</option>
-                    <option value="0" <?=isset($personData) && ($personData->gender == 0 )? 'selected' :null;?>>Female</option>
-                  </select>
-                </div>
-                <div class="ad-input ad-round ad-label" >
-                  <label for="">Email:</label>
-                  <input type="email" name="email" adBlur="blurMe()"  value="<?=isset($personData)? $personData->email :null;?>" required>
-                </div>
-                <div id="showMe">
-
-                </div>
-                <p>
-                  <button class="ad-btn btn-tgreen ad-full ad-round ad-md" type="submit" adHover="blurMe()"  name="<?=isset($personData)? 'update' :'submite';?>">Save</button>
-                  <?php if($clear){?>
-                    <a class="ad-btn ad-round ad-full ad-md" href="<?=BaseUrl;?>practice">Clear</a>
-                    <?php }?>
-                </p>
-
-
-
-              </form>
-          </div>
+          </ad-card>
 
         </div>
 
