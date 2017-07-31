@@ -6,7 +6,42 @@
 
         private static $instance = [];
 
+        function __construct(){
+          $adConfig = new AdConfig;
+          // check if live_site is ot empty
+          if(!empty($adConfig->live_site)){
+            $baseUrl = $adConfig->live_site;
+          }else{
+            // /check if its a secured connection
+            $http =isset($_SERVER['HTTPS']) ?'https://':'http://';
+            $serverName = $http.$_SERVER['HTTP_HOST'].'/';
 
+            // echo 'Server Name'.$serverName.'<br>';
+
+            // attach directory to the serverName if its not public
+            $dir = explode(DS,getcwd());
+            $countDir = count($dir);
+
+            $dir = $dir[$countDir - 1];
+
+            $rootPaths = ['htdocs','public'];
+              for($i=0; $i < count($rootPaths); $i++){
+                if($dir != $rootPaths[$i]){
+                  $is_root = false;
+                }else{
+                  $is_root = true;
+                }
+              }
+              if($is_root){
+                $baseUrl = $serverName;
+              }else{
+                $baseUrl = $serverName.$dir.'/';
+              }
+          }
+
+          define('BaseUrl',$baseUrl);
+          define('AirJax',$adConfig->airJax);
+        }
         // This Method is called in the root index.php file.
         // the Method intanciates the node class for routing
         function route(){
@@ -212,12 +247,19 @@
 
     // API for rendering
 
+    //ajaxCall
+    if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
+      $ajaxRequest = $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest' ? true:false;
+    }else{
+      $ajaxRequest = false;
+    }
+
 		if (($params->get('api')) == 'json' && ($params->get('hash')) == ($adConfig->secret))
 		{
 
 			echo json_encode($component);
 
-		}elseif ( ($adConfig->airJax && $params->get('api') == 'airJax') || ( ($params->get('api')) == 'html' && ($params->get('hash')) == ($adConfig->secret) ))
+		}elseif (  ($ajaxRequest && $adConfig->airJax && $params->get('api') == 'airJax') || ( ($params->get('api')) == 'html' && ($params->get('hash')) == ($adConfig->secret) ))
 		{
 
 
@@ -250,7 +292,12 @@
       }
 
 
-      if($url){
+      if($url || file_exists('components'.DS.$view.'.php')){
+
+        // print_r($legacy);
+
+
+
 
         require_once 'components'.DS.$view.'.php';
 
@@ -266,6 +313,49 @@
             }
             // echo $edited;
         echo '<br/>'.$view;
+      }
+
+      //check if scritps exists
+      if(isset($legacy->script)){
+
+        echo '<script>'.$legacy->script.'</script>';
+
+      }
+      elseif(isset($legacy->scriptUrls))
+      {
+
+        echo '<script  type="text/javascript" >';
+
+        $script ="";
+
+        for($i =0; $i < count($legacy->scriptUrls); $i++){
+          $path = './components/'.$legacy->scriptUrls[$i];
+          if(file_exists($path)){
+
+            $script .= require_once $path;
+          }
+        }
+
+        echo  '</script>';
+
+        // echo $scriptOpenTag.$script.$scriptCloseTag;
+
+
+
+
+      }
+
+
+
+
+      // check if styles exists
+      if(isset($legacy->style)){
+        echo '<style>'.$legacy->style.'</style>';
+
+      }elseif(isset($legacy->styleUrls)){
+        for($i =0; $i < count($legacy->styleUrls); $i++){
+          echo '<link rel="stylesheet" href="'.BaseUrl.'components/'.$legacy->styleUrls[$i].'">';
+        }
       }
 
 
@@ -449,6 +539,82 @@
       }
 
     }
+
+
+
+
+
+
+
+    // Method for calling Component Styles, if any
+    public static function componentStyle(){
+      if(!AirJax){
+
+        $legacy = CORE::getInstance('Legacy');
+        if(isset($legacy->style)){
+          echo '<style>'.$legacy->style.'</style>';
+        }elseif(isset($legacy->styleUrls)){
+          for($i =0; $i < count($legacy->styleUrls); $i++){
+            echo '<link rel="stylesheet" href="'.BaseUrl.'components/'.$legacy->styleUrls[$i].'">';
+          }
+        }
+      }
+    }
+
+
+
+
+
+
+    // Method for calling Component Script, if any
+    // check to see if SPA ajax request is going to be used. if yes,
+    // dont load the script here, load it when the component is called at render()
+    public static function componentScript(){
+      if(AirJax){
+        echo '<script src="<?=BaseUrl;?>libraries/design/js/airjax.js"></script>';
+      }else{
+      // <!-- Component Scripts -->
+
+        if(isset($legacy->script)){
+          echo '<script>'.$legacy->script.'</script>';
+        }elseif(isset($legacy->scriptUrls)){
+          for($i =0; $i < count($legacy->scriptUrls); $i++){
+            echo '<script src="'.BaseUrl.'components/'.$legacy->scriptUrls[$i].'"></script>';
+          }
+        }
+      }
+
+    }
+
+
+
+
+    // <!--Write a logic for the title-->
+    // <!--First check if its db(Website CMS), if yes, then get the title of the page from the DB,
+    // Else get the title of the Page from the $url-->
+
+    public static function componentTitle(){
+
+      $legacy = CORE::getInstance('Legacy');
+      if(isset($legacy->routerPath['title'])){
+        $title=$legacy->routerPath['title'];
+      }else{
+        if(isset($_GET['url'])){
+
+          $url = explode('/',(rtrim(strtolower($_GET['url']),'/')));
+          $title = ucfirst($url[0]);
+          for( $i=1; $i<count($url); $i++){
+            $title.='->'.ucfirst($url[$i]);
+          }
+
+        }else{
+          $title="Home";
+        }
+      }
+
+      return $title;
+    }
+
 
 
   // Method for redirecting.

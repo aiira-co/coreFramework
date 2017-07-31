@@ -89,7 +89,7 @@ ad-header{
   position: relative;
 }
 
-.ad-user-dashboard::before{
+/*.ad-user-dashboard::before{
   position: absolute;
   top:0;
   bottom:0;
@@ -97,8 +97,8 @@ ad-header{
   right: 0;
 content:'';
 background-color: rgba(0,0,0,.6);
-/*z-index: 5;*/
-}
+z-index: 5;
+}*/
 
 .ad-user-dashboard .ad-btn{
   position: absolute;

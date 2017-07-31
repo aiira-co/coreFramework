@@ -2,6 +2,8 @@ $(document).ready(function(){
 
   var ajaxURL = $('base').attr('url')+'cqured.php';
   var wrapper = $('body');
+
+  var url;
   // MOUSE EVENTS
   //Responsible for handling click Events
 
@@ -157,6 +159,8 @@ $(document).ready(function(){
           params[i] = $('#'+params[i].trim().replace('$','')).val();
         }
       }
+
+
       return {'airJaxPath':url, 'method':method,'params':params};
     }
 
@@ -277,8 +281,9 @@ setInterval(function(){
 
 
 
-// $('[adSync]').load('component');
 
+
+//Call script of component
 
 
 
@@ -355,14 +360,48 @@ function loadData(page, outlet, aimate = false, type = 'html'){
 
   //update the browser tab title to page title if ajax call is the page
 
+
+  // check if script exits, then include else remove
+
+  if($('script#airScript').length == 0){
+    var script = $('<script type="text/javascript" id="airScript"></script>');
+    wrapper.append(script);
+  }
+
+console.log($('script#airScript').length);
+  var script = $('script#airScript');
+  script.text(''); //empty script
+
+
+
+    setTimeout(function(){
+      $('ad-notify').fadeOut().remove();
+    }, 6000);
+
+
+
+  if($('airScript').length != 0){
+    $('airScript').each(function(){
+      script.text($('airScript').attr('path'));
+
+    })
+  }else{
+    console.log('no script');
+
+  }
+
+
+  console.log(url);
+
+  // check to see if component has script
+
+
+
+
+
 }
 
 
 
-console.log('hello JWT');
-
-var kofi = 'hellos';
-// console.log(kofi.base64Encode());
-// hashAlgH256('amam','kjofi');
 // END OF DOM.READY
 });

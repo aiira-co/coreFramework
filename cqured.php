@@ -59,9 +59,6 @@ declare(strict_types=1);
 
 
     define('DS',DIRECTORY_SEPARATOR);
-    define('BaseUrl',$adConfig->live_site);
-    define('AirJax',$adConfig->airJax);
-
 
 
 
@@ -74,7 +71,7 @@ declare(strict_types=1);
       require_once 'libraries'.DS.'core'.DS.'core.php';
       //Check Restrictions
 
-      if($_SERVER['SERVER_ADDR'] == $_SERVER['REMOTE_ADDR']){
+      if($_SERVER['SERVER_NAME'] == $_SERVER['HTTP_HOST']){
         require_once 'libraries'.DS.'core'.DS.'airjax.php';
         $airJax = new AirJax();
       }elseif(authorization()){

@@ -19,7 +19,7 @@ class AdConfig{
 	public $db = 'coredb';
 	public $dbprefix = '';
 
-	public $live_site = '/coreFramework/';
+	public $live_site = '';
 	public $secret = 'Pi1gS3vrtWvNq3O0';
   public $template ="simplex";
   public $routerPath="./app.router.php";

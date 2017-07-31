@@ -59,9 +59,6 @@ declare(strict_types=1);
 
 
     define('DS',DIRECTORY_SEPARATOR);
-    define('BaseUrl',$adConfig->live_site);
-    define('AirJax',$adConfig->airJax);
-
 
     if($adConfig->offline){
         require_once 'templates'.DS.$adConfig->template.DS.'offline.php';

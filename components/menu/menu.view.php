@@ -16,6 +16,9 @@
       <ad-item adRouter="<?=BaseUrl;?>contact">
         CONTACT US
       </ad-item>
+      <!-- <ad-item adRouter="<?=BaseUrl;?>check">
+        CHECK
+      </ad-item> -->
     </ad-list>
 
     <div class="ad-social">

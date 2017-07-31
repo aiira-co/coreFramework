@@ -17,6 +17,8 @@ $logout = ['path'=>'account/logout', 'component'=>'logout'];
 $math = ['path'=>'math', 'title'=>'Mathematics', 'component'=>'math'];
 $add = ['path'=>'add/:x/:y', 'title'=>'{{title}}', 'component'=>'add'];
 
+$check = ['path'=>'check', 'component'=>'check', 'title'=>'{{title}}'];
+
  $router = CORE::getInstance('Router');
 
  $router->setRouter(
@@ -30,7 +32,8 @@ $add = ['path'=>'add/:x/:y', 'title'=>'{{title}}', 'component'=>'add'];
                     $logout,
 
                     $math,
-                    $add
+                    $add,
+                    $check
                   );
 
 

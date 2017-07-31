@@ -42,6 +42,8 @@
 
     <!-- Component Styles -->
     <?php
+    if(!AirJax){
+      
       if(isset($legacy->style)){
         echo '<style>'.$legacy->style.'</style>';
       }elseif(isset($legacy->styleUrls)){
@@ -49,6 +51,8 @@
           echo '<link rel="stylesheet" href="'.BaseUrl.'components/'.$legacy->styleUrls[$i].'">';
         }
       }
+
+    }
     ?>
 
 

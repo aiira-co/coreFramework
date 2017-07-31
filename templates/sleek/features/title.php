@@ -6,30 +6,9 @@
     else if its not db(Simple Site, get it from bassket)
     Note that if its a webApp, metadata is not need-->
 
-    <!--Write a logic for the title-->
-    <!--First check if its db(Website CMS), if yes, then get the title of the page from the DB,
-    Else get the title of the Page from the $url-->
 
-    <?php
-      $legacy = CORE::getInstance('Legacy');
-      if(isset($legacy->routerPath['title'])){
-        $title=$legacy->routerPath['title'];
-      }else{
-        if(isset($_GET['url'])){
 
-          $url = explode('/',(rtrim(strtolower($_GET['url']),'/')));
-          $title = ucfirst($url[0]);
-          for( $i=1; $i<count($url); $i++){
-            $title.='->'.ucfirst($url[$i]);
-          }
-
-        }else{
-          $title="Home";
-        }
-      }
-
-    ?>
-    <title><?=$title;?></title>
+    <title><?CORE::componentTitle();?></title>
 
 
     <!--Links-->
@@ -41,15 +20,7 @@
 
 
     <!-- Component Styles -->
-    <?php
-      if(isset($legacy->style)){
-        echo '<style>'.$legacy->style.'</style>';
-      }elseif(isset($legacy->styleUrls)){
-        for($i =0; $i < count($legacy->styleUrls); $i++){
-          echo '<link rel="stylesheet" href="'.BaseUrl.'components/'.$legacy->styleUrls[$i].'">';
-        }
-      }
-    ?>
+    <?CORE::componentStyle();?>
 
 
     <!--Favicon-->

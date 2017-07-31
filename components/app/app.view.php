@@ -9,6 +9,7 @@
 <section class="intro ad-section whiteBG" >
     <div class="wrapper">
         <div class="ad-cols-12">
+        
         <center>
             <h2>Welcome Here</h2>
             <p>

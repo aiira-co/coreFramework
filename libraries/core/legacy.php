@@ -149,17 +149,7 @@
         //A static variable to hold all values of the chain methods for use in
         // the createStatement() Method
 
-        private static $s = [
-          'table'=>'',
-          'field'=>'t.*',
-          'where'=>null,
-          'order'=>null,
-          'limit'=>null,
-          'offset'=>null,
-          'joinTables'=>array(),
-          'joinOn'=>array(),
-          'groupBy'=>null
-        ];
+        private static $s = [];
 
 
         //This method is used to store raw sql statement for query
@@ -179,26 +169,28 @@
 
         public static function table(string $table): self{
           self::$pdo = CORE::getInstance('pdo');
+
           if(!class_exists('AdConfig')){
 
             require_once 'config.php';
           }
           self::$prefix  = (new AdConfig)->dbprefix;
 
-          self::$s =[
-            'table'=>'',
-            'field'=>'t.*',
-            'where'=>null,
-            'order'=>null,
-            'limit'=>null,
-            'offset'=>null,
-            'joinTables'=>[],
-            'joinOn'=>[],
-            'groupBy'=>null
-          ];
+          self::$s =[];
 
-          if(self::tableExists($table)){
-            self::$s['table'] = $table;
+            $tables = self::tableExists($table);
+          if($tables){
+
+            // set tables
+            self::$s['table'] = $tables['tables'];
+
+            //set table alias
+            if(!empty($tables['alias'])){
+              self::$s['alias'] = $tables['alias'];
+
+              // print_r($tables['alias']);
+            }
+
           }else{
             die('The Table '.self::$prefix.$table.' does not exists');
           }
@@ -214,11 +206,21 @@
         //SELECT 'fields' FROM ...
         //return self
         public function fields(string $fields): self{
-          if(! count(self::$s['joinTables']) ){
-            self::$s['field'] = $this->fieldExists(self::$s['table'], $fields);
+
+          if(!isset(explode('.',$fields)[1])){
+
+            $fields ='';
+          for($i; $i<count(self::$s['table']); $i++){
+
+            $fields .= $this->fieldExists(self::$s['table'][$i], $fields,self::$s['alias'][$i]);
+          }
+
+          self::$s['field'] = trim($fields,',');
+
           }else{
             self::$s['field'] =  $fields;
           }
+
           return new CoreModel;
         }
 
@@ -236,7 +238,12 @@
           if($field != null){
             if(!isset(explode('.',$field)[1])){
 
-              $field = $this->fieldExists(self::$s['table'], $field);
+              for($i = 0; $i < count(self::$s['table']); $i++){
+                $fieldVerified = $this->fieldExists(self::$s['table'][$i], $field, self::$s['alias'][$i]);
+              }
+
+              $field = $fieldVerified;
+
             }
 
             if($opValue == null){
@@ -286,7 +293,12 @@
           if($field != null){
             if(!isset(explode('.',$field)[1])){
 
-              $field = $this->fieldExists(self::$s['table'], $field);
+              for($i = 0; $i < count(self::$s['table']); $i++){
+                $fieldVerified = $this->fieldExists(self::$s['table'][$i], $field, self::$s['alias'][$i]);
+              }
+
+              $field = $fieldVerified;
+
             }
 
             if($opValue == null){
@@ -344,7 +356,12 @@
 
             if(!isset(explode('.',$field)[1])){
 
-              $field = $this->fieldExists(self::$s['table'], $field);
+              for($i = 0; $i < count(self::$s['table']); $i++){
+                $fieldVerified = $this->fieldExists(self::$s['table'][$i], $field, self::$s['alias'][$i]);
+              }
+
+              $field = $fieldVerified;
+
             }
 
             if($opValue == null){
@@ -492,7 +509,13 @@
         // i.e ... ORDEY BY 'id' 'ASC'
         //returns CoreModel
         function orderBy(string $field, int $order=1): self{
-          $field = $this->fieldExists(self::$s['table'], $field);
+
+          for($i = 0; $i < count(self::$s['table']); $i++){
+            $fieldVerified = $this->fieldExists(self::$s['table'][$i], $field, self::$s['alias'][$i]);
+          }
+
+          $field = $fieldVerified;
+
           if($order==1){
             $o = 'DESC';
           }elseif($order == 2){
@@ -511,8 +534,11 @@
         //This Method is to group rows in a query.
         // best used in conjanction with count to get statistically data for graphs
         public function groupBy(string $fields): self{
-          if(! count(self::$s['joinTables']) ){
-            self::$s['groupBy'] = $this->fieldExists(self::$s['table'], $fields);
+          if(!isset(explode('.',$fields)[1])){
+            for($i = 0; $i < count(self::$s['table']); $i++){
+              $fieldVerified = $this->fieldExists(self::$s['table'][$i], $field, self::$s['alias'][$i]);
+            }
+            self::$s['groupBy'] = $fieldVerified;
           }else{
             self::$s['groupBy'] =  $fields;
           }
@@ -745,12 +771,35 @@
         // the get method then assigns this return to a variable for use in the query()
         // /returns a string
         private function createStatement():string{
-          $sql = 'SELECT '.self::$s['field'];
-          $sql .=' FROM '.self::$prefix.self::$s['table'].' t';
 
 
+
+
+          // $tableAlias = isset($alias)?'':' t';
+          // $sql .=' FROM '.self::$prefix.self::$s['table'].$tableAlias;
+
+
+          //table iteration
+          $tables ="";
+          $fields ="";
+          if(isset(self::$s['table']) ){
+            for($i =0; $i < count(self::$s['table']); $i++)
+            {
+              $fields .= self::$s['alias'][$i].'.*,';
+              $tables .= self::$s['table'][$i].' '.self::$s['alias'][$i].',';
+            }
+            // echo $tables;
+
+          }
+
+          $fields = self::$s['field']??trim($fields,',');
+          $sql = 'SELECT '.$fields;
+
+          $sql .= ' FROM '.trim($tables,',');
           // Jion iteration
-          if(count(self::$s['joinTables']) ){
+
+
+          if(isset(self::$s['joinTables']) ){
             for($i =0; $i < count(self::$s['joinTables']); $i++)
             {
               $sql .= self::$s['joinTables'][$i].' '.self::$s['joinOn'][$i];
@@ -758,12 +807,11 @@
 
           }
 
-
-          $sql .= (self::$s['where'] == null) ? '' :' WHERE '.self::$s['where'];
-          $sql .= (self::$s['groupBy'] == null) ? '' :' GROUP BY '.self::$s['groupBy'];
-          $sql .= (self::$s['order'] == null) ? '' :' ORDER BY '.self::$s['order'];
-          $sql .= (self::$s['limit'] == null) ? '' :' LIMIT '.self::$s['limit'];
-          $sql .= (self::$s['offset'] == null) ? '' :' OFFSET '.self::$s['offset'];
+          $sql .= isset(self::$s['where']) ? ' WHERE '.self::$s['where'] : '';
+          $sql .= isset(self::$s['groupBy']) ? ' GROUP BY '.self::$s['groupBy'] : '';
+          $sql .= isset(self::$s['order']) ? ' ORDER BY '.self::$s['order'] : '';
+          $sql .= isset(self::$s['limit']) ? ' LIMIT '.self::$s['limit'] : '';
+          $sql .= isset(self::$s['offset']) ? ' OFFSET '.self::$s['offset'] : '';
           self::$sql = $sql; //want to have this static
           // echo $sql;
           return $sql;
@@ -841,29 +889,65 @@
 
       //Method to check if a table exist,
       // if it does, it querys with it else it takes it out of the fields
-    	private function tableExists($tables):bool
+    	private function tableExists($tables):array
     	{
+        //explode to see how many tables are being queried
     		$tables = explode(',', trim($tables, ','));
 
     		$length = count($tables);
-    		$exist = "";
+    		$tablesExist = [];
+        $tableAlias =[];
 
     		for($i = 0; $i < $length; $i++)
     		{
-    			if(self::$pdo->query("SHOW TABLES LIKE '".self::$prefix.$tables[$i]."'")->rowCount() == 1)
+          // Now trim off any whitespaces
+          $indexTable = trim($tables[$i],' ');
+
+          // Explode with DOT '.' to see if the databasename is attached to the table
+          $indexTable = explode('.',$indexTable);
+          if(isset($indexTable[1])){
+
+            $dbname= $indexTable[0].'.';
+            $dbname='';
+            $table = $indexTable[1];
+          }else{
+            $dbname="";
+            $table = $indexTable[0];
+          }
+
+          //now see if th table already has an alias set to it, then remove it.
+          $aliasTable = explode(' ',$table);
+          if(isset($aliasTable[1])){
+            // alias exists
+            $alias = $aliasTable[1];
+            echo  $alias;
+            $table = $aliasTable[0];
+          }else{
+            if($length == 1)
+            {
+
+              $alias = "t";
+            }else{
+              $alias = "t".$i;
+            }
+          }
+
+    			if(self::$pdo->query("SHOW TABLES LIKE '".$dbname.self::$prefix.$table."'")->rowCount() == 1)
 
     			{
-    				$exist = true;
+    				$tablesExist[$i]=$dbname.self::$prefix.$table;
+            $tableAlias[$i] = $alias;
+
     			}else
     			{
-    				$exist = false;
+    				die('The Table '.$table.' does not exist in the database');
     			}
 
 
     		}
 
 
-    		return $exist;
+    		return ['tables'=>$tablesExist,'alias'=>$tableAlias];
 
     	}
 
@@ -873,8 +957,10 @@
     //Method to check is a field exist, if it does,
     //it querys with it else it takes it out of the fields
 
-    	private function fieldExists($table, $field)
+    	private function fieldExists($table, $field, $alias):string
     	{
+
+        // echo 'table is: '.$table.' --- fields is: '.$field.' ---- alias is: '.$alias;
     		$field = explode(',', trim($field, ','));
 
     		$length = count($field);
@@ -883,8 +969,8 @@
     		for($i = 0; $i < $length; $i++)
     		{
     			if(self::$pdo->query("SHOW COLUMNS FROM ".self::$prefix.$table." LIKE '".$field[$i]."'")->rowCount() == 1)
-    			{
-    				$exist .= ',t.'.$field[$i];
+          {
+    				$exist .= ','.$alias.'.'.$field[$i];
             // echo $field[$i].'<br/>';
     			}
 
@@ -1100,7 +1186,7 @@
 //
 // ------------------------------------------------------------------
 
-   public function IsLoggedIn():bool
+   public static function IsLoggedIn():bool
    {
       if(isset($_SESSION['user_session']))
       {

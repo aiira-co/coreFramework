@@ -21,9 +21,10 @@
 
 <?php if(AirJax){ ?>
   <script src="<?=BaseUrl;?>libraries/design/js/airjax.js"></script>
-<?php } ?>
+
 <!-- Component Scripts -->
-<?php
+<?php }else{
+
   if(isset($legacy->script)){
     echo '<script>'.$legacy->script.'</script>';
   }elseif(isset($legacy->scriptUrls)){
@@ -31,4 +32,4 @@
       echo '<script src="'.BaseUrl.'components/'.$legacy->scriptUrls[$i].'"></script>';
     }
   }
-?>
+} ?>
