@@ -13,8 +13,8 @@
             $baseUrl = $adConfig->live_site;
           }else{
             // /check if its a secured connection
-            $http =isset($_SERVER['HTTPS']) ?'https://':'http://';
-            $serverName = $http.$_SERVER['HTTP_HOST'].'/';
+            $http =isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']=='on' ? 'https://' : 'http://';
+            $serverName = $_SERVER['HTTP_HOST'] ?? $_SERVER['SERVER_NAME'];
 
             // echo 'Server Name'.$serverName.'<br>';
 
@@ -24,7 +24,7 @@
 
             $dir = $dir[$countDir - 1];
 
-            $rootPaths = ['htdocs','public'];
+            $rootPaths = ['htdocs','www'];
               for($i=0; $i < count($rootPaths); $i++){
                 if($dir != $rootPaths[$i]){
                   $is_root = false;
@@ -35,7 +35,12 @@
               if($is_root){
                 $baseUrl = $serverName;
               }else{
-                $baseUrl = $serverName.$dir.'/';
+                if($serverName == $dir){
+                  $baseUrl = $http.$serverName.'/';
+                }else{
+
+                  $baseUrl = $http.$serverName.'/'.$dir.'/';
+                }
               }
           }
 
@@ -635,7 +640,7 @@
 
 	    if (strncmp('cli', PHP_SAPI, 3) !== 0)
 	    {
-		if (headers_sent() !== true)
+		if (!headers_sent())
 		{
 		    if (strlen(session_id()) > 0) // if using sessions
 		    {
@@ -649,7 +654,11 @@
 		    }
 
 		    header('Location: ' . $url, true, (preg_match('~^30[1237]$~', $code) > 0) ? $code : 302);
-		}
+		}else{
+
+        echo "<meta http-equiv=\"refresh\" content=\"0;url=$url\">\r\n";
+
+    }
 
 		exit();
 	    }

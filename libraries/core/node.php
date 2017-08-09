@@ -43,6 +43,7 @@ class Node{
       $coreRouter = CORE::getInstance('Router');
 
       $airJaxPath = $_POST['airJaxPath']??$_GET['airJaxPath'];
+      $airJaxPath =empty($airJaxPath)?'/':$airJaxPath;
       $routerPath = $coreRouter->getPath($airJaxPath);
 
       //Check if it has a authentication property
@@ -77,7 +78,7 @@ class Node{
             //echo '<br/>'.$class;
             if(class_exists($class)){
               $cc = new $class;
-              
+
                 AirJax::processAjaxToPHP(new $class);
 
 

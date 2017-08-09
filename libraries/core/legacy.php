@@ -210,7 +210,7 @@
           if(!isset(explode('.',$fields)[1])){
 
             $fields ='';
-          for($i; $i<count(self::$s['table']); $i++){
+          for($i=0; $i<count(self::$s['table']); $i++){
 
             $fields .= $this->fieldExists(self::$s['table'][$i], $fields,self::$s['alias'][$i]);
           }
@@ -555,6 +555,9 @@
           if(self::tableExists($table)){
 
             $join = [' INNER JOIN '.self::$prefix.$table.' '.$alias];
+            if(!isset(self::$s['joinTables'])){
+              self::$s['joinTables'] =[];
+            }
             self::$s['joinTables'] = array_merge(self::$s['joinTables'], $join);
 
 
@@ -571,7 +574,9 @@
         function leftJoin(string $table, string $alias):self{
 
           if(self::tableExists($table)){
-
+            if(!isset(self::$s['joinTables'])){
+              self::$s['joinTables'] =[];
+            }
             $join = [' LEFT JOIN '.self::$prefix.$table.' '.$alias];
             self::$s['joinTables'] = array_merge(self::$s['joinTables'], $join);
 
@@ -592,7 +597,9 @@
         function rightJoin(string $table, string $alias):self{
 
           if(self::tableExists($table)){
-
+            if(!isset(self::$s['joinTables'])){
+              self::$s['joinTables'] =[];
+            }
             $join = [' RIGHT JOIN '.self::$prefix.$table.' '.$alias];
             self::$s['joinTables'] = array_merge(self::$s['joinTables'], $join);
 
@@ -612,6 +619,9 @@
         function on(string $jField, string $tField):self{
           // check if fields exists
           $on = [' ON '.$jField.' = '.$tField];
+          if(!isset(self::$s['joinOn'])){
+            self::$s['joinOn'] =[];
+          }
             self::$s['joinOn'] = array_merge(self::$s['joinOn'], $on);
           return new CoreModel;
         }
@@ -649,7 +659,7 @@
 
 
           $sql = 'INSERT INTO '.self::$prefix;
-          $sql .=self::$s['table'].' (';
+          $sql .=explode(' ',self::genFieldsTables('tables'))[0].' (';
           $sql .= $field.') VALUES ('.$values.')';
           // echo $sql;
 
@@ -705,7 +715,7 @@
 
 
           $sql = 'UPDATE '.self::$prefix;
-          $sql .=self::$s['table'].' t SET '.$values;
+          $sql .=explode(' ',self::genFieldsTables('tables'))[0].' t SET '.$values;
 
           if(self::$s['where'] == null){
             die('please specify data to delete. Call DB::Table(\'table\')->Where(\'id\',$id)->Update($arr)');
@@ -743,12 +753,13 @@
 
         function delete():bool{
           $sql = 'DELETE FROM '.self::$prefix;
-          $sql .=self::$s['table'];
+          $sql .= explode(' ',self::genFieldsTables('tables'))[0];
           if(self::$s['where'] == null){
             die('please specify data to delete. Call DB::Table(\'table\')->Where(\'id\',$id)->Delete()');
           }
 
           $sql .= (self::$s['where'] == null) ? '' :' WHERE '.str_replace('t.','',self::$s['where']);
+          // echo self::$s['where'];
 
           // echo $sql;
           self::$sql = $sql;
@@ -764,21 +775,7 @@
 
 
 
-
-
-        //This Method is used mostly in GET request to create or generate the
-        // sql statement from the chain methods called in the model.
-        // the get method then assigns this return to a variable for use in the query()
-        // /returns a string
-        private function createStatement():string{
-
-
-
-
-          // $tableAlias = isset($alias)?'':' t';
-          // $sql .=' FROM '.self::$prefix.self::$s['table'].$tableAlias;
-
-
+        private static function genFieldsTables(string $get):string{
           //table iteration
           $tables ="";
           $fields ="";
@@ -793,9 +790,32 @@
           }
 
           $fields = self::$s['field']??trim($fields,',');
-          $sql = 'SELECT '.$fields;
+          $tables = trim($tables,',');
+          if($get =="fields"){
+            $results = $fields;
+          }else{
+            $results = $tables;
+          }
 
-          $sql .= ' FROM '.trim($tables,',');
+          return $results;
+        }
+
+        //This Method is used mostly in GET request to create or generate the
+        // sql statement from the chain methods called in the model.
+        // the get method then assigns this return to a variable for use in the query()
+        // /returns a string
+        private function createStatement():string{
+
+
+
+
+          // $tableAlias = isset($alias)?'':' t';
+          // $sql .=' FROM '.self::$prefix.self::$s['table'].$tableAlias;
+
+          $sql = 'SELECT '.self::genFieldsTables('fields');
+
+          $sql .= ' FROM '.self::genFieldsTables('tables');
+
           // Jion iteration
 
 
@@ -889,7 +909,7 @@
 
       //Method to check if a table exist,
       // if it does, it querys with it else it takes it out of the fields
-    	private function tableExists($tables):array
+    	private static function tableExists($tables):array
     	{
         //explode to see how many tables are being queried
     		$tables = explode(',', trim($tables, ','));
@@ -1028,7 +1048,7 @@
 
 
     // Method for initializing Session
-    function SessionInit($table='user', $emailField='email', $usernameField='username', $hashField='hashword'){
+    static function SessionInit($table='user', $emailField='email', $usernameField='username', $hashField='hashword'){
         self::$table = $table;
         self::$emailField = $emailField;
         self::$usernameField = $usernameField;
@@ -1036,7 +1056,7 @@
     }
 
     // Method to Login User
-    public function SessionLogin($uname,$umail,$upass):bool
+    public static function SessionLogin($uname,$umail,$upass):bool
     {
 
        try
