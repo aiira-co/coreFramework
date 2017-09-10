@@ -1,6 +1,6 @@
 
 <div class="ad-card ad-flat">
-    <ad-list class="ad-flat menuList">
+    <ad-list class="ad-flat menuList ad-hover hover-tgreen">
       <ad-item adRouter="<?=BaseUrl;?>">
         HOME
       </ad-item>
