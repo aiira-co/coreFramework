@@ -42,8 +42,7 @@ Now open the config.php file and set the variables:
 
 eg:
 
-,,,
-
+```PHP
 public $dbtype = 'mysqli';
 public $host='localhost';
 public $db = 'coreDB';
@@ -51,7 +50,7 @@ public $user='root'
 public $password='';
 public $db_prefix='';
 
-,,,
+```
 Now go to the practice/client page on the framework, if all things are properly set, the page should display correctly with some data from the database being displayed on the table. In this page, you can decide to add new client, edit cleint's info, and delete a client. Try them. 
 
 You can also go to the login page, just go back to the home page, scroll down and click on the account button. This should take you to the login page. 
