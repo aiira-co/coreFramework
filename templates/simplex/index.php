@@ -15,7 +15,7 @@
           <img src="<?=BaseUrl;?>media/images/logo/logo.png" class="img-responsive" alt="">
         </div>
 
-        <button type="button" name="button" class="ad-btn ad-flat rFloat" adRouter="<?=BaseUrl;?>practice"><i class="fa fa-shopping-cart"></i>&nbsp;  &nbsp; CART</button>
+        <button type="button" name="button" class="ad-btn ad-flat rFloat" adRouter="<?=BaseUrl;?>practice"><i class="fa fa-user-circle"></i>&nbsp;  &nbsp; CLIENT</button>
       </ad-header>
       <?php
       echo AirJax?'<ad-router  animate="true" >':null;

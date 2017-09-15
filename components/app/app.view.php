@@ -1,4 +1,5 @@
-<section class="banner ad-section" style="background-image:url('<?=BaseUrl;?>media/images/pcs.jpg'); height:400px; margin-top:-5px !important; z-index:100;">
+<section class="banner ad-section" 
+        style="background-image:url('<?=BaseUrl;?>media/images/coded.png'); height:400px; margin-top:-5px !important; z-index:100;">
     <div class="wrapper-fluid">
         <div class="ad-cols-12">
 
@@ -12,14 +13,16 @@
         
         <center>
             <h2>Welcome Here</h2>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam laborum, veritatis, iure culpa laboriosam nemo temporibus eligendi sapiente mollitia earum quos ratione cupiditate minima, nisi dolor ea illo? Deserunt, et?
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam laborum, veritatis, iure culpa laboriosam nemo temporibus eligendi sapiente mollitia earum quos ratione cupiditate minima, nisi dolor ea illo? Deserunt, et?
+            <p style="font-size:17px;">
+            Core Framework is a PHP7 MVC framework. It follows a component based approach where a component contains the component file and its view. A separate file which is a model handles database queries which is used by the component to render data into the browser through the view file.
+            <br/>
+            Download the framework from this page, it comes bundled in a zip file format. Extract the files in the MyApp folder into a folder which is the name of the app you want to create. Copy the folder into your PHP7 server directory.
+Eg. In XAMPP, copy the folder to the htdocs folder of the XAMPP directory.
             </p>
         </center>
 <br>
         <div class="ad-card ad-img ad-flat text-center">
-            <img src="<?=BaseUrl;?>media/images/suite.jpg" alt="">
+            <img src="<?=BaseUrl;?>media/images/suite.jpg" class="img-responsive" alt="">
         </div>
         <br>
         <center>

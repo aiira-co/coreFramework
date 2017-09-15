@@ -7,10 +7,20 @@
 /* BASE-- base, variables, mixins, normalize */
 /* COLORS PRESETS  */
 /* COLORS Buttons*/
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   text-transform: uppercase;
   font-weight: bold; }
-  h1 .thin, h2 .thin, h3 .thin, h4 .thin, h5 .thin, h6 .thin {
+  h1 .thin,
+  h2 .thin,
+  h3 .thin,
+  h4 .thin,
+  h5 .thin,
+  h6 .thin {
     font-weight: 300; }
 
 hr {
@@ -95,7 +105,9 @@ a {
   -mz-box-shadow: 0px 5px 16px 3px rgba(0, 0, 0, 0.1);
   box-shadow: 0px 5px 16px 3px rgba(0, 0, 0, 0.1); }
 
-.ad-title, .ad-header .title, .ad-header-fixed .title, .ad-header-responsive .title, ad-header .title, .ad-subheader h1, ad-subheader h1, .ad-subheader h2, ad-subheader h2, ad-header h2 {
+.ad-title, .ad-header .title, .ad-header-fixed .title, .ad-header-responsive .title, ad-header .title, .ad-subheader h1, ad-subheader h1,
+.ad-subheader h2,
+ad-subheader h2, ad-header h2 {
   font-size: 18px;
   color: inherit;
   margin: 0;
@@ -104,7 +116,8 @@ a {
   vertical-align: top;
   font-weight: 500; }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   font-family: bariolregular, "Open sans", serif;
@@ -116,6 +129,22 @@ html, body {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat; }
+
+::-webkit-scrollbar {
+  background-color: rgba(255, 255, 255, 0.6);
+  width: 8px;
+  -webkit-transition: all 0.3s ease-out 0s;
+  -moz-transition: all 0.3s ease-out 0s;
+  -o-transition: all 0.3s ease-out 0s;
+  transition: all 0.3s ease-out 0s; }
+
+::-webkit-scrollbar:hover {
+  width: 10px;
+  box-shadow: 0 0 2px 2px rgba(34, 44, 55, 0.4);
+  opacity: 1; }
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(34, 44, 55, 0.8); }
 
 /* LAYOUTS --- Page layout styles*/
 .ad-left, ad-left {
@@ -190,11 +219,69 @@ html, body {
   .ad-row .ad-row, ad-row .ad-row, .ad-row ad-row, ad-row ad-row {
     margin: 0; }
 
-.ad-colx-1, .ad-cols-1, .ad-colm-1, .ad-coll-1, .ad-colx-2, .ad-cols-2, .ad-colm-2, .ad-coll-2, .ad-colx-3, .ad-cols-3, .ad-colm-3, .ad-coll-3, .ad-colx-4, .ad-cols-4, .ad-colm-4, .ad-coll-4, .ad-colx-5, .ad-cols-5, .ad-colm-5, .ad-coll-5, .ad-colx-6, .ad-cols-6, .ad-colm-6, .ad-coll-6, .ad-colx-7, .ad-cols-7, .ad-colm-7, .ad-coll-7, .ad-colx-8, .ad-cols-8, .ad-colm-8, .ad-coll-8, .ad-colx-9, .ad-cols-9, .ad-colm-9, .ad-coll-9, .ad-colx-10, .ad-cols-10, .ad-colm-10, .ad-coll-10, .ad-colx-11, .ad-cols-11, .ad-colm-11, .ad-coll-11, .ad-colx-12, .ad-cols-12, .ad-colm-12, .ad-coll-12 {
+.ad-colx-1,
+.ad-cols-1,
+.ad-colm-1,
+.ad-coll-1,
+.ad-colx-2,
+.ad-cols-2,
+.ad-colm-2,
+.ad-coll-2,
+.ad-colx-3,
+.ad-cols-3,
+.ad-colm-3,
+.ad-coll-3,
+.ad-colx-4,
+.ad-cols-4,
+.ad-colm-4,
+.ad-coll-4,
+.ad-colx-5,
+.ad-cols-5,
+.ad-colm-5,
+.ad-coll-5,
+.ad-colx-6,
+.ad-cols-6,
+.ad-colm-6,
+.ad-coll-6,
+.ad-colx-7,
+.ad-cols-7,
+.ad-colm-7,
+.ad-coll-7,
+.ad-colx-8,
+.ad-cols-8,
+.ad-colm-8,
+.ad-coll-8,
+.ad-colx-9,
+.ad-cols-9,
+.ad-colm-9,
+.ad-coll-9,
+.ad-colx-10,
+.ad-cols-10,
+.ad-colm-10,
+.ad-coll-10,
+.ad-colx-11,
+.ad-cols-11,
+.ad-colm-11,
+.ad-coll-11,
+.ad-colx-12,
+.ad-cols-12,
+.ad-colm-12,
+.ad-coll-12 {
   position: relative;
   min-height: 1px; }
 
-.ad-colx-1, .ad-colx-2, .ad-colx-3, .ad-colx-4, .ad-colx-5, .ad-colx-6, .ad-colx-7, .ad-colx-8, .ad-colx-9, .ad-colx-10, .ad-colx-11, .ad-colx-12 {
+.ad-colx-1,
+.ad-colx-2,
+.ad-colx-3,
+.ad-colx-4,
+.ad-colx-5,
+.ad-colx-6,
+.ad-colx-7,
+.ad-colx-8,
+.ad-colx-9,
+.ad-colx-10,
+.ad-colx-11,
+.ad-colx-12 {
   float: left; }
 
 .ad-colx-12 {
@@ -351,7 +438,18 @@ html, body {
   margin-left: 0; }
 
 @media (min-width: 768px) {
-  .ad-cols-1, .ad-cols-2, .ad-cols-3, .ad-cols-4, .ad-cols-5, .ad-cols-6, .ad-cols-7, .ad-cols-8, .ad-cols-9, .ad-cols-10, .ad-cols-11, .ad-cols-12 {
+  .ad-cols-1,
+  .ad-cols-2,
+  .ad-cols-3,
+  .ad-cols-4,
+  .ad-cols-5,
+  .ad-cols-6,
+  .ad-cols-7,
+  .ad-cols-8,
+  .ad-cols-9,
+  .ad-cols-10,
+  .ad-cols-11,
+  .ad-cols-12 {
     float: left; }
 
   .ad-cols-12 {
@@ -507,7 +605,18 @@ html, body {
   .ad-cols-offset-0 {
     margin-left: 0; } }
 @media (min-width: 992px) {
-  .ad-colm-1, .ad-colm-2, .ad-colm-3, .ad-colm-4, .ad-colm-5, .ad-colm-6, .ad-colm-7, .ad-colm-8, .ad-colm-9, .ad-colm-10, .ad-colm-11, .ad-colm-12 {
+  .ad-colm-1,
+  .ad-colm-2,
+  .ad-colm-3,
+  .ad-colm-4,
+  .ad-colm-5,
+  .ad-colm-6,
+  .ad-colm-7,
+  .ad-colm-8,
+  .ad-colm-9,
+  .ad-colm-10,
+  .ad-colm-11,
+  .ad-colm-12 {
     float: left; }
 
   .ad-colm-12 {
@@ -663,7 +772,18 @@ html, body {
   .ad-colm-offset-0 {
     margin-left: 0; } }
 @media (min-width: 1200px) {
-  .ad-coll-1, .ad-coll-2, .ad-coll-3, .ad-coll-4, .ad-coll-5, .ad-coll-6, .ad-coll-7, .ad-coll-8, .ad-coll-9, .ad-coll-10, .ad-coll-11, .ad-coll-12 {
+  .ad-coll-1,
+  .ad-coll-2,
+  .ad-coll-3,
+  .ad-coll-4,
+  .ad-coll-5,
+  .ad-coll-6,
+  .ad-coll-7,
+  .ad-coll-8,
+  .ad-coll-9,
+  .ad-coll-10,
+  .ad-coll-11,
+  .ad-coll-12 {
     float: left; }
 
   .ad-coll-12 {
@@ -885,7 +1005,9 @@ html, body {
   -mz-box-shadow: 0px 1px 2px 1px rgba(160, 160, 160, 0.5);
   box-shadow: 0px 1px 2px 1px rgba(160, 160, 160, 0.5);
   padding: 0 16px; }
-  .ad-subheader h1, ad-subheader h1, .ad-subheader h2, ad-subheader h2 {
+  .ad-subheader h1, ad-subheader h1,
+  .ad-subheader h2,
+  ad-subheader h2 {
     margin: 0;
     padding-top: 8px; }
   .ad-subheader .ad-fab, ad-subheader .ad-fab {
@@ -1437,42 +1559,150 @@ footer {
   max-width: 85%;
   font-size: 12px; }
 
-.ad-list.ad-hover.hover-prim .ad-item:after, ad-list.ad-hover.hover-prim .ad-item:after, .ad-list.ad-hover.hover-prim .ad-avatar:after, ad-list.ad-hover.hover-prim .ad-avatar:after, .ad-list.ad-hover.hover-prim ad-avatar:after, ad-list.ad-hover.hover-prim ad-avatar:after, .ad-list.ad-hover.hover-prim .ad-thumbnail:after, ad-list.ad-hover.hover-prim .ad-thumbnail:after, .ad-list.ad-hover.hover-prim ad-thumbnail:after, ad-list.ad-hover.hover-prim ad-thumbnail:after, .ad-list.ad-hover.hover-prim ad-item:after, ad-list.ad-hover.hover-prim ad-item:after, .ad-list.ad-hover.hover-prim .ad-avatar:after, ad-list.ad-hover.hover-prim .ad-avatar:after, .ad-list.ad-hover.hover-prim ad-avatar:after, ad-list.ad-hover.hover-prim ad-avatar:after, .ad-list.ad-hover.hover-prim .ad-thumbnail:after, ad-list.ad-hover.hover-prim .ad-thumbnail:after, .ad-list.ad-hover.hover-prim ad-thumbnail:after, ad-list.ad-hover.hover-prim ad-thumbnail:after {
+.ad-list.ad-hover.hover-prim .ad-item:after, ad-list.ad-hover.hover-prim .ad-item:after, .ad-list.ad-hover.hover-prim .ad-avatar:after, ad-list.ad-hover.hover-prim .ad-avatar:after, .ad-list.ad-hover.hover-prim ad-avatar:after, ad-list.ad-hover.hover-prim ad-avatar:after, .ad-list.ad-hover.hover-prim .ad-thumbnail:after, ad-list.ad-hover.hover-prim .ad-thumbnail:after, .ad-list.ad-hover.hover-prim ad-thumbnail:after, ad-list.ad-hover.hover-prim ad-thumbnail:after, .ad-list.ad-hover.hover-prim ad-item:after, ad-list.ad-hover.hover-prim ad-item:after,
+.ad-list.ad-hover.hover-prim .ad-avatar:after,
+ad-list.ad-hover.hover-prim .ad-avatar:after,
+.ad-list.ad-hover.hover-prim ad-avatar:after,
+ad-list.ad-hover.hover-prim ad-avatar:after,
+.ad-list.ad-hover.hover-prim .ad-thumbnail:after,
+ad-list.ad-hover.hover-prim .ad-thumbnail:after,
+.ad-list.ad-hover.hover-prim ad-thumbnail:after,
+ad-list.ad-hover.hover-prim ad-thumbnail:after {
   background-color: #28d0ea; }
-.ad-list.ad-hover.hover-pink .ad-item:after, ad-list.ad-hover.hover-pink .ad-item:after, .ad-list.ad-hover.hover-pink .ad-avatar:after, ad-list.ad-hover.hover-pink .ad-avatar:after, .ad-list.ad-hover.hover-pink ad-avatar:after, ad-list.ad-hover.hover-pink ad-avatar:after, .ad-list.ad-hover.hover-pink .ad-thumbnail:after, ad-list.ad-hover.hover-pink .ad-thumbnail:after, .ad-list.ad-hover.hover-pink ad-thumbnail:after, ad-list.ad-hover.hover-pink ad-thumbnail:after, .ad-list.ad-hover.hover-pink ad-item:after, ad-list.ad-hover.hover-pink ad-item:after, .ad-list.ad-hover.hover-pink .ad-avatar:after, ad-list.ad-hover.hover-pink .ad-avatar:after, .ad-list.ad-hover.hover-pink ad-avatar:after, ad-list.ad-hover.hover-pink ad-avatar:after, .ad-list.ad-hover.hover-pink .ad-thumbnail:after, ad-list.ad-hover.hover-pink .ad-thumbnail:after, .ad-list.ad-hover.hover-pink ad-thumbnail:after, ad-list.ad-hover.hover-pink ad-thumbnail:after {
+.ad-list.ad-hover.hover-pink .ad-item:after, ad-list.ad-hover.hover-pink .ad-item:after, .ad-list.ad-hover.hover-pink .ad-avatar:after, ad-list.ad-hover.hover-pink .ad-avatar:after, .ad-list.ad-hover.hover-pink ad-avatar:after, ad-list.ad-hover.hover-pink ad-avatar:after, .ad-list.ad-hover.hover-pink .ad-thumbnail:after, ad-list.ad-hover.hover-pink .ad-thumbnail:after, .ad-list.ad-hover.hover-pink ad-thumbnail:after, ad-list.ad-hover.hover-pink ad-thumbnail:after, .ad-list.ad-hover.hover-pink ad-item:after, ad-list.ad-hover.hover-pink ad-item:after,
+.ad-list.ad-hover.hover-pink .ad-avatar:after,
+ad-list.ad-hover.hover-pink .ad-avatar:after,
+.ad-list.ad-hover.hover-pink ad-avatar:after,
+ad-list.ad-hover.hover-pink ad-avatar:after,
+.ad-list.ad-hover.hover-pink .ad-thumbnail:after,
+ad-list.ad-hover.hover-pink .ad-thumbnail:after,
+.ad-list.ad-hover.hover-pink ad-thumbnail:after,
+ad-list.ad-hover.hover-pink ad-thumbnail:after {
   background-color: #ff0066; }
-.ad-list.ad-hover.hover-tgreen .ad-item:after, ad-list.ad-hover.hover-tgreen .ad-item:after, .ad-list.ad-hover.hover-tgreen .ad-avatar:after, ad-list.ad-hover.hover-tgreen .ad-avatar:after, .ad-list.ad-hover.hover-tgreen ad-avatar:after, ad-list.ad-hover.hover-tgreen ad-avatar:after, .ad-list.ad-hover.hover-tgreen .ad-thumbnail:after, ad-list.ad-hover.hover-tgreen .ad-thumbnail:after, .ad-list.ad-hover.hover-tgreen ad-thumbnail:after, ad-list.ad-hover.hover-tgreen ad-thumbnail:after, .ad-list.ad-hover.hover-tgreen ad-item:after, ad-list.ad-hover.hover-tgreen ad-item:after, .ad-list.ad-hover.hover-tgreen .ad-avatar:after, ad-list.ad-hover.hover-tgreen .ad-avatar:after, .ad-list.ad-hover.hover-tgreen ad-avatar:after, ad-list.ad-hover.hover-tgreen ad-avatar:after, .ad-list.ad-hover.hover-tgreen .ad-thumbnail:after, ad-list.ad-hover.hover-tgreen .ad-thumbnail:after, .ad-list.ad-hover.hover-tgreen ad-thumbnail:after, ad-list.ad-hover.hover-tgreen ad-thumbnail:after {
+.ad-list.ad-hover.hover-tgreen .ad-item:after, ad-list.ad-hover.hover-tgreen .ad-item:after, .ad-list.ad-hover.hover-tgreen .ad-avatar:after, ad-list.ad-hover.hover-tgreen .ad-avatar:after, .ad-list.ad-hover.hover-tgreen ad-avatar:after, ad-list.ad-hover.hover-tgreen ad-avatar:after, .ad-list.ad-hover.hover-tgreen .ad-thumbnail:after, ad-list.ad-hover.hover-tgreen .ad-thumbnail:after, .ad-list.ad-hover.hover-tgreen ad-thumbnail:after, ad-list.ad-hover.hover-tgreen ad-thumbnail:after, .ad-list.ad-hover.hover-tgreen ad-item:after, ad-list.ad-hover.hover-tgreen ad-item:after,
+.ad-list.ad-hover.hover-tgreen .ad-avatar:after,
+ad-list.ad-hover.hover-tgreen .ad-avatar:after,
+.ad-list.ad-hover.hover-tgreen ad-avatar:after,
+ad-list.ad-hover.hover-tgreen ad-avatar:after,
+.ad-list.ad-hover.hover-tgreen .ad-thumbnail:after,
+ad-list.ad-hover.hover-tgreen .ad-thumbnail:after,
+.ad-list.ad-hover.hover-tgreen ad-thumbnail:after,
+ad-list.ad-hover.hover-tgreen ad-thumbnail:after {
   background-color: #19e3b1; }
-.ad-list.ad-hover.hover-yellow .ad-item:after, ad-list.ad-hover.hover-yellow .ad-item:after, .ad-list.ad-hover.hover-yellow .ad-avatar:after, ad-list.ad-hover.hover-yellow .ad-avatar:after, .ad-list.ad-hover.hover-yellow ad-avatar:after, ad-list.ad-hover.hover-yellow ad-avatar:after, .ad-list.ad-hover.hover-yellow .ad-thumbnail:after, ad-list.ad-hover.hover-yellow .ad-thumbnail:after, .ad-list.ad-hover.hover-yellow ad-thumbnail:after, ad-list.ad-hover.hover-yellow ad-thumbnail:after, .ad-list.ad-hover.hover-yellow ad-item:after, ad-list.ad-hover.hover-yellow ad-item:after, .ad-list.ad-hover.hover-yellow .ad-avatar:after, ad-list.ad-hover.hover-yellow .ad-avatar:after, .ad-list.ad-hover.hover-yellow ad-avatar:after, ad-list.ad-hover.hover-yellow ad-avatar:after, .ad-list.ad-hover.hover-yellow .ad-thumbnail:after, ad-list.ad-hover.hover-yellow .ad-thumbnail:after, .ad-list.ad-hover.hover-yellow ad-thumbnail:after, ad-list.ad-hover.hover-yellow ad-thumbnail:after {
+.ad-list.ad-hover.hover-yellow .ad-item:after, ad-list.ad-hover.hover-yellow .ad-item:after, .ad-list.ad-hover.hover-yellow .ad-avatar:after, ad-list.ad-hover.hover-yellow .ad-avatar:after, .ad-list.ad-hover.hover-yellow ad-avatar:after, ad-list.ad-hover.hover-yellow ad-avatar:after, .ad-list.ad-hover.hover-yellow .ad-thumbnail:after, ad-list.ad-hover.hover-yellow .ad-thumbnail:after, .ad-list.ad-hover.hover-yellow ad-thumbnail:after, ad-list.ad-hover.hover-yellow ad-thumbnail:after, .ad-list.ad-hover.hover-yellow ad-item:after, ad-list.ad-hover.hover-yellow ad-item:after,
+.ad-list.ad-hover.hover-yellow .ad-avatar:after,
+ad-list.ad-hover.hover-yellow .ad-avatar:after,
+.ad-list.ad-hover.hover-yellow ad-avatar:after,
+ad-list.ad-hover.hover-yellow ad-avatar:after,
+.ad-list.ad-hover.hover-yellow .ad-thumbnail:after,
+ad-list.ad-hover.hover-yellow .ad-thumbnail:after,
+.ad-list.ad-hover.hover-yellow ad-thumbnail:after,
+ad-list.ad-hover.hover-yellow ad-thumbnail:after {
   background-color: #fff600; }
-.ad-list.ad-hover.hover-blue .ad-item:after, ad-list.ad-hover.hover-blue .ad-item:after, .ad-list.ad-hover.hover-blue .ad-avatar:after, ad-list.ad-hover.hover-blue .ad-avatar:after, .ad-list.ad-hover.hover-blue ad-avatar:after, ad-list.ad-hover.hover-blue ad-avatar:after, .ad-list.ad-hover.hover-blue .ad-thumbnail:after, ad-list.ad-hover.hover-blue .ad-thumbnail:after, .ad-list.ad-hover.hover-blue ad-thumbnail:after, ad-list.ad-hover.hover-blue ad-thumbnail:after, .ad-list.ad-hover.hover-blue ad-item:after, ad-list.ad-hover.hover-blue ad-item:after, .ad-list.ad-hover.hover-blue .ad-avatar:after, ad-list.ad-hover.hover-blue .ad-avatar:after, .ad-list.ad-hover.hover-blue ad-avatar:after, ad-list.ad-hover.hover-blue ad-avatar:after, .ad-list.ad-hover.hover-blue .ad-thumbnail:after, ad-list.ad-hover.hover-blue .ad-thumbnail:after, .ad-list.ad-hover.hover-blue ad-thumbnail:after, ad-list.ad-hover.hover-blue ad-thumbnail:after {
+.ad-list.ad-hover.hover-blue .ad-item:after, ad-list.ad-hover.hover-blue .ad-item:after, .ad-list.ad-hover.hover-blue .ad-avatar:after, ad-list.ad-hover.hover-blue .ad-avatar:after, .ad-list.ad-hover.hover-blue ad-avatar:after, ad-list.ad-hover.hover-blue ad-avatar:after, .ad-list.ad-hover.hover-blue .ad-thumbnail:after, ad-list.ad-hover.hover-blue .ad-thumbnail:after, .ad-list.ad-hover.hover-blue ad-thumbnail:after, ad-list.ad-hover.hover-blue ad-thumbnail:after, .ad-list.ad-hover.hover-blue ad-item:after, ad-list.ad-hover.hover-blue ad-item:after,
+.ad-list.ad-hover.hover-blue .ad-avatar:after,
+ad-list.ad-hover.hover-blue .ad-avatar:after,
+.ad-list.ad-hover.hover-blue ad-avatar:after,
+ad-list.ad-hover.hover-blue ad-avatar:after,
+.ad-list.ad-hover.hover-blue .ad-thumbnail:after,
+ad-list.ad-hover.hover-blue .ad-thumbnail:after,
+.ad-list.ad-hover.hover-blue ad-thumbnail:after,
+ad-list.ad-hover.hover-blue ad-thumbnail:after {
   background-color: #2196F3; }
-.ad-list.ad-hover.hover-red .ad-item:after, ad-list.ad-hover.hover-red .ad-item:after, .ad-list.ad-hover.hover-red .ad-avatar:after, ad-list.ad-hover.hover-red .ad-avatar:after, .ad-list.ad-hover.hover-red ad-avatar:after, ad-list.ad-hover.hover-red ad-avatar:after, .ad-list.ad-hover.hover-red .ad-thumbnail:after, ad-list.ad-hover.hover-red .ad-thumbnail:after, .ad-list.ad-hover.hover-red ad-thumbnail:after, ad-list.ad-hover.hover-red ad-thumbnail:after, .ad-list.ad-hover.hover-red ad-item:after, ad-list.ad-hover.hover-red ad-item:after, .ad-list.ad-hover.hover-red .ad-avatar:after, ad-list.ad-hover.hover-red .ad-avatar:after, .ad-list.ad-hover.hover-red ad-avatar:after, ad-list.ad-hover.hover-red ad-avatar:after, .ad-list.ad-hover.hover-red .ad-thumbnail:after, ad-list.ad-hover.hover-red .ad-thumbnail:after, .ad-list.ad-hover.hover-red ad-thumbnail:after, ad-list.ad-hover.hover-red ad-thumbnail:after {
+.ad-list.ad-hover.hover-red .ad-item:after, ad-list.ad-hover.hover-red .ad-item:after, .ad-list.ad-hover.hover-red .ad-avatar:after, ad-list.ad-hover.hover-red .ad-avatar:after, .ad-list.ad-hover.hover-red ad-avatar:after, ad-list.ad-hover.hover-red ad-avatar:after, .ad-list.ad-hover.hover-red .ad-thumbnail:after, ad-list.ad-hover.hover-red .ad-thumbnail:after, .ad-list.ad-hover.hover-red ad-thumbnail:after, ad-list.ad-hover.hover-red ad-thumbnail:after, .ad-list.ad-hover.hover-red ad-item:after, ad-list.ad-hover.hover-red ad-item:after,
+.ad-list.ad-hover.hover-red .ad-avatar:after,
+ad-list.ad-hover.hover-red .ad-avatar:after,
+.ad-list.ad-hover.hover-red ad-avatar:after,
+ad-list.ad-hover.hover-red ad-avatar:after,
+.ad-list.ad-hover.hover-red .ad-thumbnail:after,
+ad-list.ad-hover.hover-red .ad-thumbnail:after,
+.ad-list.ad-hover.hover-red ad-thumbnail:after,
+ad-list.ad-hover.hover-red ad-thumbnail:after {
   background-color: #F44336; }
-.ad-list.ad-hover.hover-green .ad-item:after, ad-list.ad-hover.hover-green .ad-item:after, .ad-list.ad-hover.hover-green .ad-avatar:after, ad-list.ad-hover.hover-green .ad-avatar:after, .ad-list.ad-hover.hover-green ad-avatar:after, ad-list.ad-hover.hover-green ad-avatar:after, .ad-list.ad-hover.hover-green .ad-thumbnail:after, ad-list.ad-hover.hover-green .ad-thumbnail:after, .ad-list.ad-hover.hover-green ad-thumbnail:after, ad-list.ad-hover.hover-green ad-thumbnail:after, .ad-list.ad-hover.hover-green ad-item:after, ad-list.ad-hover.hover-green ad-item:after, .ad-list.ad-hover.hover-green .ad-avatar:after, ad-list.ad-hover.hover-green .ad-avatar:after, .ad-list.ad-hover.hover-green ad-avatar:after, ad-list.ad-hover.hover-green ad-avatar:after, .ad-list.ad-hover.hover-green .ad-thumbnail:after, ad-list.ad-hover.hover-green .ad-thumbnail:after, .ad-list.ad-hover.hover-green ad-thumbnail:after, ad-list.ad-hover.hover-green ad-thumbnail:after {
+.ad-list.ad-hover.hover-green .ad-item:after, ad-list.ad-hover.hover-green .ad-item:after, .ad-list.ad-hover.hover-green .ad-avatar:after, ad-list.ad-hover.hover-green .ad-avatar:after, .ad-list.ad-hover.hover-green ad-avatar:after, ad-list.ad-hover.hover-green ad-avatar:after, .ad-list.ad-hover.hover-green .ad-thumbnail:after, ad-list.ad-hover.hover-green .ad-thumbnail:after, .ad-list.ad-hover.hover-green ad-thumbnail:after, ad-list.ad-hover.hover-green ad-thumbnail:after, .ad-list.ad-hover.hover-green ad-item:after, ad-list.ad-hover.hover-green ad-item:after,
+.ad-list.ad-hover.hover-green .ad-avatar:after,
+ad-list.ad-hover.hover-green .ad-avatar:after,
+.ad-list.ad-hover.hover-green ad-avatar:after,
+ad-list.ad-hover.hover-green ad-avatar:after,
+.ad-list.ad-hover.hover-green .ad-thumbnail:after,
+ad-list.ad-hover.hover-green .ad-thumbnail:after,
+.ad-list.ad-hover.hover-green ad-thumbnail:after,
+ad-list.ad-hover.hover-green ad-thumbnail:after {
   background-color: #5FCF80; }
-.ad-list.ad-hover.hover-dark .ad-item:after, ad-list.ad-hover.hover-dark .ad-item:after, .ad-list.ad-hover.hover-dark .ad-avatar:after, ad-list.ad-hover.hover-dark .ad-avatar:after, .ad-list.ad-hover.hover-dark ad-avatar:after, ad-list.ad-hover.hover-dark ad-avatar:after, .ad-list.ad-hover.hover-dark .ad-thumbnail:after, ad-list.ad-hover.hover-dark .ad-thumbnail:after, .ad-list.ad-hover.hover-dark ad-thumbnail:after, ad-list.ad-hover.hover-dark ad-thumbnail:after, .ad-list.ad-hover.hover-dark ad-item:after, ad-list.ad-hover.hover-dark ad-item:after, .ad-list.ad-hover.hover-dark .ad-avatar:after, ad-list.ad-hover.hover-dark .ad-avatar:after, .ad-list.ad-hover.hover-dark ad-avatar:after, ad-list.ad-hover.hover-dark ad-avatar:after, .ad-list.ad-hover.hover-dark .ad-thumbnail:after, ad-list.ad-hover.hover-dark .ad-thumbnail:after, .ad-list.ad-hover.hover-dark ad-thumbnail:after, ad-list.ad-hover.hover-dark ad-thumbnail:after {
+.ad-list.ad-hover.hover-dark .ad-item:after, ad-list.ad-hover.hover-dark .ad-item:after, .ad-list.ad-hover.hover-dark .ad-avatar:after, ad-list.ad-hover.hover-dark .ad-avatar:after, .ad-list.ad-hover.hover-dark ad-avatar:after, ad-list.ad-hover.hover-dark ad-avatar:after, .ad-list.ad-hover.hover-dark .ad-thumbnail:after, ad-list.ad-hover.hover-dark .ad-thumbnail:after, .ad-list.ad-hover.hover-dark ad-thumbnail:after, ad-list.ad-hover.hover-dark ad-thumbnail:after, .ad-list.ad-hover.hover-dark ad-item:after, ad-list.ad-hover.hover-dark ad-item:after,
+.ad-list.ad-hover.hover-dark .ad-avatar:after,
+ad-list.ad-hover.hover-dark .ad-avatar:after,
+.ad-list.ad-hover.hover-dark ad-avatar:after,
+ad-list.ad-hover.hover-dark ad-avatar:after,
+.ad-list.ad-hover.hover-dark .ad-thumbnail:after,
+ad-list.ad-hover.hover-dark .ad-thumbnail:after,
+.ad-list.ad-hover.hover-dark ad-thumbnail:after,
+ad-list.ad-hover.hover-dark ad-thumbnail:after {
   background-color: #222c37; }
-.ad-list.ad-hover.hover-white .ad-item:after, ad-list.ad-hover.hover-white .ad-item:after, .ad-list.ad-hover.hover-white .ad-avatar:after, ad-list.ad-hover.hover-white .ad-avatar:after, .ad-list.ad-hover.hover-white ad-avatar:after, ad-list.ad-hover.hover-white ad-avatar:after, .ad-list.ad-hover.hover-white .ad-thumbnail:after, ad-list.ad-hover.hover-white .ad-thumbnail:after, .ad-list.ad-hover.hover-white ad-thumbnail:after, ad-list.ad-hover.hover-white ad-thumbnail:after, .ad-list.ad-hover.hover-white ad-item:after, ad-list.ad-hover.hover-white ad-item:after, .ad-list.ad-hover.hover-white .ad-avatar:after, ad-list.ad-hover.hover-white .ad-avatar:after, .ad-list.ad-hover.hover-white ad-avatar:after, ad-list.ad-hover.hover-white ad-avatar:after, .ad-list.ad-hover.hover-white .ad-thumbnail:after, ad-list.ad-hover.hover-white .ad-thumbnail:after, .ad-list.ad-hover.hover-white ad-thumbnail:after, ad-list.ad-hover.hover-white ad-thumbnail:after {
+.ad-list.ad-hover.hover-white .ad-item:after, ad-list.ad-hover.hover-white .ad-item:after, .ad-list.ad-hover.hover-white .ad-avatar:after, ad-list.ad-hover.hover-white .ad-avatar:after, .ad-list.ad-hover.hover-white ad-avatar:after, ad-list.ad-hover.hover-white ad-avatar:after, .ad-list.ad-hover.hover-white .ad-thumbnail:after, ad-list.ad-hover.hover-white .ad-thumbnail:after, .ad-list.ad-hover.hover-white ad-thumbnail:after, ad-list.ad-hover.hover-white ad-thumbnail:after, .ad-list.ad-hover.hover-white ad-item:after, ad-list.ad-hover.hover-white ad-item:after,
+.ad-list.ad-hover.hover-white .ad-avatar:after,
+ad-list.ad-hover.hover-white .ad-avatar:after,
+.ad-list.ad-hover.hover-white ad-avatar:after,
+ad-list.ad-hover.hover-white ad-avatar:after,
+.ad-list.ad-hover.hover-white .ad-thumbnail:after,
+ad-list.ad-hover.hover-white .ad-thumbnail:after,
+.ad-list.ad-hover.hover-white ad-thumbnail:after,
+ad-list.ad-hover.hover-white ad-thumbnail:after {
   background-color: white; }
 
-.ad-item.ad-hover.hover-prim:after, .ad-hover.hover-prim.ad-avatar:after, ad-avatar.ad-hover.hover-prim:after, .ad-hover.hover-prim.ad-thumbnail:after, ad-thumbnail.ad-hover.hover-prim:after, ad-item.ad-hover.hover-prim:after, .ad-avatar.ad-hover.hover-prim:after, ad-avatar.ad-hover.hover-prim:after, .ad-thumbnail.ad-hover.hover-prim:after, ad-thumbnail.ad-hover.hover-prim:after {
+.ad-item.ad-hover.hover-prim:after, .ad-hover.hover-prim.ad-avatar:after, ad-avatar.ad-hover.hover-prim:after, .ad-hover.hover-prim.ad-thumbnail:after, ad-thumbnail.ad-hover.hover-prim:after, ad-item.ad-hover.hover-prim:after,
+.ad-avatar.ad-hover.hover-prim:after,
+ad-avatar.ad-hover.hover-prim:after,
+.ad-thumbnail.ad-hover.hover-prim:after,
+ad-thumbnail.ad-hover.hover-prim:after {
   background-color: #28d0ea; }
-.ad-item.ad-hover.hover-pink:after, .ad-hover.hover-pink.ad-avatar:after, ad-avatar.ad-hover.hover-pink:after, .ad-hover.hover-pink.ad-thumbnail:after, ad-thumbnail.ad-hover.hover-pink:after, ad-item.ad-hover.hover-pink:after, .ad-avatar.ad-hover.hover-pink:after, ad-avatar.ad-hover.hover-pink:after, .ad-thumbnail.ad-hover.hover-pink:after, ad-thumbnail.ad-hover.hover-pink:after {
+.ad-item.ad-hover.hover-pink:after, .ad-hover.hover-pink.ad-avatar:after, ad-avatar.ad-hover.hover-pink:after, .ad-hover.hover-pink.ad-thumbnail:after, ad-thumbnail.ad-hover.hover-pink:after, ad-item.ad-hover.hover-pink:after,
+.ad-avatar.ad-hover.hover-pink:after,
+ad-avatar.ad-hover.hover-pink:after,
+.ad-thumbnail.ad-hover.hover-pink:after,
+ad-thumbnail.ad-hover.hover-pink:after {
   background-color: #ff0066; }
-.ad-item.ad-hover.hover-tgreen:after, .ad-hover.hover-tgreen.ad-avatar:after, ad-avatar.ad-hover.hover-tgreen:after, .ad-hover.hover-tgreen.ad-thumbnail:after, ad-thumbnail.ad-hover.hover-tgreen:after, ad-item.ad-hover.hover-tgreen:after, .ad-avatar.ad-hover.hover-tgreen:after, ad-avatar.ad-hover.hover-tgreen:after, .ad-thumbnail.ad-hover.hover-tgreen:after, ad-thumbnail.ad-hover.hover-tgreen:after {
+.ad-item.ad-hover.hover-tgreen:after, .ad-hover.hover-tgreen.ad-avatar:after, ad-avatar.ad-hover.hover-tgreen:after, .ad-hover.hover-tgreen.ad-thumbnail:after, ad-thumbnail.ad-hover.hover-tgreen:after, ad-item.ad-hover.hover-tgreen:after,
+.ad-avatar.ad-hover.hover-tgreen:after,
+ad-avatar.ad-hover.hover-tgreen:after,
+.ad-thumbnail.ad-hover.hover-tgreen:after,
+ad-thumbnail.ad-hover.hover-tgreen:after {
   background-color: #19e3b1; }
-.ad-item.ad-hover.hover-yellow:after, .ad-hover.hover-yellow.ad-avatar:after, ad-avatar.ad-hover.hover-yellow:after, .ad-hover.hover-yellow.ad-thumbnail:after, ad-thumbnail.ad-hover.hover-yellow:after, ad-item.ad-hover.hover-yellow:after, .ad-avatar.ad-hover.hover-yellow:after, ad-avatar.ad-hover.hover-yellow:after, .ad-thumbnail.ad-hover.hover-yellow:after, ad-thumbnail.ad-hover.hover-yellow:after {
+.ad-item.ad-hover.hover-yellow:after, .ad-hover.hover-yellow.ad-avatar:after, ad-avatar.ad-hover.hover-yellow:after, .ad-hover.hover-yellow.ad-thumbnail:after, ad-thumbnail.ad-hover.hover-yellow:after, ad-item.ad-hover.hover-yellow:after,
+.ad-avatar.ad-hover.hover-yellow:after,
+ad-avatar.ad-hover.hover-yellow:after,
+.ad-thumbnail.ad-hover.hover-yellow:after,
+ad-thumbnail.ad-hover.hover-yellow:after {
   background-color: #fff600; }
-.ad-item.ad-hover.hover-blue:after, .ad-hover.hover-blue.ad-avatar:after, ad-avatar.ad-hover.hover-blue:after, .ad-hover.hover-blue.ad-thumbnail:after, ad-thumbnail.ad-hover.hover-blue:after, ad-item.ad-hover.hover-blue:after, .ad-avatar.ad-hover.hover-blue:after, ad-avatar.ad-hover.hover-blue:after, .ad-thumbnail.ad-hover.hover-blue:after, ad-thumbnail.ad-hover.hover-blue:after {
+.ad-item.ad-hover.hover-blue:after, .ad-hover.hover-blue.ad-avatar:after, ad-avatar.ad-hover.hover-blue:after, .ad-hover.hover-blue.ad-thumbnail:after, ad-thumbnail.ad-hover.hover-blue:after, ad-item.ad-hover.hover-blue:after,
+.ad-avatar.ad-hover.hover-blue:after,
+ad-avatar.ad-hover.hover-blue:after,
+.ad-thumbnail.ad-hover.hover-blue:after,
+ad-thumbnail.ad-hover.hover-blue:after {
   background-color: #2196F3; }
-.ad-item.ad-hover.hover-red:after, .ad-hover.hover-red.ad-avatar:after, ad-avatar.ad-hover.hover-red:after, .ad-hover.hover-red.ad-thumbnail:after, ad-thumbnail.ad-hover.hover-red:after, ad-item.ad-hover.hover-red:after, .ad-avatar.ad-hover.hover-red:after, ad-avatar.ad-hover.hover-red:after, .ad-thumbnail.ad-hover.hover-red:after, ad-thumbnail.ad-hover.hover-red:after {
+.ad-item.ad-hover.hover-red:after, .ad-hover.hover-red.ad-avatar:after, ad-avatar.ad-hover.hover-red:after, .ad-hover.hover-red.ad-thumbnail:after, ad-thumbnail.ad-hover.hover-red:after, ad-item.ad-hover.hover-red:after,
+.ad-avatar.ad-hover.hover-red:after,
+ad-avatar.ad-hover.hover-red:after,
+.ad-thumbnail.ad-hover.hover-red:after,
+ad-thumbnail.ad-hover.hover-red:after {
   background-color: #F44336; }
-.ad-item.ad-hover.hover-green:after, .ad-hover.hover-green.ad-avatar:after, ad-avatar.ad-hover.hover-green:after, .ad-hover.hover-green.ad-thumbnail:after, ad-thumbnail.ad-hover.hover-green:after, ad-item.ad-hover.hover-green:after, .ad-avatar.ad-hover.hover-green:after, ad-avatar.ad-hover.hover-green:after, .ad-thumbnail.ad-hover.hover-green:after, ad-thumbnail.ad-hover.hover-green:after {
+.ad-item.ad-hover.hover-green:after, .ad-hover.hover-green.ad-avatar:after, ad-avatar.ad-hover.hover-green:after, .ad-hover.hover-green.ad-thumbnail:after, ad-thumbnail.ad-hover.hover-green:after, ad-item.ad-hover.hover-green:after,
+.ad-avatar.ad-hover.hover-green:after,
+ad-avatar.ad-hover.hover-green:after,
+.ad-thumbnail.ad-hover.hover-green:after,
+ad-thumbnail.ad-hover.hover-green:after {
   background-color: #5FCF80; }
-.ad-item.ad-hover.hover-dark:after, .ad-hover.hover-dark.ad-avatar:after, ad-avatar.ad-hover.hover-dark:after, .ad-hover.hover-dark.ad-thumbnail:after, ad-thumbnail.ad-hover.hover-dark:after, ad-item.ad-hover.hover-dark:after, .ad-avatar.ad-hover.hover-dark:after, ad-avatar.ad-hover.hover-dark:after, .ad-thumbnail.ad-hover.hover-dark:after, ad-thumbnail.ad-hover.hover-dark:after {
+.ad-item.ad-hover.hover-dark:after, .ad-hover.hover-dark.ad-avatar:after, ad-avatar.ad-hover.hover-dark:after, .ad-hover.hover-dark.ad-thumbnail:after, ad-thumbnail.ad-hover.hover-dark:after, ad-item.ad-hover.hover-dark:after,
+.ad-avatar.ad-hover.hover-dark:after,
+ad-avatar.ad-hover.hover-dark:after,
+.ad-thumbnail.ad-hover.hover-dark:after,
+ad-thumbnail.ad-hover.hover-dark:after {
   background-color: #222c37; }
-.ad-item.ad-hover.hover-white:after, .ad-hover.hover-white.ad-avatar:after, ad-avatar.ad-hover.hover-white:after, .ad-hover.hover-white.ad-thumbnail:after, ad-thumbnail.ad-hover.hover-white:after, ad-item.ad-hover.hover-white:after, .ad-avatar.ad-hover.hover-white:after, ad-avatar.ad-hover.hover-white:after, .ad-thumbnail.ad-hover.hover-white:after, ad-thumbnail.ad-hover.hover-white:after {
+.ad-item.ad-hover.hover-white:after, .ad-hover.hover-white.ad-avatar:after, ad-avatar.ad-hover.hover-white:after, .ad-hover.hover-white.ad-thumbnail:after, ad-thumbnail.ad-hover.hover-white:after, ad-item.ad-hover.hover-white:after,
+.ad-avatar.ad-hover.hover-white:after,
+ad-avatar.ad-hover.hover-white:after,
+.ad-thumbnail.ad-hover.hover-white:after,
+ad-thumbnail.ad-hover.hover-white:after {
   background-color: white; }
 
 .ad-card, ad-card, ad-table {
@@ -1718,6 +1948,9 @@ footer {
     background-image: none;
     outline: 0;
     box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1) inset, 0px 0px 0px 1px #28d0ea; }
+  .ad-btn:disabled {
+    opacity: .5;
+    cursor: not-allowed; }
   .ad-btn i {
     padding-left: 3px; }
   .ad-btn.ad-xs {
@@ -2060,22 +2293,36 @@ footer {
   font-size: 14px;
   min-height: .01%;
   overflow-x: auto; }
-  .ad-table table thead th, ad-table table thead th, .ad-table table td, ad-table table td {
+  .ad-table table thead th, ad-table table thead th,
+  .ad-table table td,
+  ad-table table td {
     opacity: 0.8; }
-  .ad-table table th, ad-table table th, .ad-table table td, ad-table table td {
+  .ad-table table th, ad-table table th,
+  .ad-table table td,
+  ad-table table td {
     padding: 14px 16px !important;
     max-height: 48px !important;
     text-align: left; }
-    .ad-table table th.num, ad-table table th.num, .ad-table table td.num, ad-table table td.num {
+    .ad-table table th.num, ad-table table th.num,
+    .ad-table table td.num,
+    ad-table table td.num {
       text-align: right; }
-    .ad-table table th .ad-checkbox, ad-table table th .ad-checkbox, .ad-table table td .ad-checkbox, ad-table table td .ad-checkbox {
+    .ad-table table th .ad-checkbox, ad-table table th .ad-checkbox,
+    .ad-table table td .ad-checkbox,
+    ad-table table td .ad-checkbox {
       top: 8px; }
-    .ad-table table th.action, ad-table table th.action, .ad-table table td.action, ad-table table td.action {
+    .ad-table table th.action, ad-table table th.action,
+    .ad-table table td.action,
+    ad-table table td.action {
       text-align: right;
       padding: 0 !important; }
-      .ad-table table th.action .ad-btn, ad-table table th.action .ad-btn, .ad-table table td.action .ad-btn, ad-table table td.action .ad-btn {
+      .ad-table table th.action .ad-btn, ad-table table th.action .ad-btn,
+      .ad-table table td.action .ad-btn,
+      ad-table table td.action .ad-btn {
         margin-top: 8px; }
-    .ad-table table th .ad-icon-letter, ad-table table th .ad-icon-letter, .ad-table table td .ad-icon-letter, ad-table table td .ad-icon-letter {
+    .ad-table table th .ad-icon-letter, ad-table table th .ad-icon-letter,
+    .ad-table table td .ad-icon-letter,
+    ad-table table td .ad-icon-letter {
       background-color: #222c37;
       border-radius: 50%;
       color: white;
@@ -2520,14 +2767,11 @@ footer {
       border-color: transparent; }
   .ad-tab.ad-block .ad-body, ad-tab.ad-block .ad-body, .ad-tab.ad-block ad-body, ad-tab.ad-block ad-body {
     border: none; }
-  .ad-tab.ad-round .ad-head, ad-tab.ad-round .ad-head, .ad-tab.ad-round ad-head, ad-tab.ad-round ad-head {
-    border: 1px solid rgba(34, 44, 55, 0.3);
-    border-radius: 20px; }
-    .ad-tab.ad-round .ad-head li.active, ad-tab.ad-round .ad-head li.active, .ad-tab.ad-round ad-head li.active, ad-tab.ad-round ad-head li.active {
-      background-color: #222c37;
-      color: white;
-      border-radius: 20px;
-      border-color: transparent; }
+  .ad-tab.ad-round .ad-head li.active, ad-tab.ad-round .ad-head li.active, .ad-tab.ad-round ad-head li.active, ad-tab.ad-round ad-head li.active {
+    background-color: #222c37;
+    color: white;
+    border-radius: 20px;
+    border-color: transparent; }
   .ad-tab.ad-round .ad-body, ad-tab.ad-round .ad-body, .ad-tab.ad-round ad-body, ad-tab.ad-round ad-body {
     border: none; }
     .ad-tab.ad-round .ad-body .ad-content.ad-show, ad-tab.ad-round .ad-body .ad-content.ad-show, .ad-tab.ad-round ad-body .ad-content.ad-show, ad-tab.ad-round ad-body .ad-content.ad-show, .ad-tab.ad-round .ad-body ad-content.ad-show, ad-tab.ad-round .ad-body ad-content.ad-show, .ad-tab.ad-round ad-body ad-content.ad-show, ad-tab.ad-round ad-body ad-content.ad-show {
@@ -2691,6 +2935,8 @@ label.output {
     min-height: 100px; }
   .ad-input.ad-block input, ad-input.ad-block input, .ad-input.ad-block select, ad-input.ad-block select, .ad-input.ad-block textarea, ad-input.ad-block textarea {
     border-radius: 0; }
+  .ad-input.ad-round label, ad-input.ad-round label {
+    padding-left: 16px; }
   .ad-input.ad-round input, ad-input.ad-round input, .ad-input.ad-round select, ad-input.ad-round select, .ad-input.ad-round textarea, ad-input.ad-round textarea {
     border-radius: 16.5px;
     padding: 0 2%;
@@ -2896,29 +3142,46 @@ input[type=range]:focus::-ms-fill-upper, .ad-input select[type=range]:focus::-ms
 .ad-toggle {
   position: relative;
   display: block;
-  height: 20px !important;
-  width: 40px;
+  height: 35px !important;
+  width: 70px;
   margin: 16px;
-  background: #B5B3B3;
+  background: rgba(34, 44, 55, 0.1);
   border-radius: 100px;
   cursor: pointer;
   transition: all .3s ease;
   padding: 0; }
   .ad-toggle:after {
     position: absolute;
-    left: -2px;
-    top: -3px;
+    left: 8px;
+    top: 8px;
     display: block;
-    width: 26px;
-    height: 26px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     background: white;
-    -webkit-box-shadow: 0 0px 3px 3px rgba(0, 0, 0, 0.05);
-    -moz-box-shadow: 0 0px 3px 3px rgba(0, 0, 0, 0.05);
-    -o-box-shadow: 0 0px 3px 3px rgba(0, 0, 0, 0.05);
-    -mz-box-shadow: 0 0px 3px 3px rgba(0, 0, 0, 0.05);
-    box-shadow: 0 0px 3px 3px rgba(0, 0, 0, 0.05);
+    -webkit-box-shadow: 0 0px 3px 3px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 0px 3px 3px rgba(0, 0, 0, 0.1);
+    -o-box-shadow: 0 0px 3px 3px rgba(0, 0, 0, 0.1);
+    -mz-box-shadow: 0 0px 3px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0px 3px 3px rgba(0, 0, 0, 0.1);
     content: '';
+    -webkit-transition: all 0.3s ease-out 0s;
+    -moz-transition: all 0.3s ease-out 0s;
+    -o-transition: all 0.3s ease-out 0s;
+    transition: all 0.3s ease-out 0s; }
+  .ad-toggle:before {
+    position: absolute;
+    left: 40px;
+    top: 8px;
+    display: block;
+    width: 20px;
+    height: 20px;
+    font-family: FontAwesome;
+    font-size: 20px;
+    transform: scale(0.8);
+    text-align: center;
+    color: rgba(0, 0, 0, 0.2);
+    content: '\f00d';
     -webkit-transition: all 0.3s ease-out 0s;
     -moz-transition: all 0.3s ease-out 0s;
     -o-transition: all 0.3s ease-out 0s;
@@ -2968,7 +3231,7 @@ input[type=range]:focus::-ms-fill-upper, .ad-input select[type=range]:focus::-ms
   opacity: 0;
   transform: scale(0); }
 
-[type="checkbox"]:rchecked + .ad-checkbox:before {
+[type="checkbox"]:checked + .ad-checkbox:before {
   border-color: #009eb8 !important;
   background-color: #009eb8; }
 
@@ -3077,8 +3340,10 @@ input[type=range]:focus::-ms-fill-upper, .ad-input select[type=range]:focus::-ms
 input[type="checkbox"]:checked ~ .ad-toggle, .ad-input select[type="checkbox"]:checked ~ .ad-toggle, ad-input select[type="checkbox"]:checked ~ .ad-toggle, .ad-input textarea[type="checkbox"]:checked ~ .ad-toggle, ad-input textarea[type="checkbox"]:checked ~ .ad-toggle {
   background: #1ec6e0; }
   input[type="checkbox"]:checked ~ .ad-toggle:after, .ad-input select[type="checkbox"]:checked ~ .ad-toggle:after, ad-input select[type="checkbox"]:checked ~ .ad-toggle:after, .ad-input textarea[type="checkbox"]:checked ~ .ad-toggle:after, ad-input textarea[type="checkbox"]:checked ~ .ad-toggle:after {
-    left: 20px;
-    background: #0094ae; }
+    left: 42px; }
+  input[type="checkbox"]:checked ~ .ad-toggle::before, .ad-input select[type="checkbox"]:checked ~ .ad-toggle::before, ad-input select[type="checkbox"]:checked ~ .ad-toggle::before, .ad-input textarea[type="checkbox"]:checked ~ .ad-toggle::before, ad-input textarea[type="checkbox"]:checked ~ .ad-toggle::before {
+    content: '\f00c';
+    left: 10px; }
 
 input[type="checkbox"]:disabled ~ .ad-toggle, .ad-input select[type="checkbox"]:disabled ~ .ad-toggle, ad-input select[type="checkbox"]:disabled ~ .ad-toggle, .ad-input textarea[type="checkbox"]:disabled ~ .ad-toggle, ad-input textarea[type="checkbox"]:disabled ~ .ad-toggle {
   background: #D5D5D5;
@@ -3086,27 +3351,159 @@ input[type="checkbox"]:disabled ~ .ad-toggle, .ad-input select[type="checkbox"]:
   input[type="checkbox"]:disabled ~ .ad-toggle:after, .ad-input select[type="checkbox"]:disabled ~ .ad-toggle:after, ad-input select[type="checkbox"]:disabled ~ .ad-toggle:after, .ad-input textarea[type="checkbox"]:disabled ~ .ad-toggle:after, ad-input textarea[type="checkbox"]:disabled ~ .ad-toggle:after {
     background: #BCBDBC; }
 
-form.ad-form.input-pink input:focus, form.ad-form.input-pink .ad-input select:focus, .ad-input form.ad-form.input-pink select:focus, form.ad-form.input-pink ad-input select:focus, ad-input form.ad-form.input-pink select:focus, form.ad-form.input-pink .ad-input textarea:focus, .ad-input form.ad-form.input-pink textarea:focus, form.ad-form.input-pink ad-input textarea:focus, ad-input form.ad-form.input-pink textarea:focus, form.ad-form.input-pink select:focus, form.ad-form.input-pink textarea:focus, .ad-input.input-pink input:focus, ad-input.input-pink input:focus, .ad-input.input-pink select:focus, ad-input.input-pink select:focus, .ad-input.input-pink textarea:focus, ad-input.input-pink textarea:focus, .ad-input.input-pink select:focus, ad-input.input-pink select:focus, .ad-input.input-pink textarea:focus, ad-input.input-pink textarea:focus {
+form.ad-form.input-pink input:focus, form.ad-form.input-pink .ad-input select:focus, .ad-input form.ad-form.input-pink select:focus, form.ad-form.input-pink ad-input select:focus, ad-input form.ad-form.input-pink select:focus, form.ad-form.input-pink .ad-input textarea:focus, .ad-input form.ad-form.input-pink textarea:focus, form.ad-form.input-pink ad-input textarea:focus, ad-input form.ad-form.input-pink textarea:focus,
+form.ad-form.input-pink select:focus,
+form.ad-form.input-pink textarea:focus,
+.ad-input.input-pink input:focus,
+ad-input.input-pink input:focus,
+.ad-input.input-pink select:focus,
+ad-input.input-pink select:focus,
+.ad-input.input-pink textarea:focus,
+ad-input.input-pink textarea:focus,
+.ad-input.input-pink select:focus,
+ad-input.input-pink select:focus,
+.ad-input.input-pink textarea:focus,
+ad-input.input-pink textarea:focus {
   border-color: #ff0066; }
-form.ad-form.input-prim input:focus, form.ad-form.input-prim .ad-input select:focus, .ad-input form.ad-form.input-prim select:focus, form.ad-form.input-prim ad-input select:focus, ad-input form.ad-form.input-prim select:focus, form.ad-form.input-prim .ad-input textarea:focus, .ad-input form.ad-form.input-prim textarea:focus, form.ad-form.input-prim ad-input textarea:focus, ad-input form.ad-form.input-prim textarea:focus, form.ad-form.input-prim select:focus, form.ad-form.input-prim textarea:focus, .ad-input.input-prim input:focus, ad-input.input-prim input:focus, .ad-input.input-prim select:focus, ad-input.input-prim select:focus, .ad-input.input-prim textarea:focus, ad-input.input-prim textarea:focus, .ad-input.input-prim select:focus, ad-input.input-prim select:focus, .ad-input.input-prim textarea:focus, ad-input.input-prim textarea:focus {
+form.ad-form.input-prim input:focus, form.ad-form.input-prim .ad-input select:focus, .ad-input form.ad-form.input-prim select:focus, form.ad-form.input-prim ad-input select:focus, ad-input form.ad-form.input-prim select:focus, form.ad-form.input-prim .ad-input textarea:focus, .ad-input form.ad-form.input-prim textarea:focus, form.ad-form.input-prim ad-input textarea:focus, ad-input form.ad-form.input-prim textarea:focus,
+form.ad-form.input-prim select:focus,
+form.ad-form.input-prim textarea:focus,
+.ad-input.input-prim input:focus,
+ad-input.input-prim input:focus,
+.ad-input.input-prim select:focus,
+ad-input.input-prim select:focus,
+.ad-input.input-prim textarea:focus,
+ad-input.input-prim textarea:focus,
+.ad-input.input-prim select:focus,
+ad-input.input-prim select:focus,
+.ad-input.input-prim textarea:focus,
+ad-input.input-prim textarea:focus {
   border-color: #28d0ea; }
-form.ad-form.input-tgreen input:focus, form.ad-form.input-tgreen .ad-input select:focus, .ad-input form.ad-form.input-tgreen select:focus, form.ad-form.input-tgreen ad-input select:focus, ad-input form.ad-form.input-tgreen select:focus, form.ad-form.input-tgreen .ad-input textarea:focus, .ad-input form.ad-form.input-tgreen textarea:focus, form.ad-form.input-tgreen ad-input textarea:focus, ad-input form.ad-form.input-tgreen textarea:focus, form.ad-form.input-tgreen select:focus, form.ad-form.input-tgreen textarea:focus, .ad-input.input-tgreen input:focus, ad-input.input-tgreen input:focus, .ad-input.input-tgreen select:focus, ad-input.input-tgreen select:focus, .ad-input.input-tgreen textarea:focus, ad-input.input-tgreen textarea:focus, .ad-input.input-tgreen select:focus, ad-input.input-tgreen select:focus, .ad-input.input-tgreen textarea:focus, ad-input.input-tgreen textarea:focus {
+form.ad-form.input-tgreen input:focus, form.ad-form.input-tgreen .ad-input select:focus, .ad-input form.ad-form.input-tgreen select:focus, form.ad-form.input-tgreen ad-input select:focus, ad-input form.ad-form.input-tgreen select:focus, form.ad-form.input-tgreen .ad-input textarea:focus, .ad-input form.ad-form.input-tgreen textarea:focus, form.ad-form.input-tgreen ad-input textarea:focus, ad-input form.ad-form.input-tgreen textarea:focus,
+form.ad-form.input-tgreen select:focus,
+form.ad-form.input-tgreen textarea:focus,
+.ad-input.input-tgreen input:focus,
+ad-input.input-tgreen input:focus,
+.ad-input.input-tgreen select:focus,
+ad-input.input-tgreen select:focus,
+.ad-input.input-tgreen textarea:focus,
+ad-input.input-tgreen textarea:focus,
+.ad-input.input-tgreen select:focus,
+ad-input.input-tgreen select:focus,
+.ad-input.input-tgreen textarea:focus,
+ad-input.input-tgreen textarea:focus {
   border-color: #19e3b1; }
-form.ad-form.input-yellow input:focus, form.ad-form.input-yellow .ad-input select:focus, .ad-input form.ad-form.input-yellow select:focus, form.ad-form.input-yellow ad-input select:focus, ad-input form.ad-form.input-yellow select:focus, form.ad-form.input-yellow .ad-input textarea:focus, .ad-input form.ad-form.input-yellow textarea:focus, form.ad-form.input-yellow ad-input textarea:focus, ad-input form.ad-form.input-yellow textarea:focus, form.ad-form.input-yellow select:focus, form.ad-form.input-yellow textarea:focus, .ad-input.input-yellow input:focus, ad-input.input-yellow input:focus, .ad-input.input-yellow select:focus, ad-input.input-yellow select:focus, .ad-input.input-yellow textarea:focus, ad-input.input-yellow textarea:focus, .ad-input.input-yellow select:focus, ad-input.input-yellow select:focus, .ad-input.input-yellow textarea:focus, ad-input.input-yellow textarea:focus {
+form.ad-form.input-yellow input:focus, form.ad-form.input-yellow .ad-input select:focus, .ad-input form.ad-form.input-yellow select:focus, form.ad-form.input-yellow ad-input select:focus, ad-input form.ad-form.input-yellow select:focus, form.ad-form.input-yellow .ad-input textarea:focus, .ad-input form.ad-form.input-yellow textarea:focus, form.ad-form.input-yellow ad-input textarea:focus, ad-input form.ad-form.input-yellow textarea:focus,
+form.ad-form.input-yellow select:focus,
+form.ad-form.input-yellow textarea:focus,
+.ad-input.input-yellow input:focus,
+ad-input.input-yellow input:focus,
+.ad-input.input-yellow select:focus,
+ad-input.input-yellow select:focus,
+.ad-input.input-yellow textarea:focus,
+ad-input.input-yellow textarea:focus,
+.ad-input.input-yellow select:focus,
+ad-input.input-yellow select:focus,
+.ad-input.input-yellow textarea:focus,
+ad-input.input-yellow textarea:focus {
   border-color: #fff600; }
-form.ad-form.input-blue input:focus, form.ad-form.input-blue .ad-input select:focus, .ad-input form.ad-form.input-blue select:focus, form.ad-form.input-blue ad-input select:focus, ad-input form.ad-form.input-blue select:focus, form.ad-form.input-blue .ad-input textarea:focus, .ad-input form.ad-form.input-blue textarea:focus, form.ad-form.input-blue ad-input textarea:focus, ad-input form.ad-form.input-blue textarea:focus, form.ad-form.input-blue select:focus, form.ad-form.input-blue textarea:focus, .ad-input.input-blue input:focus, ad-input.input-blue input:focus, .ad-input.input-blue select:focus, ad-input.input-blue select:focus, .ad-input.input-blue textarea:focus, ad-input.input-blue textarea:focus, .ad-input.input-blue select:focus, ad-input.input-blue select:focus, .ad-input.input-blue textarea:focus, ad-input.input-blue textarea:focus {
+form.ad-form.input-blue input:focus, form.ad-form.input-blue .ad-input select:focus, .ad-input form.ad-form.input-blue select:focus, form.ad-form.input-blue ad-input select:focus, ad-input form.ad-form.input-blue select:focus, form.ad-form.input-blue .ad-input textarea:focus, .ad-input form.ad-form.input-blue textarea:focus, form.ad-form.input-blue ad-input textarea:focus, ad-input form.ad-form.input-blue textarea:focus,
+form.ad-form.input-blue select:focus,
+form.ad-form.input-blue textarea:focus,
+.ad-input.input-blue input:focus,
+ad-input.input-blue input:focus,
+.ad-input.input-blue select:focus,
+ad-input.input-blue select:focus,
+.ad-input.input-blue textarea:focus,
+ad-input.input-blue textarea:focus,
+.ad-input.input-blue select:focus,
+ad-input.input-blue select:focus,
+.ad-input.input-blue textarea:focus,
+ad-input.input-blue textarea:focus {
   border-color: #2196F3; }
-form.ad-form.input-red input:focus, form.ad-form.input-red .ad-input select:focus, .ad-input form.ad-form.input-red select:focus, form.ad-form.input-red ad-input select:focus, ad-input form.ad-form.input-red select:focus, form.ad-form.input-red .ad-input textarea:focus, .ad-input form.ad-form.input-red textarea:focus, form.ad-form.input-red ad-input textarea:focus, ad-input form.ad-form.input-red textarea:focus, form.ad-form.input-red select:focus, form.ad-form.input-red textarea:focus, .ad-input.input-red input:focus, ad-input.input-red input:focus, .ad-input.input-red select:focus, ad-input.input-red select:focus, .ad-input.input-red textarea:focus, ad-input.input-red textarea:focus, .ad-input.input-red select:focus, ad-input.input-red select:focus, .ad-input.input-red textarea:focus, ad-input.input-red textarea:focus {
+form.ad-form.input-red input:focus, form.ad-form.input-red .ad-input select:focus, .ad-input form.ad-form.input-red select:focus, form.ad-form.input-red ad-input select:focus, ad-input form.ad-form.input-red select:focus, form.ad-form.input-red .ad-input textarea:focus, .ad-input form.ad-form.input-red textarea:focus, form.ad-form.input-red ad-input textarea:focus, ad-input form.ad-form.input-red textarea:focus,
+form.ad-form.input-red select:focus,
+form.ad-form.input-red textarea:focus,
+.ad-input.input-red input:focus,
+ad-input.input-red input:focus,
+.ad-input.input-red select:focus,
+ad-input.input-red select:focus,
+.ad-input.input-red textarea:focus,
+ad-input.input-red textarea:focus,
+.ad-input.input-red select:focus,
+ad-input.input-red select:focus,
+.ad-input.input-red textarea:focus,
+ad-input.input-red textarea:focus {
   border-color: #F44336; }
-form.ad-form.input-green input:focus, form.ad-form.input-green .ad-input select:focus, .ad-input form.ad-form.input-green select:focus, form.ad-form.input-green ad-input select:focus, ad-input form.ad-form.input-green select:focus, form.ad-form.input-green .ad-input textarea:focus, .ad-input form.ad-form.input-green textarea:focus, form.ad-form.input-green ad-input textarea:focus, ad-input form.ad-form.input-green textarea:focus, form.ad-form.input-green select:focus, form.ad-form.input-green textarea:focus, .ad-input.input-green input:focus, ad-input.input-green input:focus, .ad-input.input-green select:focus, ad-input.input-green select:focus, .ad-input.input-green textarea:focus, ad-input.input-green textarea:focus, .ad-input.input-green select:focus, ad-input.input-green select:focus, .ad-input.input-green textarea:focus, ad-input.input-green textarea:focus {
+form.ad-form.input-green input:focus, form.ad-form.input-green .ad-input select:focus, .ad-input form.ad-form.input-green select:focus, form.ad-form.input-green ad-input select:focus, ad-input form.ad-form.input-green select:focus, form.ad-form.input-green .ad-input textarea:focus, .ad-input form.ad-form.input-green textarea:focus, form.ad-form.input-green ad-input textarea:focus, ad-input form.ad-form.input-green textarea:focus,
+form.ad-form.input-green select:focus,
+form.ad-form.input-green textarea:focus,
+.ad-input.input-green input:focus,
+ad-input.input-green input:focus,
+.ad-input.input-green select:focus,
+ad-input.input-green select:focus,
+.ad-input.input-green textarea:focus,
+ad-input.input-green textarea:focus,
+.ad-input.input-green select:focus,
+ad-input.input-green select:focus,
+.ad-input.input-green textarea:focus,
+ad-input.input-green textarea:focus {
   border-color: #5FCF80; }
-form.ad-form.input-purple input:focus, form.ad-form.input-purple .ad-input select:focus, .ad-input form.ad-form.input-purple select:focus, form.ad-form.input-purple ad-input select:focus, ad-input form.ad-form.input-purple select:focus, form.ad-form.input-purple .ad-input textarea:focus, .ad-input form.ad-form.input-purple textarea:focus, form.ad-form.input-purple ad-input textarea:focus, ad-input form.ad-form.input-purple textarea:focus, form.ad-form.input-purple select:focus, form.ad-form.input-purple textarea:focus, .ad-input.input-purple input:focus, ad-input.input-purple input:focus, .ad-input.input-purple select:focus, ad-input.input-purple select:focus, .ad-input.input-purple textarea:focus, ad-input.input-purple textarea:focus, .ad-input.input-purple select:focus, ad-input.input-purple select:focus, .ad-input.input-purple textarea:focus, ad-input.input-purple textarea:focus {
+form.ad-form.input-purple input:focus, form.ad-form.input-purple .ad-input select:focus, .ad-input form.ad-form.input-purple select:focus, form.ad-form.input-purple ad-input select:focus, ad-input form.ad-form.input-purple select:focus, form.ad-form.input-purple .ad-input textarea:focus, .ad-input form.ad-form.input-purple textarea:focus, form.ad-form.input-purple ad-input textarea:focus, ad-input form.ad-form.input-purple textarea:focus,
+form.ad-form.input-purple select:focus,
+form.ad-form.input-purple textarea:focus,
+.ad-input.input-purple input:focus,
+ad-input.input-purple input:focus,
+.ad-input.input-purple select:focus,
+ad-input.input-purple select:focus,
+.ad-input.input-purple textarea:focus,
+ad-input.input-purple textarea:focus,
+.ad-input.input-purple select:focus,
+ad-input.input-purple select:focus,
+.ad-input.input-purple textarea:focus,
+ad-input.input-purple textarea:focus {
   border-color: purple; }
-form.ad-form.input-white input:focus, form.ad-form.input-white .ad-input select:focus, .ad-input form.ad-form.input-white select:focus, form.ad-form.input-white ad-input select:focus, ad-input form.ad-form.input-white select:focus, form.ad-form.input-white .ad-input textarea:focus, .ad-input form.ad-form.input-white textarea:focus, form.ad-form.input-white ad-input textarea:focus, ad-input form.ad-form.input-white textarea:focus, form.ad-form.input-white select:focus, form.ad-form.input-white textarea:focus, .ad-input.input-white input:focus, ad-input.input-white input:focus, .ad-input.input-white select:focus, ad-input.input-white select:focus, .ad-input.input-white textarea:focus, ad-input.input-white textarea:focus, .ad-input.input-white select:focus, ad-input.input-white select:focus, .ad-input.input-white textarea:focus, ad-input.input-white textarea:focus {
+form.ad-form.input-white input:focus, form.ad-form.input-white .ad-input select:focus, .ad-input form.ad-form.input-white select:focus, form.ad-form.input-white ad-input select:focus, ad-input form.ad-form.input-white select:focus, form.ad-form.input-white .ad-input textarea:focus, .ad-input form.ad-form.input-white textarea:focus, form.ad-form.input-white ad-input textarea:focus, ad-input form.ad-form.input-white textarea:focus,
+form.ad-form.input-white select:focus,
+form.ad-form.input-white textarea:focus,
+.ad-input.input-white input:focus,
+ad-input.input-white input:focus,
+.ad-input.input-white select:focus,
+ad-input.input-white select:focus,
+.ad-input.input-white textarea:focus,
+ad-input.input-white textarea:focus,
+.ad-input.input-white select:focus,
+ad-input.input-white select:focus,
+.ad-input.input-white textarea:focus,
+ad-input.input-white textarea:focus {
   border-color: white; }
-form.ad-form.input-dark input:focus, form.ad-form.input-dark .ad-input select:focus, .ad-input form.ad-form.input-dark select:focus, form.ad-form.input-dark ad-input select:focus, ad-input form.ad-form.input-dark select:focus, form.ad-form.input-dark .ad-input textarea:focus, .ad-input form.ad-form.input-dark textarea:focus, form.ad-form.input-dark ad-input textarea:focus, ad-input form.ad-form.input-dark textarea:focus, form.ad-form.input-dark select:focus, form.ad-form.input-dark textarea:focus, .ad-input.input-dark input:focus, ad-input.input-dark input:focus, .ad-input.input-dark select:focus, ad-input.input-dark select:focus, .ad-input.input-dark textarea:focus, ad-input.input-dark textarea:focus, .ad-input.input-dark select:focus, ad-input.input-dark select:focus, .ad-input.input-dark textarea:focus, ad-input.input-dark textarea:focus {
+form.ad-form.input-dark input:focus, form.ad-form.input-dark .ad-input select:focus, .ad-input form.ad-form.input-dark select:focus, form.ad-form.input-dark ad-input select:focus, ad-input form.ad-form.input-dark select:focus, form.ad-form.input-dark .ad-input textarea:focus, .ad-input form.ad-form.input-dark textarea:focus, form.ad-form.input-dark ad-input textarea:focus, ad-input form.ad-form.input-dark textarea:focus,
+form.ad-form.input-dark select:focus,
+form.ad-form.input-dark textarea:focus,
+.ad-input.input-dark input:focus,
+ad-input.input-dark input:focus,
+.ad-input.input-dark select:focus,
+ad-input.input-dark select:focus,
+.ad-input.input-dark textarea:focus,
+ad-input.input-dark textarea:focus,
+.ad-input.input-dark select:focus,
+ad-input.input-dark select:focus,
+.ad-input.input-dark textarea:focus,
+ad-input.input-dark textarea:focus {
   border-color: #222c37; }
-form.ad-form.input-clear input:focus, form.ad-form.input-clear .ad-input select:focus, .ad-input form.ad-form.input-clear select:focus, form.ad-form.input-clear ad-input select:focus, ad-input form.ad-form.input-clear select:focus, form.ad-form.input-clear .ad-input textarea:focus, .ad-input form.ad-form.input-clear textarea:focus, form.ad-form.input-clear ad-input textarea:focus, ad-input form.ad-form.input-clear textarea:focus, form.ad-form.input-clear select:focus, form.ad-form.input-clear textarea:focus, .ad-input.input-clear input:focus, ad-input.input-clear input:focus, .ad-input.input-clear select:focus, ad-input.input-clear select:focus, .ad-input.input-clear textarea:focus, ad-input.input-clear textarea:focus, .ad-input.input-clear select:focus, ad-input.input-clear select:focus, .ad-input.input-clear textarea:focus, ad-input.input-clear textarea:focus {
+form.ad-form.input-clear input:focus, form.ad-form.input-clear .ad-input select:focus, .ad-input form.ad-form.input-clear select:focus, form.ad-form.input-clear ad-input select:focus, ad-input form.ad-form.input-clear select:focus, form.ad-form.input-clear .ad-input textarea:focus, .ad-input form.ad-form.input-clear textarea:focus, form.ad-form.input-clear ad-input textarea:focus, ad-input form.ad-form.input-clear textarea:focus,
+form.ad-form.input-clear select:focus,
+form.ad-form.input-clear textarea:focus,
+.ad-input.input-clear input:focus,
+ad-input.input-clear input:focus,
+.ad-input.input-clear select:focus,
+ad-input.input-clear select:focus,
+.ad-input.input-clear textarea:focus,
+ad-input.input-clear textarea:focus,
+.ad-input.input-clear select:focus,
+ad-input.input-clear select:focus,
+.ad-input.input-clear textarea:focus,
+ad-input.input-clear textarea:focus {
   border-color: transparent; }
 
 output {

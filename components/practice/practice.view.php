@@ -9,7 +9,7 @@
           <form adSubmit="searchItem()" ad-data-type='html' ad-outlet="tbody" method="POST">
               <ad-table class="ad-block ad-flat whiteBG">
                   <ad-header class="ad-flat">
-                      <h2 class="title"><i class="fa fa-shopping-cart"></i> &nbsp; Items in Cart</h2>
+                      <h2 class="title"><i class="fa fa-user-circle"></i> &nbsp; List of Clients</h2>
                       <span class="rFloat">
                         <input type="search"  adKeyPress="searchItem()" ad-data-type='html' ad-outlet="tbody" name="key" value="">
                         <button type="submit" name="button" class="ad-btn ad-flat"><i class="fa fa-search"></i></button>
@@ -44,13 +44,13 @@
         <div class="ad-cols-4">
           <ad-card class="ad-round ad-shadow" id="summaryView">
 
-            <h1 class="title">Item Detail</h1>
+            <h1 class="title">Client Detail</h1>
 
             <p class="text-center" style="opacity:.5;">
               <i class="fa fa-shopping-basket fa-5x"></i>
               <br>
               <br>
-              Select an item to view detail
+              Select a client to view detail
             </p>
 
           </ad-card>
