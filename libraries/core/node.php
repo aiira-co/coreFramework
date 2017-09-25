@@ -1,7 +1,8 @@
 <?php
 
 
-class Node{
+class Node
+{
 
     private $route = ['0'=>'aleph','1'=>'beth','2'=>'gimmel','3'=>'daleth','4'=>'hey'];
     public $router = [];
@@ -11,62 +12,60 @@ class Node{
 
     // Setters & Getters
     function set($key, $value)
-	{
-		$this->$key = $value;
+    {
+        $this->$key = $value;
+    }
 
-	}
-
-	function get($key)
-	{
-		return $this->$key ?? null;
-
-	}
+    function get($key)
+    {
+        return $this->$key ?? null;
+    }
 
 
-    function router(){
-      $this->adConfig  =  new AdConfig;
+    function router()
+    {
+        $this->adConfig  =  new AdConfig;
 
-        if(file_exists($this->adConfig->routerPath)){
-          $this->airRoute();
-        }else{
-          echo 'The file '.$this->adConfig->routerPath.'was not found at the specified destination <br><h2>Check the routerPath variable in config.php<h2>';
+        if (file_exists($this->adConfig->routerPath)) {
+            $this->airRoute();
+        } else {
+            echo 'The file '.$this->adConfig->routerPath.'was not found at the specified destination <br><h2>Check the routerPath variable in config.php<h2>';
         }
-
     }
 
 
 
 
-    function airJaxRouter(){
-      $this->adConfig  =  new AdConfig;
-      require_once $this->adConfig->routerPath;
-      $coreRouter = CORE::getInstance('Router');
+    function airJaxRouter()
+    {
+        $this->adConfig  =  new AdConfig;
+        require_once $this->adConfig->routerPath;
+        $coreRouter = CORE::getInstance('Router');
 
-      $airJaxPath = $_POST['airJaxPath']??$_GET['airJaxPath'];
-      $airJaxPath =empty($airJaxPath)?'/':$airJaxPath;
-      $routerPath = $coreRouter->getPath($airJaxPath);
+        $airJaxPath = $_POST['airJaxPath']??$_GET['airJaxPath'];
+        $airJaxPath =empty($airJaxPath)?'/':$airJaxPath;
+        $routerPath = $coreRouter->getPath($airJaxPath);
 
       //Check if it has a authentication property
-      if(isset($routerPath['auth'])){
-        if($routerPath['auth'][0]){
-          $coreRouter->checkSession($routerPath['auth'][1], $routerPath['path']);
+        if (isset($routerPath['auth'])) {
+            if ($routerPath['auth'][0]) {
+                $coreRouter->checkSession($routerPath['auth'][1], $routerPath['path']);
+            }
         }
 
-      }
+        $this->aleph = $routerPath['component'];
+        $this->router[0] = $routerPath['component'];
 
-      $this->aleph = $routerPath['component'];
-      $this->router[0] = $routerPath['component'];
-
-      $legacy = CORE::getInstance('Legacy');
-      $legacy->set('routerPath',$routerPath);
+        $legacy = CORE::getInstance('Legacy');
+        $legacy->set('routerPath', $routerPath);
 
         $aleph = strtolower($this->aleph);
         $path = 'components'.DS.$aleph.DS.$aleph.'.component.php';
 
-        if(file_exists($path)){
+        if (file_exists($path)) {
             // echo'file exists';
             require_once $path;
-              $i = explode('-',$aleph);
+              $i = explode('-', $aleph);
 
               $class = isset($i[1]) ? ucfirst($i[0]).ucfirst($i[1]) : ucfirst($i[0]);
 
@@ -76,112 +75,92 @@ class Node{
             // echo $class;
 
             //echo '<br/>'.$class;
-            if(class_exists($class)){
-              $cc = new $class;
+            if (class_exists($class)) {
+                $cc = new $class;
 
                 AirJax::processAjaxToPHP(new $class);
-
-
-            }else{
+            } else {
                 echo '<br/> The class '.$class.'does not exist. File: '.$path;
             }
-
-        }else{
-
-          echo 'file path to component not found';
+        } else {
+            echo 'file path to component not found';
         }
     }
 
 
 
 
-    private function airRoute(){
+    private function airRoute()
+    {
       // echo ' app router file exists';
-      require_once $this->adConfig->routerPath;
-      $coreRouter = CORE::getInstance('Router');
+        require_once $this->adConfig->routerPath;
+        $coreRouter = CORE::getInstance('Router');
       // print_r($r->getRouter());
 
       // Get URL and Formate it
-      $url = $_GET['url']??'/';
-      $url = $url!='/' ? rtrim($url, '/'):'/';
+        $url = $_GET['url']??'/';
+        $url = $url!='/' ? rtrim($url, '/'):'/';
 
-      $routerPath = $coreRouter->getPath($url);
-      $legacy = CORE::getInstance('Legacy');
+        $routerPath = $coreRouter->getPath($url);
+        $legacy = CORE::getInstance('Legacy');
 
-      $this->adConfig  =  new AdConfig;
+        $this->adConfig  =  new AdConfig;
 
 
       // Check if url was found in the coreRouter
-      if($routerPath != null){
-        //Check if it has a redirect property
-        if(isset($routerPath['redirectTo'])){
-          CORE::redirect($routerPath['redirectTo']);
-        }
+        if ($routerPath != null) {
+            //Check if it has a redirect property
+            if (isset($routerPath['redirectTo'])) {
+                CORE::redirect($routerPath['redirectTo']);
+            }
 
 
 
-        //Check if it has a authentication property
-        if(isset($routerPath['auth'])){
-          if($routerPath['auth'][0]){
-            $coreRouter->checkSession($routerPath['auth'][1], $routerPath['path']);
-          }
-
-        }
-
+            //Check if it has a authentication property
+            if (isset($routerPath['auth'])) {
+                if ($routerPath['auth'][0]) {
+                    $coreRouter->checkSession($routerPath['auth'][1], $routerPath['path']);
+                }
+            }
 
 
-        // $coreComponent = new CoreComponent($path['component'], $this->router);
 
-        $this->aleph = $routerPath['component'];
-        $this->router[0] = $routerPath['component'];
+            // $coreComponent = new CoreComponent($path['component'], $this->router);
 
-        $legacy->set('routerPath',$routerPath);
-          $aleph = strtolower($this->aleph);
-          // echo $aleph.'<br/>';
-          $path = 'components'.DS.$aleph.DS.$aleph.'.component.php';
-          // echo $path;
+            $this->aleph = $routerPath['component'];
+            $this->router[0] = $routerPath['component'];
 
-
-          if(file_exists($path)){
-              //echo'file exists';
-              require_once $path;
+            $legacy->set('routerPath', $routerPath);
+            $aleph = strtolower($this->aleph);
+            // echo $aleph.'<br/>';
+            $path = 'components'.DS.$aleph.DS.$aleph.'.component.php';
+            // echo $path;
 
 
-                $i = explode('-',$aleph);
+            if (file_exists($path)) {
+                //echo'file exists';
+                require_once $path;
+
+
+                $i = explode('-', $aleph);
 
                 $class = isset($i[1]) ? ucfirst($i[0]).ucfirst($i[1]) : ucfirst($i[0]);
 
 
                         // $aleph;
-              $class = $class.'Component';
+                $class = $class.'Component';
 
-              //echo '<br/>'.$class;
-              if(class_exists($class)){
-                  $coreComponent = new CoreComponent(new $class, $this->router);
-
-              }else{
-                  echo '<br/> The class '.$class.'does not exist. File: '.$path;
-              }
-
-          }else{
-
+                //echo '<br/>'.$class;
+                if (class_exists($class)) {
+                    $coreComponent = new CoreComponent(new $class, $this->router);
+                } else {
+                    echo '<br/> The class '.$class.'does not exist. File: '.$path;
+                }
+            } else {
+                require_once 'templates'.DS.$this->adConfig->template.DS.'error.php';
+            }
+        } else {
             require_once 'templates'.DS.$this->adConfig->template.DS.'error.php';
-          }
-
-
-      }else{
-        require_once 'templates'.DS.$this->adConfig->template.DS.'error.php';
-      }
-
-
-
+        }
     }
-
-
-
 }
-
-
-
-
-?>

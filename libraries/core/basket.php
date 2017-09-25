@@ -1,21 +1,18 @@
 <?php
 
-    class Basket{
+class Basket
+{
 
 
-        function set($key, $value){
-            $this->$key = $value;
-        }
-
-
-
-        function get($key){
-          return $this->$key ?? null;
-        }
-
-
-
-
+    function set($key, $value)
+    {
+        $this->$key = $value;
     }
 
-?>
+
+
+    function get($key)
+    {
+        return $this->$key ?? null;
+    }
+}

@@ -5,25 +5,20 @@ class Params
 {
 
 
-	function __construct()
-	{
+    function __construct()
+    {
 
-		foreach($_REQUEST as $key => $value)
-		{
-			$this->$key = $value;
-		}
-	}
+        foreach ($_REQUEST as $key => $value) {
+            $this->$key = $value;
+        }
+    }
 
-	function get($key)
-	{
-			return $this->$key ?? null;
-	}
+    function get($key)
+    {
+            return $this->$key ?? null;
+    }
 
-	// function set($key, $value){
-	// 		$this->$key = $value;
-	// }
-
+    // function set($key, $value){
+    // 		$this->$key = $value;
+    // }
 }
-
-
-?>

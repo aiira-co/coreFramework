@@ -58,18 +58,13 @@ declare(strict_types=1);
     $adConfig = new AdConfig;
 
 
-    define('DS',DIRECTORY_SEPARATOR);
+    define('DS', DIRECTORY_SEPARATOR);
 
-    if($adConfig->offline){
-        require_once 'templates'.DS.$adConfig->template.DS.'offline.php';
-    }
-    else{
+if ($adConfig->offline) {
+    require_once 'templates'.DS.$adConfig->template.DS.'offline.php';
+} else {
+    require_once 'libraries'.DS.'core'.DS.'core.php';
+    $site = new Core;
 
-         require_once 'libraries'.DS.'core'.DS.'core.php';
-         $site = new Core;
-
-         $site->Route();
-
-    }
-
-?>
+    $site->Route();
+}

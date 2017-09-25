@@ -1,24 +1,24 @@
 <?php
 
-class CheckComponent{
+class CheckComponent
+{
 
-  public $title="Check Works!";
+    public $title="Check Works!";
 
-  private $model;
+    private $model;
 
 
-  function constructor(){
+    function constructor()
+    {
 
-    $this->model = CORE::getModel('check');
+        $this->model = CORE::getModel('check');
 
-    $this->getData();
+        $this->getData();
+    }
 
-  }
-
-  function getData(){
-    $this->data = $this->model->getPersons();
-    $this->sql= $this->model->getSQL();
-  }
+    function getData()
+    {
+        $this->data = $this->model->getPersons();
+        $this->sql= $this->model->getSQL();
+    }
 }
-
- ?>

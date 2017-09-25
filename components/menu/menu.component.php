@@ -1,13 +1,11 @@
 <?php
 
-  class MenuComponent{
+class MenuComponent
+{
 
     public $title;
 
-    function constructor(){
-
+    function constructor()
+    {
     }
-    
-  }
-
- ?>
+}

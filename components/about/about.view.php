@@ -1,6 +1,6 @@
 
 <div class="half"
-      style="background-image:url('<?=BaseUrl;?>media/images/coded.png');">
+      style="background-image:url('<?=BaseUrl;?>assets/images/coded.png');">
 
   <div class="ad-card ad-flat ad-center">
     <img src="<?=BaseUrl;?>media/images/suite.jpg" class="img-responsive" style="margin-top:20%;" alt="">

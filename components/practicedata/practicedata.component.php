@@ -2,7 +2,8 @@
 
 use middleWare as MW;
 
-class PracticedataComponent{
+class PracticedataComponent
+{
 
     public $model;
     public $data;
@@ -11,20 +12,17 @@ class PracticedataComponent{
 
 
 
-    function constructor(){
-      $this->model = CORE::getModel('practice');
-      $this->params =  CORE::getInstance('Params');
-      $this->key = $_POST['key']??'';
-      $this->items();
+    function constructor()
+    {
+        $this->model = CORE::getModel('practice');
+        $this->params =  CORE::getInstance('Params');
+        $this->key = $_POST['key']??'';
+        $this->items();
     }
 
-    function items(){
+    function items()
+    {
 
-      $this->data = $this->model->getItems($this->key);
+        $this->data = $this->model->getItems($this->key);
     }
-
-
-
 }
-
-?>

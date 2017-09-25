@@ -1,5 +1,5 @@
 <section class="banner ad-section" 
-        style="background-image:url('<?=BaseUrl;?>media/images/coded.png'); height:400px; margin-top:-5px !important; z-index:100;">
+        style="background-image:url('<?=BaseUrl;?>assets/images/coded.png'); height:400px; margin-top:-5px !important; z-index:100;">
     <div class="wrapper-fluid">
         <div class="ad-cols-12">
 

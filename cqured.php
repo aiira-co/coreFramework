@@ -58,30 +58,27 @@ declare(strict_types=1);
     $adConfig = new AdConfig;
 
 
-    define('DS',DIRECTORY_SEPARATOR);
+    define('DS', DIRECTORY_SEPARATOR);
 
 
 
 
-    if($adConfig->offline){
-        echo json_encode(["noti"=>"success","result"=>$adConfig->offline_message]);
-    }
-    else{
+if ($adConfig->offline) {
+    echo json_encode(["noti"=>"success","result"=>$adConfig->offline_message]);
+} else {
+    require_once 'libraries'.DS.'core'.DS.'core.php';
+  //Check Restrictions
 
-      require_once 'libraries'.DS.'core'.DS.'core.php';
-      //Check Restrictions
-
-      if($_SERVER['SERVER_NAME'] == $_SERVER['HTTP_HOST']){
+    if ($_SERVER['SERVER_NAME'] == $_SERVER['HTTP_HOST']) {
         require_once 'libraries'.DS.'core'.DS.'airjax.php';
         $airJax = new AirJax();
-      }elseif(authorization()){
+    } elseif (authorization()) {
         require_once 'libraries'.DS.'core'.DS.'airjax.php';
         $airJax = new AirJax();
-      }else{
+    } else {
         die('WHO ARE YOU');
-      }
-
     }
+}
 
 
  // Also look for a way to generate TOKENS per each call(ajax) for verfication.
@@ -90,21 +87,17 @@ declare(strict_types=1);
 
     //CrossOringin Checks
     // This should be a separate class
-    function authorization():bool{
-      if(isset($adConfig->cors)){
+function authorization():bool
+{
+    if (isset($adConfig->cors)) {
+        for ($i=0; $i < count($adConfig->cors); $i++) {
+            if ($adConfig->cors[$i] == $_SERVER['REMOTE_ADDR']) {
+                return true;
+            }
 
-        for($i=0;$i < count($adConfig->cors); $i++){
-          if($adConfig->cors[$i] == $_SERVER['REMOTE_ADDR']){
-            return true;
-          }
-
-          return false;
+            return false;
         }
-
-      }else{
+    } else {
         return false;
-      }
-  }
-
-
-?>
+    }
+}

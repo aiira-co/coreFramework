@@ -35,7 +35,3 @@ $check = ['path'=>'check', 'component'=>'check', 'title'=>'{{title}}'];
                     $add,
                     $check
                   );
-
-
-
-?>

@@ -12,21 +12,19 @@
 
     <?php
       $legacy = CORE::getInstance('Legacy');
-      if(isset($legacy->routerPath['title'])){
+    if (isset($legacy->routerPath['title'])) {
         $title=$legacy->routerPath['title'];
-      }else{
-        if(isset($_GET['url'])){
-
-          $url = explode('/',(rtrim(strtolower($_GET['url']),'/')));
-          $title = ucfirst($url[0]);
-          for( $i=1; $i<count($url); $i++){
-            $title.='->'.ucfirst($url[$i]);
-          }
-
-        }else{
-          $title="Home";
+    } else {
+        if (isset($_GET['url'])) {
+            $url = explode('/', (rtrim(strtolower($_GET['url']), '/')));
+            $title = ucfirst($url[0]);
+            for ($i=1; $i<count($url); $i++) {
+                $title.='->'.ucfirst($url[$i]);
+            }
+        } else {
+            $title="Home";
         }
-      }
+    }
 
     ?>
     <title><?=$title;?></title>
@@ -42,16 +40,14 @@
 
     <!-- Component Styles -->
     <?php
-    if(!AirJax){
-      
-      if(isset($legacy->style)){
-        echo '<style>'.$legacy->style.'</style>';
-      }elseif(isset($legacy->styleUrls)){
-        for($i =0; $i < count($legacy->styleUrls); $i++){
-          echo '<link rel="stylesheet" href="'.BaseUrl.'components/'.$legacy->styleUrls[$i].'">';
+    if (!AirJax) {
+        if (isset($legacy->style)) {
+            echo '<style>'.$legacy->style.'</style>';
+        } elseif (isset($legacy->styleUrls)) {
+            for ($i =0; $i < count($legacy->styleUrls); $i++) {
+                echo '<link rel="stylesheet" href="'.BaseUrl.'components/'.$legacy->styleUrls[$i].'">';
+            }
         }
-      }
-
     }
     ?>
 

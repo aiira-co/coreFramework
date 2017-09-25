@@ -4,8 +4,9 @@
     <img src="<?=$adConfig->offline_image;?>" alt="">
 <?php
 
-    if($adConfig->display_offline_message)
-        echo $adConfig->offline_message;
+if ($adConfig->display_offline_message) {
+    echo $adConfig->offline_message;
+}
 
 
 ?>
