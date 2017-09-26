@@ -25,73 +25,88 @@ class Legacy
 
 // Parent Class for Controllers
 
-class CoreComponent
+class CoreController
 {
     private $router= [];
     private $routerExist = false;
-    private $component;
+    private $controller;
 
     private static $c = [];
 
-    function __construct($component, $router)
+    function __construct($controller, $router)
     {
         $this->router = $router;
-        $this->component = $component;
-        if (method_exists($component, 'constructor')) {
-            $component->constructor();
+        $this->controller = $controller;
+        if (method_exists($controller, 'constructor')) {
+            $controller->constructor();
         }
         // echo 'hello controller';
-           $this->component();
+           $this->controllerRequest();
     }
 
-    static function Init(array $c)
+
+    // The controller function must have an array as an argument not just variables
+    function controllerRequest()
     {
+        $controller = $this->controller;
+        $basket = CORE::getInstance('basket');
 
-      //Get the keys of the passed component
-        $cFields = array_keys($c);
-      //Get the length of the passed component
-        $cLength = count($c);
+        switch ($_SERVER['REQUEST_METHOD']) {
+            case 'GET':
+                # code...
+                if (method_exists($controller, 'httpGet')) {
+                    $basket->result = $controller->httpGet();
+                } else {
+                    $this->error('httpGet');
+                }
+                break;
 
-        for ($i = 0; $i < $cLength; $i++) {
-            //compare the passed component key to the original componenent key,
-            //if there is a match, assign it, else die
-            self::$c[$cFields[$i]] = $c[$cFields[$i]];
+
+            case 'POST':
+                $data  = file_get_contents('php://input');
+                if (method_exists($controller, 'httpPost')) {
+                    $basket->result = $controller->httpPost($data);
+                } else {
+                    $this->error('httpPost');
+                }
+                break;
+
+            case 'PUT':
+                $data  = file_get_contents('php://input');
+
+                if (method_exists($controller, 'httpPut')) {
+                    $basket->result = $controller->httpPut($data);
+                } else {
+                    $this->error('httpPut');
+                }
+                break;
+
+            case 'DELETE':
+                if (method_exists($controller, 'httpDelete')) {
+                    $basket->result = $controller->httpDelete();
+                } else {
+                      $this->error('httpDelete');
+                }
+                break;
+
+            default:
+                if (method_exists($controller, 'httpGet')) {
+                    $basket->result = $controller->httpGet();
+                } else {
+                    $this->error('httpGet');
+                }
+                break;
         }
+        
+        // it will now render at the CORE::render() called in the node.php file
     }
 
-    // The component function must have an array as an argument not just variables
-    function component()
+
+
+    function error(string $fx)
     {
-
-        $legacy = CORE::getInstance('Legacy');
-
-        // Set Title if {{title}
-        if (isset($legacy->routerPath['title']) && $legacy->routerPath['title'] == '{{title}}') {
-            $legacy->routerPath['title'] = $this->component->title??'Error: $title does not exist in component';
-        }
-
-
-        // Set STYLE
-        if (isset(self::$c['style'])) {
-            $legacy->style = self::$c['style'];
-        } elseif (isset(self::$c['styleUrls'])) {
-            $legacy->styleUrls = self::$c['styleUrls'];
-        }
-
-      // Set SCRIPT
-        if (isset(self::$c['script'])) {
-            $legacy->script = self::$c['script'];
-        } elseif (isset(self::$c['scriptUrls'])) {
-            $legacy->scriptUrls = self::$c['scriptUrls'];
-        }
-
-        if (isset(self::$c['template'])) {
-            CORE::render(self::$c['template'], $this->component, false);
-        } elseif (isset(self::$c['templateUrl'])) {
-            CORE::render(self::$c['templateUrl'], $this->component);
-        } else {
-            CORE::render(DS.$this->router[0].DS.$this->router[0].'.view', $this->component);
-        }
+        $basket = CORE::getInstance('basket');
+        $basket->results = ['error'=>'The Method '.$fx.'() was not found in the contorller'];
     }
 }
 
@@ -195,12 +210,14 @@ class CoreModel
     {
 
         if (!isset(explode('.', $fields)[1])) {
-            $fields ='';
-            for ($i=0; $i<count(self::$s['table']); $i++) {
-                $fields .= $this->fieldExists(self::$s['table'][$i], $fields, self::$s['alias'][$i]);
+            $fieldss ='';
+            for ($i=0; $i<count(self::$s['table']); $i++) 
+            {
+                $fieldss.= $this->fieldExists(self::$s['table'][$i], $fields, self::$s['alias'][$i]);
             }
 
-            self::$s['field'] = trim($fields, ',');
+            // echo $fieldss;
+            self::$s['field'] = trim($fieldss, ',');
         } else {
             self::$s['field'] =  $fields;
         }
@@ -802,7 +819,7 @@ class CoreModel
         $sql .= isset(self::$s['limit']) ? ' LIMIT '.self::$s['limit'] : '';
         $sql .= isset(self::$s['offset']) ? ' OFFSET '.self::$s['offset'] : '';
         self::$sql = $sql; //want to have this static
-      // echo $sql;
+    //   echo $sql;
         return $sql;
     }
 
@@ -837,7 +854,7 @@ class CoreModel
             }
 
 
-              // print_r($bindParam);
+            //   print_r(self::$bindParam);
               //Empty bindParam;
               self::$bindParam = [];
 
@@ -935,8 +952,11 @@ class CoreModel
         $exist = "";
 
         for ($i = 0; $i < $length; $i++) {
-            if (self::$pdo->query("SHOW COLUMNS FROM ".self::$prefix.$table." LIKE '".$field[$i]."'")->rowCount() == 1) {
-                $exist .= ','.$alias.'.'.$field[$i];
+            // var_dump($field);
+            
+                                    
+            if (self::$pdo->query("SHOW COLUMNS FROM ".self::$prefix.$table." LIKE '".$field[$i]."'") != null) {
+                $exist .= ','.$alias.'.'.trim($field[$i],' ');
             // echo $field[$i].'<br/>';
             }
         }
@@ -1081,14 +1101,14 @@ class CoreSession
                                 ->where('id', $userRow->id)
                                 ->update(
                                 [
-                                   'account_enabled' => false,
-                                   'access_failed_count'=>$userRow->access_failed_count + 1,
-                                   'lockout_enabled' => true ,
-                                   'lockout_end'=> strtotime(date('Y-m-d h:i:s')) + 86700
-                                 ]
-                                      );
+                                  'account_enabled' => false,
+                                  'access_failed_count'=>$userRow->access_failed_count + 1,
+                                  'lockout_enabled' => true ,
+                                  'lockout_end'=> strtotime(date('Y-m-d h:i:s')) + 86700
+                                ]
+                                     );
                             }
-                             return false;
+                            return false;
                         }
                     }
                 } else {
