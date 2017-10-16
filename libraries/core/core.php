@@ -90,9 +90,9 @@ class Core
                         //Select the dbtype, whether mysql, mysqli,mssql, oracle, sqlite etc
                 if ($adConfig->dbtype == "mysqli" || $adConfig->dbtype == "mysql") {
                     self::$instance[$class] = new PDO("mysql:host = $adConfig->host;dbname=$adConfig->db", $adConfig->user, $adConfig->password);
-                } elseif ($config->server == "oracle") {
+                } elseif ($adConfig->dbtype == "oracle") {
                               self::$instance[$class] = new PDO("oci:dbname=".$adConfig->db, $adConfig->user, $adConfig->password);
-                } elseif ($config->server == "mssql") {
+                } elseif ($adConfig->dbtype == "mssql") {
                     self::$instance[$class] = new PDO("mssql:host = $adConfig->host;dbname=$adConfig->db", $adConfig->user, $adConfig->password);
                 }
             } else {

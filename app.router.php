@@ -1,37 +1,20 @@
 <?php
 
 
-$base = ['path'=>'/', 'component'=>'app', 'title'=>'Welcome Home'];
-$about = ['path'=>'about', 'component'=>'about'];
+$appRouter = [
+  ['path'=>'/', 'component'=>'app', 'title'=>'Welcome Home'],
+  ['path'=>'about', 'component'=>'about'],
+  ['path'=>'practice', 'component'=>'practice', 'title'=>'Practice With Data'],
+  ['path'=>'persondata', 'component'=>'practicedata'],
+  ['path'=>'contact', 'component'=>'contact', 'title'=>'Get In Touch'],
+  ['path'=>'account', 'component'=>'account', 'title'=>'Profile', 'auth'=>[true,'account/login']],
+  ['path'=>'account/login', 'component'=>'login','title'=>'Please Login'],
+  ['path'=>'account/logout', 'component'=>'logout'],
+  ['path'=>'math', 'title'=>'Mathematics', 'component'=>'math'],
+  ['path'=>'add/:x/:y', 'title'=>'{{title}}', 'component'=>'add'],
+  ['path'=>'check', 'component'=>'check', 'title'=>'{{title}}']
 
-$practice = ['path'=>'practice', 'component'=>'practice', 'title'=>'Practice With Data'];
-$practiceData = ['path'=>'persondata', 'component'=>'practicedata'];
+]; 
 
-$contact = ['path'=>'contact', 'component'=>'contact', 'title'=>'Get In Touch'];
-
-$account = ['path'=>'account', 'component'=>'account', 'title'=>'Profile', 'auth'=>[true,'account/login']];
-$loginPage = ['path'=>'account/login', 'component'=>'login','title'=>'Please Login'];
-$logout = ['path'=>'account/logout', 'component'=>'logout'];
-
-
-$math = ['path'=>'math', 'title'=>'Mathematics', 'component'=>'math'];
-$add = ['path'=>'add/:x/:y', 'title'=>'{{title}}', 'component'=>'add'];
-
-$check = ['path'=>'check', 'component'=>'check', 'title'=>'{{title}}'];
-
- $router = CORE::getInstance('Router');
-
- $router->setRouter(
-                    $base,
-                    $practice,
-                    $practiceData,
-                    $contact,
-                    $about,
-                    $account,
-                    $loginPage,
-                    $logout,
-
-                    $math,
-                    $add,
-                    $check
-                  );
+$router = CORE::getInstance('Router');
+$router->setRouter($appRouter);
