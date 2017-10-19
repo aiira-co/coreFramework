@@ -18,9 +18,9 @@
         <button type="button" name="button" class="ad-btn ad-flat rFloat" adRouter="<?=BaseUrl;?>practice"><i class="fa fa-user-circle"></i>&nbsp;  &nbsp; CLIENT</button>
       </ad-header>
         <?php
-        echo AirJax?'<ad-router  animate="true" >':null;
+        echo AirJax?'<router-outlet  animate="true" >':null;
         CORE::CoreApp();
-        echo AirJax?'</ad-router>':null;
+        echo AirJax?'</router-outlet>':null;
         require_once 'features/footer.php';
 
         ?>

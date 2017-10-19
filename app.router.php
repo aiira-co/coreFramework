@@ -1,6 +1,5 @@
 <?php
 
-
 $appRouter = [
   ['path'=>'/', 'component'=>'app', 'title'=>'Welcome Home'],
   ['path'=>'about', 'component'=>'about'],
@@ -16,5 +15,5 @@ $appRouter = [
 
 ]; 
 
-$router = CORE::getInstance('Router');
-$router->setRouter($appRouter);
+$appRouterModule = CORE::getInstance('Router');
+$appRouterModule->setRouter($appRouter);

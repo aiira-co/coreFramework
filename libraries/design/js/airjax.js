@@ -130,7 +130,7 @@ $(document).ready(function(){
     // console.log(trigger);
     var airData = $.param(airThod(eventData));
     var data = airData+'&'+triggerData;
-    var outlet = trigger[0].hasAttribute('ad-outlet') ? $(''+trigger.attr('ad-outlet')+'') : 'ad-notify';
+    var outlet = trigger[0].hasAttribute('router-outlet') ? $(''+trigger.attr('router-outlet')+'') : 'ad-notify';
     var dataType = trigger[0].hasAttribute('ad-data-type') ? trigger.attr('ad-data-type') :'json';
     requestAirJax(ajaxURL,data, 'POST', dataType, {'outlet':outlet,'animate':true});
   }
@@ -186,12 +186,12 @@ wrapper.on('click','[adModal]',function(e){
 
 // ad>Router click event
 
-wrapper.on('click','[adRouter]',function(){
+wrapper.on('click','[routerLink]',function(){
 
   var nextPage;
   var routerOutlet = $('ad-router');
   var currentPageRouter = window.location.href;
-  var nextPageRouter = $(this).attr('adRouter');
+  var nextPageRouter = $(this).attr('routerLink');
   var animate = $('ad-router').attr('animate');
 
   // console.log(currentPageRouter);
