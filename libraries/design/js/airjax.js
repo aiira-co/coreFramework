@@ -189,11 +189,12 @@ $(document).ready(function () {
   wrapper.on('click', '[routerLink]', function () {
 
     var nextPage;
-    var routerOutlet = $('ad-router');
+    var routerOutlet = $('router-outlet');
     var currentPageRouter = window.location.href;
     var nextPageRouter = $(this).attr('routerLink');
     var animate = $('ad-router').attr('animate');
 
+    // console.log(nextPageRouter);
     // console.log(currentPageRouter);
     if (currentPageRouter == nextPageRouter) {
       animate = false;
@@ -360,6 +361,7 @@ $(document).ready(function () {
   function loadData(page, outlet, aimate = false, type = 'html') {
     // var routerOutlet = $('ad-router');
 
+    // console.log(outlet);
     // create notify if doesnt exist
     if (outlet == 'ad-notify') {
       if ($('ad-notify > p').length == 0) {
@@ -412,7 +414,7 @@ $(document).ready(function () {
       wrapper.append(script);
     }
 
-    console.log($('script#airScript').length);
+    // console.log($('script#airScript').length);
     var script = $('script#airScript');
     script.text(''); //empty script
 
@@ -435,7 +437,7 @@ $(document).ready(function () {
     }
 
 
-    console.log(url);
+    // console.log(url);
 
     // check to see if component has script
 

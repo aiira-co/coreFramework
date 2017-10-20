@@ -26,8 +26,8 @@
       <br>
       <button type="button" name="button" class="ad-btn ad-flat clear">DISCLAIMER</button>
       <br>
-      <a href="http://facebook.com/project-air" target="_blank" class="ad-btn ad-round ad-flat clear"><i class="fa fa-facebook"></i></a>
-      <a href="http://twitter.com/project-air" target="_blank" class="ad-btn ad-round ad-flat clear"><i class="fa fa-twitter"></i></a>
-      <a href="http://pinterest.com/project-air" target="_blank" class="ad-btn ad-round ad-flat clear"><i class="fa fa-pinterest"></i></a>
+      <a href="http://facebook.com/project-air" target="_blank" class="ad-btn ad-round ad-flat clear ad-icon"><i class="fa fa-facebook"></i></a>
+      <a href="http://twitter.com/project-air" target="_blank" class="ad-btn ad-round ad-flat clear ad-icon"><i class="fa fa-twitter"></i></a>
+      <a href="http://pinterest.com/project-air" target="_blank" class="ad-btn ad-round ad-flat clear ad-icon"><i class="fa fa-pinterest"></i></a>
     </div>
   </div>
