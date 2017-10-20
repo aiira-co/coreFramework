@@ -1,19 +1,19 @@
 
 <div class="ad-card ad-flat">
     <ad-list class="ad-flat menuList ad-hover hover-tgreen">
-      <ad-item routerLink="<?=BaseUrl;?>">
+      <ad-item routerLink="<?=BaseUrl;?>" routerLinkActive="colorTgreen">
         HOME
       </ad-item>
 
-      <ad-item routerLink="<?=BaseUrl;?>about">
+      <ad-item routerLink="<?=BaseUrl;?>about" routerLinkActive="colorTgreen">
         ABOUT US
       </ad-item>
 
-      <ad-item routerLink="<?=BaseUrl;?>practice">
+      <ad-item routerLink="<?=BaseUrl;?>practice" routerLinkActive="colorTgreen">
         PRACTICE
       </ad-item>
 
-      <ad-item routerLink="<?=BaseUrl;?>contact">
+      <ad-item routerLink="<?=BaseUrl;?>contact" routerLinkActive="colorTgreen">
         CONTACT US
       </ad-item>
       <!-- <ad-item routerLink="<?=BaseUrl;?>check">
