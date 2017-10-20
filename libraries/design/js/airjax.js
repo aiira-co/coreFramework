@@ -192,7 +192,7 @@ $(document).ready(function () {
     var routerOutlet = $('router-outlet');
     var currentPageRouter = window.location.href;
     var nextPageRouter = $(this).attr('routerLink');
-    var animate = $('ad-router').attr('animate');
+    var animate = $('router-outlet').attr('animate');
 
     // console.log(nextPageRouter);
     // console.log(currentPageRouter);
@@ -405,7 +405,11 @@ $(document).ready(function () {
 
 
     //update the browser tab title to page title if ajax call is the page
-
+    // console.log(wrapper.find(pageTitle));
+    setTimeout(function () {
+      
+      document.title =wrapper.find('pageTitle').attr('label');
+    }, 1000);
 
     // check if script exits, then include else remove
 

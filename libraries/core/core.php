@@ -267,10 +267,6 @@ class Core
 
             if ($url || file_exists('components'.DS.$view.'.php')) {
                     // print_r($legacy);
-
-
-
-
                     require_once 'components'.DS.$view.'.php';
             } else {
                     // echo str_replace('{{'.$search.'}}', $replace, $coreLegacy->view);
@@ -283,6 +279,9 @@ class Core
                     echo '<br/>'.$view;
             }
 
+            //getPageTitle
+            echo'<pageTitle label="'.self::componentTitle().'"></pageTitle>';
+            
       //check if scritps exists
             if (isset($legacy->script)) {
                     echo '<script>'.$legacy->script.'</script>';
@@ -303,7 +302,7 @@ class Core
                     // echo $scriptOpenTag.$script.$scriptCloseTag;
             }
 
-
+                
 
 
       // check if styles exists

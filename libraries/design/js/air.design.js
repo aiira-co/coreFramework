@@ -36,6 +36,7 @@ $(document).ready(function () {
         }
     }
 
+
     checkNav();
 
 
@@ -150,6 +151,17 @@ $(document).ready(function () {
     // better to check if there has been aan ajax request, 
     // then rescan the doc to construct tab
     constructTab();
+
+    wrapper.on('click', '[routerLink]', function () {
+        // console.log("routerLink Clicked");
+        setInterval(function () {
+            // checkSync()// this will run after every 5 seconds
+            constructTab();
+        }, 10000);
+        // $(document).on('load', 'router-outlet', function () {
+        //     console.log("ALL current AJAX calls have completed");
+        // })
+    });
 
     wrapper.on('click', '.ad-tab-group .ad-head li, ad-tab-group .ad-head li', function () {
         var $this = $(this);
