@@ -38,7 +38,7 @@
  * @author      Owusu-Afriyie Kofi <koathecedi@gmail.com>
  * @copyright   2017 airDesign.
  * @license     http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @link        http://airDesign.co.nf
+ * @link        http://airdesign.co.nf
  * @version     @@2.00@@
  */
 declare(strict_types=1);

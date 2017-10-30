@@ -13,7 +13,7 @@
                       <span class="rFloat">
                         <input type="search"  adKeyPress="searchItem()" ad-data-type='html' ad-outlet="tbody" name="key" value="">
                         <button type="submit" name="button" class="ad-btn ad-flat"><i class="fa fa-search"></i></button>
-                        <button type="button" name="button" class="ad-btn ad-flat ad-tip" ad-tip="Add Item" adClick="createNew()" ad-data-type='html' ad-outlet="#summaryView"><i class="fa fa-plus"></i></button>
+                        <button type="button" name="button" class="ad-btn ad-flat ad-tip" ad-tip="Add Item" adClick="createNew()" ad-data-type='html' router-outlet="#summaryView"><i class="fa fa-plus"></i></button>
                       </span>
                   </ad-header>
 
