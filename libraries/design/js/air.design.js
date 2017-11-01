@@ -28,8 +28,8 @@ $(document).ready(function () {
     // Nav
 
     function checkNav() {
-        if ($('.ad-nav').length != 0) {
-            console.log('nav found');
+        if ($('.ad-nav #menuTrigger').length != 0) {
+            // console.log('nav found menuTrigger found');
             var adLogo = $('.ad-nav .ad-logo').html();
             var adMenu = $('.ad-nav .ad-menu').html();
             wrapper.prepend('<div class="menuTriggered"><div class="ad-logo">' + adLogo + '</div>' + adMenu + '</div>');
@@ -151,17 +151,6 @@ $(document).ready(function () {
     // better to check if there has been aan ajax request, 
     // then rescan the doc to construct tab
     constructTab();
-
-    wrapper.on('click', '[routerLink]', function () {
-        // console.log("routerLink Clicked");
-        setInterval(function () {
-            // checkSync()// this will run after every 5 seconds
-            constructTab();
-        }, 10000);
-        // $(document).on('load', 'router-outlet', function () {
-        //     console.log("ALL current AJAX calls have completed");
-        // })
-    });
 
     wrapper.on('click', '.ad-tab-group .ad-head li, ad-tab-group .ad-head li', function () {
         var $this = $(this);
