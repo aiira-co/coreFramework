@@ -6,18 +6,18 @@
 <div class="wrapper">
     <div class="ad-row">
       <div class="ad-cols-8">
-          <form adSubmit="searchItem()" ad-data-type='html' ad-outlet="tbody" method="POST">
+          <form (submit)="searchItem()" [data-type]='html' [outlet]="tbody" method="POST">
               <ad-table class="ad-block ad-flat whiteBG">
                   <ad-header class="ad-flat">
                       <h2 class="title"><i class="fa fa-user-circle"></i> &nbsp; List of Clients</h2>
                       <span class="rFloat">
-                        <input type="search"  adKeyPress="searchItem()" ad-data-type='html' ad-outlet="tbody" name="key" value="">
+                        <input type="search"  (keypress)="searchItem()" [data-type]='html' [outlet]="tbody" name="key" value="">
                         <button type="submit" name="button" class="ad-btn ad-flat"><i class="fa fa-search"></i></button>
-                        <button type="button" name="button" class="ad-btn ad-flat ad-tip" ad-tip="Add Item" adClick="createNew()" ad-data-type='html' router-outlet="#summaryView"><i class="fa fa-plus"></i></button>
+                        <button type="button" name="button" class="ad-btn ad-flat ad-tip" ad-tip="Add Item" (click)="createNew()" [data-type]='html' [outlet]="#summaryView"><i class="fa fa-plus"></i></button>
                       </span>
                   </ad-header>
 
-                  <table class="table">
+                  <table>
                       <thead>
                           <tr>
                               <th>Name</th>
@@ -26,7 +26,7 @@
                               <th>Action</th>
                           </tr>
                       </thead>
-                      <tbody adSync ="<?=BaseUrl;?>persondata, countData()" >
+                      <tbody (adSync) ="<?=BaseUrl;?>persondata, countData()" >
                         <?php CORE::component('practicedata');?>
 
                       </tbody>
@@ -47,7 +47,7 @@
             <h1 class="title">Client Detail</h1>
 
             <p class="text-center" style="opacity:.5;">
-              <i class="fa fa-shopping-basket fa-5x"></i>
+              <i class="fa fa-id-card fa-5x"></i>
               <br>
               <br>
               Select a client to view detail

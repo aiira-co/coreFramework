@@ -53,7 +53,7 @@
 
 
     <!--Favicon-->
-    <link href="<?=BaseUrl;?>media/images/logo/favicon.png" rel="icon" type="image/png"/>
+    <link href="<?=BaseUrl;?>assets/images/logo/favicon.png" rel="icon" type="image/png"/>
 
 
 

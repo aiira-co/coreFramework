@@ -3,124 +3,126 @@ $(document).ready(function () {
   var ajaxURL = $('base').attr('url') + 'cqured.php';
   var wrapper = $('body');
 
+ 
   var url;
   // MOUSE EVENTS
   //Responsible for handling click Events
 
-  wrapper.on('click', '[adClick]', function (e) {
+  wrapper.on('click', '[\\(click\\)]', function (e) {
     e.preventDefault();
     wrapper.append('<ad-loading/>');
-    processEvent($(this), $(this).attr('adClick'));
+    // console.log($(this).attr('(click)'));
+    processEvent($(this), $(this).attr('(click)'));
   });
 
 
   // on('hover') not working but $.hover works
-  wrapper.on('mousedown', '[adMouseDown]', function (e) {
+  wrapper.on('mousedown', '[\\(mousedown\\)]', function (e) {
     e.preventDefault();
     wrapper.append('<ad-loading/>');
-    processEvent($(this), $(this).attr('adMouseDown'));
+    processEvent($(this), $(this).attr('(mousedown)'));
   });
 
 
   // on('hover') not working but $.hover works
-  wrapper.on('mouseenter', '[adMouseEnter]', function (e) {
+  wrapper.on('mouseenter', '[\\(mouseenter\\)]', function (e) {
     e.preventDefault();
     wrapper.append('<ad-loading/>');
-    processEvent($(this), $(this).attr('adMouseEnter'));
+    processEvent($(this), $(this).attr('(mouseenter)'));
   });
 
   // on('hover') not working but $.hover works
-  wrapper.on('mouseleave', '[adMouseLeave]', function (e) {
+  wrapper.on('mouseleave', '[\\(mouseleave\\)]', function (e) {
     e.preventDefault();
     wrapper.append('<ad-loading/>');
-    processEvent($(this), $(this).attr('adMouseLeave'));
+    processEvent($(this), $(this).attr('(mouseleave)'));
   });
 
   // on('hover') not working but $.hover works
-  wrapper.on('mousemove', '[adMouseMove]', function (e) {
+  wrapper.on('mousemove', '[\\(mousemove\\)]', function (e) {
     e.preventDefault();
     wrapper.append('<ad-loading/>');
-    processEvent($(this), $(this).attr('adMouseMove'));
+    processEvent($(this), $(this).attr('(mousemove)'));
   });
 
   // on('hover') not working but $.hover works
-  wrapper.on('mouseout', '[adMouseOut]', function (e) {
+  wrapper.on('mouseout', '[\\(mouseout\\)]', function (e) {
     e.preventDefault();
     wrapper.append('<ad-loading/>');
-    processEvent($(this), $(this).attr('adMouseOut'));
+    processEvent($(this), $(this).attr('(mouseout)'));
   });
 
   // on('hover') not working but $.hover works
-  wrapper.on('mouseup', '[adMouseUp]', function (e) {
+  wrapper.on('mouseup', '[\\(mouseup\\)]', function (e) {
     e.preventDefault();
     wrapper.append('<ad-loading/>');
-    processEvent($(this), $(this).attr('adMouseUp'));
+    processEvent($(this), $(this).attr('(mouseup)'));
   });
 
   // on('hover') not working but $.hover works
-  wrapper.on('mouseover', '[adMouseOver]', function (e) {
+  wrapper.on('mouseover', '[\\(mouseover\\)]', function (e) {
     e.preventDefault();
     wrapper.append('<ad-loading/>');
-    processEvent($(this), $(this).attr('adMouseOver'));
+    processEvent($(this), $(this).attr('(mouseover)'));
   });
 
 
   // INPUT EVENTS
-  wrapper.on('blur', 'input[adBlur]', function (e) {
+  wrapper.on('blur', 'input[\\(blur\\)]', function (e) {
     e.preventDefault();
     wrapper.append('<ad-loading/>');
     var inputValue = $(this).serialize();
-    processEvent($(this), $(this).attr('adBlur'), inputValue);
+    processEvent($(this), $(this).attr('(blur)'), inputValue);
   });
 
 
   // KEY BOARDING EVENTS
 
   // for keypress, to search, that is auto-complete
-  wrapper.on('keypress', 'input[adKeyPress]', function () {
+  wrapper.on('keypress', 'input[\\(keypress\\)]', function () {
     // e.preventDefault();
     wrapper.append('<ad-loading/>');
     var inputValue = $(this).serialize();
-    processEvent($(this), $(this).attr('adKeyPress'), inputValue);
+    processEvent($(this), $(this).attr('(keypress)'), inputValue);
 
   });
 
   // for keydown, to search, that is auto-complete
-  wrapper.on('keydown', 'input[adKeyDown]', function () {
+  wrapper.on('keydown', 'input[\\(keydown\\)]', function () {
     // e.preventDefault();
     wrapper.append('<ad-loading/>');
     var inputValue = $(this).serialize();
-    processEvent($(this), $(this).attr('adKeyDown'), inputValue);
+    processEvent($(this), $(this).attr('(keydown)'), inputValue);
 
   });
 
   // for keydown, to search, that is auto-complete
-  wrapper.on('keyup', 'input[adKeyUp]', function () {
+  wrapper.on('keyup', 'input[\\(keyup\\)]', function () {
     // e.preventDefault();
     wrapper.append('<ad-loading/>');
     var inputValue = $(this).serialize();
-    processEvent($(this), $(this).attr('adKeyUp'), inputValue);
+    processEvent($(this), $(this).attr('(keyup)'), inputValue);
 
   });
 
 
   // for keypress, to search, that is auto-complete
-  wrapper.on('change', 'input[adChange]', function (e) {
+  wrapper.on('change', 'input[\\(change\\)]', function (e) {
     e.preventDefault();
     wrapper.append('<ad-loading/>');
     var inputValue = $(this).serialize();
-    processEvent($(this), $(this).attr('adChange'), inputValue);
+    processEvent($(this), $(this).attr('(change)'), inputValue);
 
     // console.log('change event triggered');
   });
 
   //on submit for forms
-  wrapper.on('submit', 'form[adSubmit]', function (e) {
+  wrapper.on('submit', 'form[\\(submit\\)]', function (e) {
     // stop post to refresh page
     e.preventDefault();
     wrapper.append('<ad-loading/>');
     var formData = $(this).serialize();
-    processEvent($(this), $(this).attr('adSubmit'), formData);
+    processEvent($(this), $(this).attr('(submit)'), formData);
 
   });
 
@@ -130,8 +132,8 @@ $(document).ready(function () {
     // console.log(trigger);
     var airData = $.param(airThod(eventData));
     var data = airData + '&' + triggerData;
-    var outlet = trigger[0].hasAttribute('router-outlet') ? $('' + trigger.attr('router-outlet') + '') : 'ad-notify';
-    var dataType = trigger[0].hasAttribute('ad-data-type') ? trigger.attr('ad-data-type') : 'json';
+    var outlet = trigger[0].hasAttribute('[outlet]') ? $('' + trigger.attr('[outlet]') + '') : 'ad-notify';
+    var dataType = trigger[0].hasAttribute('[data-type]') ? trigger.attr('[data-type]') : 'json';
     requestAirJax(ajaxURL, data, 'POST', dataType, { 'outlet': outlet, 'animate': true });
   }
 
@@ -184,7 +186,7 @@ $(document).ready(function () {
 
 
 
-  // ad>Router click event
+  // adRouter now routerLink click event
 
   wrapper.on('click', '[routerLink]', function () {
 
@@ -232,7 +234,7 @@ $(document).ready(function () {
 
       }
       // Search within
-      else if ($(this).find('[routerLink]') != null) {
+      else if ($(this).find('[routerLink]').length != 0) {
         // $(this).find('[routerLink]').attr('routerLink');
         if ($(this).find('[routerLink]').attr('routerLink') == url) {
           $(this).addClass($(this).attr('routerLinkActive'));
@@ -264,7 +266,7 @@ $(document).ready(function () {
   function adSync(autoLoad) {
 
     // var autoLoad = $('[adSync]');
-    var params = autoLoad.attr('adSync').split(',');
+    var params = autoLoad.attr('(adSync)').split(',');
 
     var html = params[0];
     var count = params[1]; //trim the side ) off
@@ -277,18 +279,18 @@ $(document).ready(function () {
       //ajaxMethod to get the number
       $.post(ajaxURL, data, function (result) {
 
-        if (autoLoad[0].hasAttribute('adCount')) {
+        if (autoLoad[0].hasAttribute('ad_count')) {
 
-          oldCount = autoLoad.attr('adCount');
+          oldCount = autoLoad.attr('ad_count');
         } else {
           oldCount = 0;
-          autoLoad.attr('adCount', 0);
+          autoLoad.attr('ad_count', 0);
         }
 
         newCount = result.result;
         if (oldCount != newCount) {
           // loadPage
-          autoLoad.attr('adCount', newCount);
+          autoLoad.attr('ad_count', newCount);
           requestAirJax(html, { "api": 'airJax' }, 'GET', 'html', { 'outlet': autoLoad, 'animate': true });
         }
 
@@ -309,9 +311,9 @@ $(document).ready(function () {
 
   function checkSync() {
     // console.log('checkSync is running to find sync.');
-    if ($('[adSync]').length != 0) {
+    if ($('[\\(adSync\\)]').length != 0) {
       // console.log('sync found!')
-      $('[adSync]').each(function () {
+      $('[\\(adSync\\)]').each(function () {
         adSync($(this));
       });
 

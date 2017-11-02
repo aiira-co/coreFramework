@@ -1,5 +1,5 @@
 <h2 class="title"><?=$title?></h2>
-<form adSubmit="<?=$method;?>">
+<form (submit)="<?=$method;?>">
     <div class="ad-input ad-block ad-label">
       <label for="">Name:</label>
       <input type="text" name="name"  value="<?=$item->name ??null;?>" required>
@@ -19,7 +19,7 @@
     <p>
       <button class="ad-btn btn-dark ad-full ad-block ad-md text-upper ad-spread" type="submit"  name="<?=isset($personData)? 'update' :'submite';?>">Add to cart</button>
       <?php if(isset($item->id)){?>
-        <button type="button" class="ad-btn ad-block ad-full ad-md" adRouter="<?=BaseUrl;?>practice">Clear</button>
+        <button type="button" class="ad-btn ad-block ad-full ad-md" routerLink="<?=BaseUrl;?>practice">Clear</button>
         <?php }?>
     </p>
 
