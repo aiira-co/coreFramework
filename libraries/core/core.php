@@ -115,7 +115,7 @@ class Core
     public static function getModel($model, $path = null)
     {
 
-            $file = $path??'components'. DS .'models'.DS.$model .'.model.php';
+            $file = $path??'models'.DS.$model .'.model.php';
 
             $class = ucfirst($model).'Model';
         if (class_exists($class)) {

@@ -17,13 +17,30 @@ $(document).ready(function () {
             header.addClass('ad-fixed');
             $('.logo1').css('display', 'none');
             $('.logo2').css('display', 'block');
-        }
-        else {
+        } else {
             header.removeClass('ad-fixed');
             $('.logo1').css('display', 'block');
             $('.logo2').css('display', 'none');
         }
     });
+
+
+
+    function ScanDOM4Constructive() {
+        // tab
+
+        if (wrapper.find('.ad-tab-group, ad-tab-group').not('[ad_constructed]').length !== 0) {
+
+            constructTab();
+        }
+    }
+
+
+    // ScanDOM4Constructive
+    ScanDOM4Constructive();
+    setInterval(function () {
+        ScanDOM4Constructive();
+    }, 3000);
 
     // Nav
 
@@ -71,7 +88,10 @@ $(document).ready(function () {
         //    $('.ad-modal#'+$this.attr('ad-modal')).css({'left': e.pageX},{'top': e.pageX});
         var $modal = $('.ad-modal#' + $this.attr('ad-modal'));
 
-        var triggerPosition = { top: e.pageY - window.pageYOffset + 'px', left: e.pageX + 'px' };
+        var triggerPosition = {
+            top: e.pageY - window.pageYOffset + 'px',
+            left: e.pageX + 'px'
+        };
 
         $modal.css('left', triggerPosition.left);
         $modal.css('top', triggerPosition.top);
@@ -122,7 +142,7 @@ $(document).ready(function () {
     // Scan DOM for ad-tab-group and construct the ad-head
     function constructTab() {
 
-        $('.ad-tab-group, ad-tab-group').each(function () {
+        $('.ad-tab-group, ad-tab-group').not('[ad_constructed]').each(function () {
 
             // Check is the .ad-head is not already generated
             if ($(this).find('.ad-head').length == 0) {
@@ -145,12 +165,14 @@ $(document).ready(function () {
                 $(this).prepend(head);
             }
 
+
+            // Mark as Constructed
+            $(this).attr('ad_constructed', true);
+
         });
     }
 
-    // better to check if there has been aan ajax request, 
-    // then rescan the doc to construct tab
-    constructTab();
+
 
     wrapper.on('click', '.ad-tab-group .ad-head li, ad-tab-group .ad-head li', function () {
         var $this = $(this);

@@ -110,3 +110,18 @@ z-index: 5;
   position: relative;
   /*z-index: 100;*/
 }
+
+
+.card-img{
+  width:200px;
+  height:200px;
+
+  margin:0 auto;
+}
+
+.card-img ~ p{
+  width:70%;
+  margin:0 auto;
+  /* background-color:red; */
+}
+

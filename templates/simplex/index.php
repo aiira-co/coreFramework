@@ -9,7 +9,7 @@
 
     ?>
     <ad-right>
-      <ad-header class="whiteBG">
+      <ad-header class="ad-flat">
         <button type="button" name="button" class="ad-btn ad-flat" id="ad-menu-toggle"><i class="fa fa-bars"></i> &nbsp; &nbsp; MENU</button>
         <div class="text-center logo" adRouter="<?=BaseUrl;?>">
           <img src="<?=BaseUrl;?>assets/images/logo/logo.png" class="img-responsive" alt="">
