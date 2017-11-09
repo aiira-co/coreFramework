@@ -10,11 +10,11 @@ class PracticeComponent
     public $clear = false;
     public $count;
     public $personData;
-    
+
 
     private $params;
     private $model;
-    
+
 
 
     function constructor()

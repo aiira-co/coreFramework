@@ -19,7 +19,7 @@
 
                   <table>
                       <thead>
-                          <tr>
+                          <tr >
                               <th>Name</th>
                               <th>Gender</th>
                               <th>Email</th>
