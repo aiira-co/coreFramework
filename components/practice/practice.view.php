@@ -7,7 +7,7 @@
     <div class="ad-row">
       <div class="ad-cols-8">
           <form (submit)="searchItem()" [data-type]='html' [outlet]="tbody" method="POST">
-              <ad-table class="ad-block ad-flat whiteBG">
+              <ad-table class="ad-block ad-flat bg-white">
                   <ad-header class="ad-flat">
                       <h2 class="title"><i class="fa fa-user-circle"></i> &nbsp; List of Clients</h2>
                       <span class="rFloat">

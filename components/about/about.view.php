@@ -7,7 +7,7 @@
   </div>
 </div>
 
-<div class="half detail whiteBG">
+<div class="half detail bg-white">
   <ad-section>
     <div class="ad-card ad-flat ad-center">
       <h2 class="title">Details here</h2>

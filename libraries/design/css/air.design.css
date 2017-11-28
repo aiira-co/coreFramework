@@ -117,40 +117,40 @@ ad-subheader h2, ad-header h2 {
   vertical-align: top;
   font-weight: 500; }
 
-.whiteBG, ad-card {
+.bg-white, ad-card {
   background-color: #fff;
   color: #222c37; }
-  .whiteBG.hover:hover, ad-card.hover:hover {
+  .bg-white.hover:hover, ad-card.hover:hover {
     -webkit-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     -o-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     -mz-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3); }
 
-.tqBG {
+.bg-tq {
   background-color: #227586;
   color: white; }
-  .tqBG.hover:hover {
+  .bg-tq.hover:hover {
     -webkit-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     -o-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     -mz-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3); }
 
-.greenBG {
+.bg-green {
   background-color: #00796B;
   color: white; }
-  .greenBG.hover:hover {
+  .bg-green.hover:hover {
     -webkit-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     -o-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     -mz-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3); }
 
-.purpleBG {
+.bg-purple {
   background-color: #871E6A;
   color: white; }
-  .purpleBG.hover:hover {
+  .bg-purple.hover:hover {
     -webkit-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     -o-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
@@ -167,68 +167,68 @@ ad-subheader h2, ad-header h2 {
     -mz-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3); }
 
-.blueBG {
+.bg-blue {
   background-color: #2196F3;
   color: white; }
-  .blueBG.hover:hover {
+  .bg-blue.hover:hover {
     -webkit-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     -o-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     -mz-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3); }
 
-.darkBG {
+.bg-dark {
   background-color: #222c37;
   color: white; }
-  .darkBG.hover:hover {
+  .bg-dark.hover:hover {
     -webkit-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     -o-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     -mz-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3); }
-  .darkBG .ad-input input, .darkBG ad-input input, .darkBG .ad-input select, .ad-input .darkBG ad-input select, .darkBG ad-input select, .darkBG .ad-input textarea, .ad-input .darkBG ad-input textarea, .darkBG ad-input textarea {
+  .bg-dark .ad-input input, .bg-dark ad-input input, .bg-dark .ad-input select, .ad-input .bg-dark ad-input select, .bg-dark ad-input select, .bg-dark .ad-input textarea, .ad-input .bg-dark ad-input textarea, .bg-dark ad-input textarea {
     background-color: rgba(255, 255, 255, 0.05); }
-  .darkBG .ad-input select option, .darkBG ad-input select option {
+  .bg-dark .ad-input select option, .bg-dark ad-input select option {
     color: white;
     background-color: #222c37; }
-    .darkBG .ad-input select option[selected], .darkBG ad-input select option[selected] {
+    .bg-dark .ad-input select option[selected], .bg-dark ad-input select option[selected] {
       color: black;
       background-color: #28d0ea; }
 
-.pinkBG {
+.bg-pink {
   background-color: #ff0066;
   color: white; }
-  .pinkBG.hover:hover {
+  .bg-pink.hover:hover {
     -webkit-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     -o-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     -mz-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3); }
 
-.primBG {
+.bg-prim {
   background-color: #28d0ea;
   color: white; }
-  .primBG.hover:hover {
+  .bg-prim.hover:hover {
     -webkit-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     -o-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     -mz-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3); }
 
-.tgreenBG {
+.bg-tgreen {
   background-color: #19e3b1;
   color: white; }
-  .tgreenBG.hover:hover {
+  .bg-tgreen.hover:hover {
     -webkit-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     -o-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     -mz-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3); }
 
-.yellowBG {
+.bg-yellow {
   background-color: #fff600;
   color: #222c37; }
-  .yellowBG.hover:hover {
+  .bg-yellow.hover:hover {
     -webkit-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
     -o-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
@@ -236,20 +236,23 @@ ad-subheader h2, ad-header h2 {
     box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3); }
 
 /*//COLORS*/
-.colorPink {
+.color-pink {
   color: #ff0066; }
 
-.colorDark {
+.color-dark {
   color: #222c37; }
 
-.colorPrim {
+.color-prim {
   color: #28d0ea; }
 
-.colorTgreen {
+.color-tgreen {
   color: #19e3b1; }
 
-.colorYellow {
+.color-yellow {
   color: #fff600; }
+
+.color-blue {
+  color: #2196F3; }
 
 html,
 body {
@@ -1821,6 +1824,26 @@ footer {
   -o-box-shadow: 0px 1px 0.5px 0.5px rgba(0, 0, 0, 0.1);
   -mz-box-shadow: 0px 1px 0.5px 0.5px rgba(0, 0, 0, 0.1);
   box-shadow: 0px 1px 0.5px 0.5px rgba(0, 0, 0, 0.1); }
+.ad-avatar .ad-img, ad-avatar .ad-img {
+  display: inline-block;
+  vertical-align: top;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  margin-right: 16px;
+  border-radius: 3px;
+  border-radius: 50%;
+  overflow: hidden;
+  -webkit-box-shadow: 0px 1px 0.5px 0.5px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 1px 0.5px 0.5px rgba(0, 0, 0, 0.1);
+  -o-box-shadow: 0px 1px 0.5px 0.5px rgba(0, 0, 0, 0.1);
+  -mz-box-shadow: 0px 1px 0.5px 0.5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 1px 0.5px 0.5px rgba(0, 0, 0, 0.1);
+  text-align: center; }
+  .ad-avatar .ad-img img, ad-avatar .ad-img img {
+    border-radius: 0;
+    width: 100%; }
 .ad-avatar h2, ad-avatar h2 {
   display: inline-block;
   vertical-align: top;
@@ -1853,7 +1876,7 @@ footer {
   display: inline-block;
   vertical-align: top;
   width: 30px;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.1);
   height: 100%;
   margin: 0;
   padding: 0;
@@ -2117,6 +2140,10 @@ ad-thumbnail.ad-hover.hover-white:after {
       border-color: rgba(255, 246, 0, 0.3); }
     .ad-card.outline.outline-tgreen:before, ad-card.outline.outline-tgreen:before, ad-table.outline.outline-tgreen:before {
       border-color: rgba(25, 227, 177, 0.3); }
+    .ad-card.outline.outline-blue:before, ad-card.outline.outline-blue:before, ad-table.outline.outline-blue:before {
+      border-color: rgba(33, 150, 243, 0.3); }
+    .ad-card.outline.outline-red:before, ad-card.outline.outline-red:before, ad-table.outline.outline-red:before {
+      border-color: rgba(244, 67, 54, 0.3); }
     .ad-card.outline.outline-white:before, ad-card.outline.outline-white:before, ad-table.outline.outline-white:before {
       border-color: rgba(255, 255, 255, 0.3); }
   .ad-card p, ad-card p, ad-table p {
@@ -2170,7 +2197,11 @@ ad-thumbnail.ad-hover.hover-white:after {
   border-radius: 3px;
   background-color: white;
   border: medium none;
-  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1) inset, 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.1);
+  -o-box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.1);
+  -mz-box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.1);
   -webkit-transition: all 0.2s ease-out 0s;
   -moz-transition: all 0.2s ease-out 0s;
   -o-transition: all 0.2s ease-out 0s;
@@ -2180,7 +2211,11 @@ ad-thumbnail.ad-hover.hover-white:after {
   .ad-btn:hover, .ad-btn:focus, .ad-btn.focus {
     color: inherit;
     text-decoration: none;
-    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1) inset, 0px 0px 0px 1px #28d0ea, 0px 0px 3px 1px #0f8a9d; }
+    -webkit-box-shadow: 0 0 3px 2px #28d0ea;
+    -moz-box-shadow: 0 0 3px 2px #28d0ea;
+    -o-box-shadow: 0 0 3px 2px #28d0ea;
+    -mz-box-shadow: 0 0 3px 2px #28d0ea;
+    box-shadow: 0 0 3px 2px #28d0ea; }
   .ad-btn:active, .ad-btn.active {
     background-image: none;
     outline: 0;
@@ -2324,6 +2359,58 @@ ad-thumbnail.ad-hover.hover-white:after {
     border-radius: 30px 0 0 30px; }
   .ad-btn-group.ad-round .ad-btn:last-child {
     border-radius: 0 30px 30px 0; }
+
+.btn-default {
+  background-color: white;
+  color: #222c37;
+  outline: none; }
+  .btn-default:hover, .btn-default:focus {
+    background-color: #f0f0f0;
+    color: #222c37;
+    box-shadow: none; }
+  .btn-default:active {
+    color: #222c37;
+    background-color: whitesmoke; }
+  .btn-default.clear {
+    color: white;
+    background: transparent;
+    box-shadow: none; }
+    .btn-default.clear:hover {
+      text-shadow: 0px 0px 2px white; }
+  .btn-default.outline {
+    color: white;
+    background: transparent;
+    box-shadow: 0px 0px 3px 0px rgba(255, 255, 255, 0.1) inset, 0px 0px 0px 1.5px rgba(255, 255, 255, 0.8); }
+    .btn-default.outline:hover {
+      box-shadow: none;
+      background-color: white;
+      color: #222c37; }
+
+.btn-grey {
+  background-color: gainsboro;
+  color: #222c37;
+  outline: none; }
+  .btn-grey:hover, .btn-grey:focus {
+    background-color: #cccccc;
+    color: #222c37;
+    box-shadow: none; }
+  .btn-grey:active {
+    color: #222c37;
+    background-color: #d1d1d1; }
+  .btn-grey.clear {
+    color: gainsboro;
+    background: transparent;
+    box-shadow: none; }
+    .btn-grey.clear:hover {
+      text-shadow: 0px 0px 2px #f0f0f0; }
+  .btn-grey.outline {
+    color: gainsboro;
+    background: transparent;
+    box-shadow: 0px 0px 3px 0px rgba(220, 220, 220, 0.1) inset, 0px 0px 0px 1.5px rgba(220, 220, 220, 0.8); }
+    .btn-grey.outline:hover {
+      box-shadow: none;
+      background-color: gainsboro;
+      color: #222c37; }
 
 .btn-prim {
   background-color: #28d0ea;

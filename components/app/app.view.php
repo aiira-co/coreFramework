@@ -1,4 +1,4 @@
-<section class="banner whiteBG ad-section no-padding" 
+<section class="banner bg-white ad-section no-padding" 
         style="margin-top:-5px !important; z-index:100;">
     <div class="wrapper">
         <div class="ad-cols-12">
@@ -44,7 +44,7 @@
     <div class="wrapper">
         <div class="ad-cols-3">
         <div class="ad-card ad-flat text-center ad-center">
-            <div class="ad-card ad-shadow ad-round whiteBG card-img" >
+            <div class="ad-card ad-shadow ad-round bg-white card-img" >
             
             </div>
 
@@ -65,7 +65,7 @@
 
         <div class="ad-cols-3">
         <div class="ad-card ad-flat text-center ad-center">
-            <div class="ad-card ad-shadow ad-round whiteBG card-img">
+            <div class="ad-card ad-shadow ad-round bg-white card-img">
             
             </div>
 
@@ -85,7 +85,7 @@
 
         <div class="ad-cols-3">
         <div class="ad-card ad-flat text-center ad-center">
-            <div class="ad-card ad-shadow ad-round whiteBG card-img">
+            <div class="ad-card ad-shadow ad-round bg-white card-img">
             
             </div>
 
@@ -106,7 +106,7 @@
 
         <div class="ad-cols-3">
         <div class="ad-card ad-flat text-center ad-center">
-            <div class="ad-card ad-shadow ad-round whiteBG card-img">
+            <div class="ad-card ad-shadow ad-round bg-white card-img">
             
             </div>
 

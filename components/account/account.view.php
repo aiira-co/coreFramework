@@ -3,11 +3,11 @@
     <div class="wrapper">
         <div class="ad-row">
             <div class="ad-col-12">
-              <div class="ad-card whiteBG ad-user-dashboard" style="background-image:url('<?=BaseUrl;?>media/images/pcs.jpg');">
+              <div class="ad-card bg-white ad-user-dashboard" style="background-image:url('<?=BaseUrl;?>media/images/pcs.jpg');">
 
 
 
-                    <ad-user class="darkBG ad-sm" style="">
+                    <ad-user class="bg-dark ad-sm" style="">
                       <img src="<?=BaseUrl;?>media/images/user/8.jpg" alt="">
                     </ad-user>
                     <a adRouter="<?=BaseUrl;?>account/logout" class="ad-btn ad-round btn-tgreen ad-md outline">Logout</a>

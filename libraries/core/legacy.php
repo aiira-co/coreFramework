@@ -385,7 +385,7 @@ class CoreModel
 
     //This Method is used at the end of a chain to query the DB.
     //it returns an array of objects
-    public function get() : array
+    public function get() : ?array
     {
         $sql = $this->createStatement();
         return $this->query($sql);
@@ -482,7 +482,7 @@ class CoreModel
     function offset(int $n)
     {
         self::$s['offset'] = $n;
-        if (self::$s['order'] == null) {
+        if (!isset(self::$s['order'])) {
             $this->orderBy('id');
         }
         return $this->get();
@@ -525,7 +525,7 @@ class CoreModel
     {
         if (!isset(explode('.', $fields)[1])) {
             for ($i = 0; $i < count(self::$s['table']); $i++) {
-                $fieldVerified = $this->fieldExists(self::$s['table'][$i], $field, self::$s['alias'][$i]);
+                $fieldVerified = $this->fieldExists(self::$s['table'][$i], $fields, self::$s['alias'][$i]);
             }
             self::$s['groupBy'] = $fieldVerified;
         } else {
