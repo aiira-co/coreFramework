@@ -149,7 +149,7 @@ class CoreModel
     // Not tested yet
     public static function sql($sql): self
     {
-        $this->dbSql = $sql ?? null;
+        self::$dbSql = $sql ?? null;
         return new CoreModel;
     }
 
@@ -1047,7 +1047,7 @@ class CoreSession
             $pdo = CORE::getInstance('pdo');
 
             if (self::$table =='') {
-                 $this->SessionInit();
+                 self::SessionInit();
             }
 
             require_once 'config.php';
