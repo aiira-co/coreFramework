@@ -1047,7 +1047,7 @@ class CoreSession
             $pdo = CORE::getInstance('pdo');
 
             if (self::$table =='') {
-                 self::SessionInit();
+                 self::$SessionInit();
             }
 
             require_once 'config.php';

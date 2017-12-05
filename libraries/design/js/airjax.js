@@ -3,7 +3,11 @@ $(document).ready(function () {
   var ajaxURL = $('base').attr('url') + 'cqured.php';
   var wrapper = $('body');
 
- 
+  //to clear input forms after submission
+  var clearFormInputs = null;
+  // navigate to url onn success submission
+  var inputRouterLink = null;
+
   var url;
   // MOUSE EVENTS
   //Responsible for handling click Events
@@ -122,9 +126,38 @@ $(document).ready(function () {
     e.preventDefault();
     wrapper.append('<ad-loading/>');
     var formData = $(this).serialize();
+
+    //Check to clear data after submit or to navigate
+    if ($(this)[0].hasAttribute('ad-form')) {
+      // check for inputs with ad-clear to clear them on success
+      clearFormInputs = $(this);
+    } else {
+      clearFormInputs = null;
+
+    }
+
+    if ($(this)[0].hasAttribute('action')) {
+      //router to action on save
+      inputRouterLink = $(this).attr('action');
+    } else {
+      inputRouterLink = null;
+    }
+
+
     processEvent($(this), $(this).attr('(submit)'), formData);
 
   });
+
+
+
+  function clearForm(form) {
+    // after submission, empty the inputs
+    form.find('[ad-clear]').each(function () {
+      $(this)[0].value='';
+      // console.log($(this));
+
+    });
+  }
 
 
   //responsible for getting data to be airJax-ed
@@ -134,7 +167,10 @@ $(document).ready(function () {
     var data = airData + '&' + triggerData;
     var outlet = trigger[0].hasAttribute('[outlet]') ? $('' + trigger.attr('[outlet]') + '') : 'ad-notify';
     var dataType = trigger[0].hasAttribute('[data-type]') ? trigger.attr('[data-type]') : 'json';
-    requestAirJax(ajaxURL, data, 'POST', dataType, { 'outlet': outlet, 'animate': true });
+    requestAirJax(ajaxURL, data, 'POST', dataType, {
+      'outlet': outlet,
+      'animate': true
+    });
   }
 
   // This function takes the attrubute value and convert them
@@ -163,37 +199,88 @@ $(document).ready(function () {
       }
 
 
-      return { 'airJaxPath': url, 'method': method, 'params': params };
+      return {
+        'airJaxPath': url,
+        'method': method,
+        'params': params
+      };
     }
 
     // var airthod =
     // console.log(airthod);\
 
     // console.log(url);
-    return { 'airJaxPath': url, 'method': method };
+    return {
+      'airJaxPath': url,
+      'method': method
+    };
 
   }
 
 
   //Responsible for loading modals
 
-  wrapper.on('click', '[adModal]', function (e) {
+  wrapper.on('click', '[\\(modal\\)]', function (e) {
     e.preventDefault();
-    $('ad-modal').addClass('ad-show');
-    $('ad-modal').load($(this).attr('adModal'));
+    if($('ad-modal').length != 0){
+
+      $('ad-modal').addClass('ad-show');
+      $('ad-modal').load($(this).attr('(modal)'));
+    }else{
+      let = modalHTML = `<div class="ad-modal ad-show">
+                          
+                          <div class="modal-content">
+                            <div class="ad-card ad-round ad-shadow bg-white text-center is-loading">
+                              <p>LOADING...</p>
+                            </div>  
+                          </div>
+
+                          <button id='closeModal' class="ad-btn ad-icon ad-md ad-round btn-dark" style="position:absolute; top:-16px; right:-16px;">
+                            <i class="fa fa-times"></i>
+                          </button> 
+                        </div>
+                        <div class="ad-overlay"></div>`;
+      wrapper.append(modalHTML);
+      let outlet = $('.ad-modal>div.modal-content');
+      
+      ajaxURL = $(this).attr('(modal)');
+
+      requestAirJax(ajaxURL, {
+        "api": 'airJax'
+      }, 'GET', 'html', {
+        'outlet': outlet,
+        'animate': true
+      });
+    }
 
   });
 
+  // Close Modal
+
+  wrapper.on('click','#closeModal',function(){
+    
+    $('div.ad-modal').addClass('ad-closemodal');
+
+    setTimeout(()=>{
+      $('div.ad-modal').remove();
+      $('div.ad-overlay').remove();
+    },1000);
+  });
 
 
   // adRouter now routerLink click event
 
   wrapper.on('click', '[routerLink]', function () {
+    routerLink($(this).attr('routerLink'));
+  });
 
+
+
+  function routerLink(url) {
     var nextPage;
     var routerOutlet = $('router-outlet');
     var currentPageRouter = window.location.href;
-    var nextPageRouter = $(this).attr('routerLink');
+    var nextPageRouter = url;
     var animate = $('router-outlet').attr('animate');
 
     // console.log(nextPageRouter);
@@ -202,17 +289,23 @@ $(document).ready(function () {
       animate = false;
     }
 
-    if (animate) {
-      wrapper.append('<ad-loading/>');
-    }
+    // if (animate) {
+    // Just add loader for 2G networks
+    wrapper.append('<ad-loading/>');
+    // }
 
-    requestAirJax(nextPageRouter, { "api": 'airJax' }, 'GET', 'html', { 'outlet': routerOutlet, 'animate': animate });
+    requestAirJax(nextPageRouter, {
+      "api": 'airJax'
+    }, 'GET', 'html', {
+      'outlet': routerOutlet,
+      'animate': animate,
+      'routerLink':true
+    });
     history.pushState(null, null, nextPageRouter);
 
     // check any routerLinkActive to apply class
     routerLinkActive(nextPageRouter);
-
-  });
+  }
 
 
 
@@ -291,7 +384,12 @@ $(document).ready(function () {
         if (oldCount != newCount) {
           // loadPage
           autoLoad.attr('ad_count', newCount);
-          requestAirJax(html, { "api": 'airJax' }, 'GET', 'html', { 'outlet': autoLoad, 'animate': true });
+          requestAirJax(html, {
+            "api": 'airJax'
+          }, 'GET', 'html', {
+            'outlet': autoLoad,
+            'animate': true
+          });
         }
 
         // console.log('result is : '+newCount);
@@ -303,7 +401,12 @@ $(document).ready(function () {
 
 
       // console.log('load page every 30 seconds');
-      requestAirJax(html, { "api": 'airJax' }, 'GET', 'html', { 'outlet': autoLoad, 'animate': true });
+      requestAirJax(html, {
+        "api": 'airJax'
+      }, 'GET', 'html', {
+        'outlet': autoLoad,
+        'animate': true
+      });
 
     }
 
@@ -323,7 +426,7 @@ $(document).ready(function () {
 
   // Find a way to initialize this if a person wants to use it
   setInterval(function () {
-    checkSync()// this will run after every 5 seconds
+    checkSync() // this will run after every 5 seconds
   }, 10000);
 
 
@@ -347,11 +450,21 @@ $(document).ready(function () {
       data: $data
 
     }).done(function (data) {
-      loadData(data, $params.outlet, $params.animate, $dataType);
+      loadData(data, $params.outlet, $params.animate, $dataType, $params.routerLink ? $params.routerLink : false);
 
     }).fail(function (jqXHR, textStatus) {
       //do fail stuff
-      console.log(textStatus);
+      console.error(textStatus, jqXHR.responseText);
+      
+
+      if ($('ad-notify > p').length == 0) {
+        wrapper.append('<ad-notify><p></p></ad-notify>');
+        outlet = $('ad-notify > p');
+      } else {
+        outlet = $('ad-notify > p');
+      }
+
+      outlet.html('An Error Occured <span class="color-yellow">[Check Browser Console]</span>');
     });
 
 
@@ -360,7 +473,7 @@ $(document).ready(function () {
 
 
   // Load the ajax result to position
-  function loadData(page, outlet, aimate = false, type = 'html') {
+  function loadData(page, outlet, aimate = false, type = 'html', routerLink = false) {
     // var routerOutlet = $('ad-router');
 
     // console.log(outlet);
@@ -385,7 +498,7 @@ $(document).ready(function () {
 
       setTimeout(function () {
         outlet.removeClass('ad-disappear');
-        $('ad-loading').fadeOut().remove();
+        // $('ad-loading').fadeOut().remove();
       }, 1500);
 
 
@@ -400,18 +513,35 @@ $(document).ready(function () {
       outlet.html(type == 'html' ? page : page.result);
     }
 
+    setTimeout(function () {
+      // outlet.removeClass('ad-disappear');
+      $('ad-loading').fadeOut().remove();
+    }, 1500);
+
     //scroll back to top
     $(outlet).parent().animate({
       scrollTop: 0
     }, 1000);
 
 
+
+    //check if its a submission
+    if (clearFormInputs !== null) {
+      clearForm(clearFormInputs);
+    }
+    if (inputRouterLink !== null) {
+      routerLink(inputRouterLink);
+    }
+
+
     //update the browser tab title to page title if ajax call is the page
     // console.log(wrapper.find(pageTitle));
-    setTimeout(function () {
-      
-      document.title =wrapper.find('pageTitle').attr('label');
-    }, 1000);
+    if(routerLink){
+      setTimeout(function () {
+  
+        document.title = wrapper.find('pageTitle').attr('label');
+      }, 1000);
+    }
 
     // check if script exits, then include else remove
 
