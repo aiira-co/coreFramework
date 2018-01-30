@@ -70,40 +70,90 @@ class Core
     // if class is not available, require the class file, then repeat the
     // process again to instantiate
 
-    public static function getInstance($class)
-    {
+        public static function getInstance($class)
+        {
 
 
-        // check if instance of the class already exist
-        if (isset(self::$instance[$class])) {
-            return self::$instance[$class];
-        } else {
-          // check if class is available
-            if (!class_exists($class)) {
-                self::Autoload($class);
-            }
-
-            // if the argument entered is PDO, then return the Database connection
-            if ($class == 'pdo') {
-                        $adConfig = new AdConfig;
-
-                        //Select the dbtype, whether mysql, mysqli,mssql, oracle, sqlite etc
-                if ($adConfig->dbtype == "mysqli" || $adConfig->dbtype == "mysql") {
-                    self::$instance[$class] = new PDO("mysql:host = $adConfig->host;dbname=$adConfig->db", $adConfig->user, $adConfig->password);
-                } elseif ($adConfig->dbtype == "oracle") {
-                              self::$instance[$class] = new PDO("oci:dbname=".$adConfig->db, $adConfig->user, $adConfig->password);
-                } elseif ($adConfig->dbtype == "mssql") {
-                    self::$instance[$class] = new PDO("mssql:host = $adConfig->host;dbname=$adConfig->db", $adConfig->user, $adConfig->password);
-                }
+            // check if instance of the class already exist
+            if (isset(self::$instance[$class])) {
+                return self::$instance[$class];
             } else {
-                // $formatClass = ucfirst($class)
-                self::$instance[$class] = new $class;
+              // check if class is available
+                if (!class_exists($class)) {
+                    self::Autoload($class);
+                }
+
+                // if the argument entered is PDO, then return the Database connection
+                if ($class == 'pdo') {
+                        self::connectionString($class);
+                } else {
+                    // $formatClass = ucfirst($class)
+                    self::$instance[$class] = new $class;
+                }
+
+                return self::$instance[$class];
+            }
+        }
+
+
+
+
+        // Connection Iterator
+        private static function connectionString($class){
+          $adConfig = new AdConfig;
+
+          // check if the database values are Traversable or array
+          if(!(is_array($adConfig->db) || ($adConfig->db instanceof Traversable))){
+            //Select the dbtype, whether mysql, mysqli,mssql, oracle, sqlite etc
+            switch ($adConfig->dbtype) {
+              case 'mysqli':
+
+                self::$instance[$class] = new PDO("mysql:host = $adConfig->host;dbname=$adConfig->db", $adConfig->user, $adConfig->password);
+                break;
+              case 'oracle':
+                self::$instance[$class] = new PDO("oci:dbname=".$adConfig->db, $adConfig->user, $adConfig->password);
+                break;
+
+              case 'mssql':
+                self::$instance[$class] = new PDO("mssql:host = $adConfig->host;dbname=$adConfig->db", $adConfig->user, $adConfig->password);
+                break;
+
+              default:
+                self::$instance[$class] = new PDO("mysql:host = $adConfig->host;dbname=$adConfig->db", $adConfig->user, $adConfig->password);
+                break;
             }
 
-            return self::$instance[$class];
-        }
-    }
+          }else{
+            //connection to multiple database
+            $conType = 'mysql';
+            switch ($adConfig->dbtype) {
+              case 'mysqli':
+                $conType = 'mysql';
+                break;
+              case 'oracle':
+                $conType = 'oci';
+                break;
 
+              case 'mssql':
+                $conType = 'mssql';
+                break;
+
+              default:
+                $conType = 'mysql';
+                break;
+            }
+            for($i =0; $i < count($adConfig->db); $i++){
+              // echo $adConfig->pass[$i];
+              $host = $adConfig->host[$i];
+              $db = $adConfig->db[$i];
+              self::$instance[$class][$i] = new PDO("$conType:host = $host;dbname=$db",$adConfig->user[$i],$adConfig->password[$i]);
+            }
+
+
+          }
+
+
+        }
 
 
 
@@ -281,7 +331,7 @@ class Core
 
             //getPageTitle
             echo'<pageTitle label="'.self::componentTitle().'"></pageTitle>';
-            
+
       //check if scritps exists
             if (isset($legacy->script)) {
                     echo '<script>'.$legacy->script.'</script>';
@@ -302,7 +352,7 @@ class Core
                     // echo $scriptOpenTag.$script.$scriptCloseTag;
             }
 
-                
+
 
 
       // check if styles exists

@@ -5,7 +5,7 @@ class AirJax
 {
 
     private static $method;
-    private static $params;
+    private static $airParams;
     private static $airJaxPath;
     private static $type="application/json";
 
@@ -17,11 +17,11 @@ class AirJax
             $data  = file_get_contents('php://input');
             self::$airJaxPath = $_POST['airJaxPath']??'/';
             self::$method = $_POST['method']??'constructor';
-            self::$params = $_POST['params']??null;
+            self::$airParams = $_POST['airParams']??null;
         } elseif ($_SERVER['REQUEST_METHOD']== 'GET') {
             self::$airJaxPath = $_GET['airJaxPath']??'/';
             self::$method = $_GET['method']??'constructor';
-            self::$params = $_GET['params']??null;
+            self::$airParams = $_GET['airParams']??null;
         }
 
         if (isset($_SERVER['HTTP_ACCEPT'])) {
@@ -39,7 +39,7 @@ class AirJax
     {
 
         $method = trim(self::$method, ' ');
-        $params =self::$params;
+        $airParams =self::$airParams;
 
 
 
@@ -49,7 +49,7 @@ class AirJax
                 $class->constructor();
             }
 
-            if (is_null($params) || empty($params)) {
+            if (is_null($airParams) || empty($airParams)) {
                 if (self::$type == 'text/html') {
                     header('Content-type:'.self::$type);
                     $class->$method();
@@ -63,11 +63,11 @@ class AirJax
             } else {
                 if (self::$type == 'text/html') {
                     header('Content-type:'.self::$type);
-                    call_user_func_array(array($class,$method), $params);
+                    call_user_func_array(array($class,$method), $airParams);
                 } else {
                     $render = [
                     "notification"=>"Success",
-                    "result" => call_user_func_array(array($class,$method), $params)
+                    "result" => call_user_func_array(array($class,$method), $airParams)
                     ];
 
                     echo self::renderJSON($render);
