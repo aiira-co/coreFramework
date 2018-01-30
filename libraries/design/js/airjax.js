@@ -180,21 +180,21 @@ $(document).ready(function () {
     split = airValue.split('(');
 
     method = split[0];
-    params = split[1].trim().replace(')', ''); //trim the side ) off
+    airParams = split[1].trim().replace(')', ''); //trim the side ) off
     url = window.location.href.split($('base').attr('url'))[1];
-    // console.log(params.length);
-    if (params.length != 0) {
+    // console.log(airParams.length);
+    if (airParams.length != 0) {
 
-      params = params.split(','); //make it object for multiple parameters for the method
+      airParams = airParams.split(','); //make it object for multiple parameters for the method
 
-      count = params.length;
+      count = airParams.length;
 
       // console.log(count);
       for (i = 0; i < count; i++) {
-        // console.log(params[i]);
-        if (params[i][0] == '$') {
+        // console.log(airParams[i]);
+        if (airParams[i][0] == '$') {
           // console.log('yes');
-          params[i] = $('#' + params[i].trim().replace('$', '')).val();
+          airParams[i] = $('#' + airParams[i].trim().replace('$', '')).val();
         }
       }
 
@@ -202,7 +202,7 @@ $(document).ready(function () {
       return {
         'airJaxPath': url,
         'method': method,
-        'params': params
+        'airParams': airParams
       };
     }
 
@@ -359,10 +359,10 @@ $(document).ready(function () {
   function adSync(autoLoad) {
 
     // var autoLoad = $('[adSync]');
-    var params = autoLoad.attr('(adSync)').split(',');
+    var airParams = autoLoad.attr('(adSync)').split(',');
 
-    var html = params[0];
-    var count = params[1]; //trim the side ) off
+    var html = airParams[0];
+    var count = airParams[1]; //trim the side ) off
 
     // check if count is available
     if (count) {
@@ -438,7 +438,7 @@ $(document).ready(function () {
 
 
 
-  function requestAirJax($url, $data, $type = 'POST', $dataType = 'json', $params = null) {
+  function requestAirJax($url, $data, $type = 'POST', $dataType = 'json', $airParams = null) {
 
 
     $.ajax({
@@ -450,7 +450,7 @@ $(document).ready(function () {
       data: $data
 
     }).done(function (data) {
-      loadData(data, $params.outlet, $params.animate, $dataType, $params.routerLink ? $params.routerLink : false);
+      loadData(data, $airParams.outlet, $airParams.animate, $dataType, $airParams.routerLink ? $airParams.routerLink : false);
 
     }).fail(function (jqXHR, textStatus) {
       //do fail stuff
