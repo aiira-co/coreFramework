@@ -63,7 +63,7 @@ declare(strict_types=1);
 if ($adConfig->offline) {
     require_once 'templates'.DS.$adConfig->template.DS.'offline.php';
 } else {
-    require_once 'libraries'.DS.'core'.DS.'core.php';
+    require_once 'core'.DS.'core.php';
     $site = new Core;
 
     $site->Route();

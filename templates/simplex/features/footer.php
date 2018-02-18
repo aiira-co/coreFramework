@@ -15,12 +15,12 @@
 
 
 <!--Scritps-->
-<script src="<?=BaseUrl;?>libraries/design/js/jquery-3.2.1.min.js"></script>
-<script src="<?=BaseUrl;?>libraries/design/js/air.design.js"></script>
+<script src="<?=CDN;?>js/jquery-3.2.1.min.js"></script>
+<script src="<?=CDN;?>js/air.design.js"></script>
 <script src="<?=BaseUrl;?>templates/simplex/js/main.js"></script>
 
 <?php if (AirJax) { ?>
-  <script src="<?=BaseUrl;?>libraries/design/js/airjax.js"></script>
+  <script src="<?=CDN;?>js/airjax.js"></script>
 
 <!-- Component Scripts -->
 <?php } else {

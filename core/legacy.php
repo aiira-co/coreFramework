@@ -129,6 +129,7 @@ class CoreModel
 {
 
     public static $pdo;
+    public static $connections;
     public static $prefix;
     public static $sql;
 
@@ -147,9 +148,17 @@ class CoreModel
 
     //This method is used to store raw sql statement for query
     // Not tested yet
-    public static function sql($sql): self
-    {
-        self::$dbSql = $sql ?? null;
+    public static function sql($sql):self
+    {   self::$pdo = CORE::getInstance('pdo');
+
+                if (!class_exists('AdConfig')) {
+                    require_once 'config.php';
+                }
+                self::$prefix  = (new AdConfig)->dbprefix;
+
+                self::$s =[];
+
+        self::$s['sql'] =  $sql ;
         return new CoreModel;
     }
 
@@ -163,7 +172,14 @@ class CoreModel
 
     public static function table(string $table): self
     {
-        self::$pdo = CORE::getInstance('pdo');
+        self::$connections = CORE::getInstance('pdo');
+        // CHeck FOr mulyidatabse connections
+        if(is_array(self::$connections) || (self::$connections instanceof Traversable)){
+          self::$pdo = self::$connections[0];
+        }else{
+          self::$pdo = self::$connections;
+        }
+
 
         if (!class_exists('AdConfig')) {
             require_once 'config.php';
@@ -387,7 +403,8 @@ class CoreModel
     //it returns an array of objects
     public function get() : ?array
     {
-        $sql = $this->createStatement();
+
+        $sql = self::$s['sql'] ?? $this->createStatement();
         return $this->query($sql);
     }
 
@@ -409,6 +426,19 @@ class CoreModel
     }
 
 
+
+        // This Method returns the Average results of a query.
+    // i.e SELECT AVG(*) ...
+    // returns an integer
+
+    //Mostly use this method to chec is an item already exists and also for [pagination]
+    public function avg($field='*'): ?int
+    {
+        self::$s['field'] = 'AVG('.$field.')';
+        $sql = $this->createStatement();
+
+        return json_decode(json_encode($this->query($sql)), true)[0]['AVG('.$field.')'];
+    }
 
     //This Method is used to query distinct rows
     // i.e SELECT COUNT(*) ...
@@ -862,6 +892,7 @@ class CoreModel
 
     private function query(string $sql, bool $fetchAll = true)
     {
+
         try {
             $query = self::$pdo->prepare($sql);
 
@@ -948,17 +979,59 @@ class CoreModel
             }
 
             // SHOW TABLES FROM suiteinventory LIKE 'person'
+            if(is_array(self::$connections) || (self::$connections instanceof Traversable)){
+              $exists = false;
+              // check all the connnections untill its true;
+              for($j = 0; $j < count(self::$connections); $j++){
+                  // print_r(self::$connections[$j]);
+                if(self::checkTableField('table',self::$connections[$j], $fromDB, $table)){
+                  $exists = true;
+                }
+              }
 
-            if (self::$pdo->query("SHOW TABLES ".$fromDB."LIKE '".self::$prefix.$table."'")->rowCount() == 1) {
-                $tablesExist[$i]=$dbname.self::$prefix.$table;
-                $tableAlias[$i] = $alias;
-            } else {
-                die('The Table '.$dbname.$table.' does not exist in the database');
+
+
+              if ($exists) {
+                  $tablesExist[$i]=$dbname.self::$prefix.$table;
+                  $tableAlias[$i] = $alias;
+              } else {
+                  die('The Table '.$dbname.$table.' does not exist in the database');
+              }
+
+            }else{
+
+              //Single Connection
+              if (self::checkTableField('table',self::$pdo, $fromDB, $table)) {
+                  $tablesExist[$i]=$dbname.self::$prefix.$table;
+                  $tableAlias[$i] = $alias;
+              } else {
+                  die('The Table '.$dbname.$table.' does not exist in the database');
+              }
             }
+
         }
 
 
         return ['tables'=>$tablesExist,'alias'=>$tableAlias];
+    }
+
+
+
+    // Iterator Method to query for the existence of fields and tables
+    private static function checkTableField($type,$con, $subject, $table):bool
+    {
+    switch ($type) {
+      case 'field':
+        return $con->query("SHOW COLUMNS FROM ".self::$prefix.$table." LIKE '".$subject."'") != null;
+        break;
+
+      default:
+        $tableExists = $con->query("SHOW TABLES ".$subject."LIKE '".self::$prefix.$table."'");
+        return $tableExists && $tableExists->rowCount() == 1;
+        break;
+    }
+
+    return false;
     }
 
 
@@ -978,9 +1051,7 @@ class CoreModel
 
         for ($i = 0; $i < $length; $i++) {
             // var_dump($field);
-            
-                                    
-            if (self::$pdo->query("SHOW COLUMNS FROM ".self::$prefix.$table." LIKE '".$field[$i]."'") != null) {
+            if (self::checkTableField('field',self::$pdo, $field[$i], $table)) {
                 $exist .= ','.$alias.'.'.trim($field[$i], ' ');
             // echo $field[$i].'<br/>';
             }
@@ -990,6 +1061,9 @@ class CoreModel
         return trim($exist, ',');
     }
 }
+
+
+
 
 
 

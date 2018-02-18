@@ -31,11 +31,11 @@
 
 
     <!--Links-->
-    <link rel="stylesheet" href="<?=BaseUrl;?>libraries/design/css/air.design.css">
+    <link rel="stylesheet" href="<?=CDN;?>css/air.design.css">
     <link rel="stylesheet" href="<?=BaseUrl;?>templates/simplex/css/main.css">
 
 
-    <link rel="stylesheet" href="<?=BaseUrl;?>libraries/design/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<?=CDN;?>css/font-awesome.min.css">
 
 
     <!-- Component Styles -->
@@ -53,7 +53,7 @@
 
 
     <!--Favicon-->
-    <link href="<?=BaseUrl;?>assets/images/logo/favicon.png" rel="icon" type="image/png"/>
+    <link href="<?=CDN;?>images/logo/favicon.png" rel="icon" type="image/png"/>
 
 
 

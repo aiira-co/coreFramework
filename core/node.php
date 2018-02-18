@@ -39,7 +39,9 @@ class Node
     function airJaxRouter()
     {
         $this->adConfig  =  new AdConfig;
-        require_once $this->adConfig->routerPath;
+
+          require_once '../'.$this->adConfig->routerPath;
+
         $coreRouter = CORE::getInstance('Router');
 
         $airJaxPath = $_POST['airJaxPath']??$_GET['airJaxPath'];
@@ -60,7 +62,7 @@ class Node
         $legacy->set('routerPath', $routerPath);
 
         $aleph = strtolower($this->aleph);
-        $path = 'components'.DS.$aleph.DS.$aleph.'.component.php';
+        $path = '..'.DS.'components'.DS.$aleph.DS.$aleph.'.component.php';
 
         if (file_exists($path)) {
             // echo'file exists';
@@ -83,7 +85,7 @@ class Node
                 echo '<br/> The class '.$class.'does not exist. File: '.$path;
             }
         } else {
-            echo 'file path to component not found';
+            echo 'Node::File path to component not found';
         }
     }
 

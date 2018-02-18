@@ -21,12 +21,9 @@ class Core
             // echo 'Server Name'.$serverName.'<br>';
 
             // attach directory to the serverName if its not public
-            $dir = explode(DS, getcwd());
-            $countDir = count($dir);
+            $dir = basename(dirname($_SERVER['PHP_SELF']));
 
-            $dir = $dir[$countDir - 1];
-
-            $rootPaths = ['htdocs','www'];
+            $rootPaths = ['htdocs','www','public_html'];
             for ($i=0; $i < count($rootPaths); $i++) {
                 if ($dir != $rootPaths[$i]) {
                     $is_root = false;
@@ -39,22 +36,26 @@ class Core
             } else {
                 if ($serverName == $dir) {
                     $baseUrl = $http.$serverName.'/';
-                } else {
+                }else {
                     $baseUrl = $http.$serverName.'/'.$dir.'/';
                 }
             }
         }
 
+        //CDN
+        $cdn = !empty($adConfig->cdn)?$adConfig->cdn:$baseUrl.'assets'.DS
+;
         define('BaseUrl', $baseUrl);
         define('AirJax', $adConfig->airJax);
+        define('CDN',$cdn);
     }
     // This Method is called in the root index.php file.
     // the Method intanciates the node class for routing
     function route()
     {
 
-        require_once 'libraries'.DS.'core'.DS.'node.php';
-        require_once 'libraries'.DS.'core'.DS.'legacy.php';
+        require_once 'core'.DS.'node.php';
+        require_once 'core'.DS.'legacy.php';
         $node = CORE::getInstance('Node');
         $node->router();
         // $this->aleph = $node->aleph;
@@ -165,21 +166,23 @@ class Core
     public static function getModel($model, $path = null)
     {
 
-            $file = $path??'models'.DS.$model .'.model.php';
+            $file =$model .'.model';
 
-            $class = ucfirst($model).'Model';
+            $model = explode('-', $model);
+            $class = isset($model[1]) ? ucfirst($model[0]).ucfirst($model[1]).'Model' :ucfirst($model[0]).'Model';
+            // $class = ucfirst($model).'Model';
         if (class_exists($class)) {
             return new $class;
         } else {
-            if (file_exists($file)) {
-                require_once $file;
+            if (self::autoload($file)) {
+
                 if (class_exists($class)) {
                     return new $class;
                 } else {
                     die('The Class '.$class.' does not exist in the file '.$file);
                 }
             } else {
-                die('The Model Path '.$file.' Was Not FOUND!!');
+                die('The Model '.$file.' Was Not FOUND!!');
             }
         }
     }
@@ -187,56 +190,67 @@ class Core
 
     // Instantiate a Plugin
     //I have never used this plugin before. Work on it.
-    public static function getPlugin($plugin)
-    {
-        require_once 'plugins/index.php';
-        $plugins = new Plugins($plugin);
-
-
-        if (isset($plugins->$plugin)) {
-            $plugin = $plugins->$plugin;
-          // print_r($plugin);
-            $file = $plugin['path'];
-            $class = $plugin['class'];
-
-            if (file_exists($file)) {
-                require_once $file;
-
-                if (class_exists($class)) {
-                    return new $class;
-                } else {
-                    return null;
-                }
-            } else {
-                return null;
-            }
-        } else {
-            return null;
-        }
-
-      //  $plugins;
-    }
-
-
+    // public static function getPlugin($plugin)
+    // {
+    //     require_once 'plugins/index.php';
+    //     $plugins = new Plugins($plugin);
+    //
+    //
+    //     if (isset($plugins->$plugin)) {
+    //         $plugin = $plugins->$plugin;
+    //       // print_r($plugin);
+    //         $file = $plugin['path'];
+    //         $class = $plugin['class'];
+    //
+    //         if (self::autoload(filename)) {
+    //             require_once $file;
+    //
+    //             if (class_exists($class)) {
+    //                 return new $class;
+    //             } else {
+    //                 return null;
+    //             }
+    //         } else {
+    //             return null;
+    //         }
+    //     } else {
+    //         return null;
+    //     }
+    //
+    //   //  $plugins;
+    // }
+    //
+    //
 
 
 
     // Automatically load required for to instatiate the class
-    private static function autoload($class)
+    private static function autoload($class): bool
     {
       // echo memory_get_usage();
         $node = CORE::getInstance('Node'); //check to see if you can reduced memory usage here
-        $paths = ['libraries'.DS.'core','components'.DS.$node->aleph];
+        $paths = [
+          '.',
+          'core',
+          'components'.DS.$node->aleph,
+          'components',
+          'models',
+          '..'.DS.'components',
+          '..'.DS.'models'];
+
         foreach ($paths as $path) {
             $file = $path.DS.strtolower($class).'.php';
 
             // echo '<p>'.$file.'</p>';
 
             if (file_exists($file)) {
+              // echo'found';
                 require_once $file;
                 return true;
             }
         }
+
+        return false;
     }
 
 
@@ -431,15 +445,19 @@ class Core
     {
         $cPath  = 'components'.DS.$component.DS.$component.'.component.php';
         $vPath  = 'components'.DS.$component.DS.$component.'.view.php';
-
-        if (file_exists($cPath)) {
-            require_once $cPath;
+        $cfile =$component.DS.$component.'.component';
+        $vfile =$component.DS.$component.'.view';
+        // echo getcwd();
+        if (self::autoload($cfile) ) {
+            // require_once $cPath;
             $component = explode('-', $component);
             $class = isset($component[1]) ? ucfirst($component[0]).ucfirst($component[1]).'Component' :ucfirst($component[0]).'Component';
             if (class_exists($class)) {
                 $routeComponent = new $class;
 
-                if (file_exists($vPath)) {
+                if (file_exists($vPath) || file_exists('..'.DS.$vPath)) {
+
+                  $vPath = file_exists($vPath)?$vPath:'..'.DS.$vPath;
                     if (method_exists($routeComponent, 'constructor')) {
                         $routeComponent->constructor();
                     }
@@ -461,7 +479,8 @@ class Core
                         }
                     }
 
-                    require_once $vPath;
+                require_once $vPath;
+
                 } else {
                     echo '<h2>The View File <i>'.$vPath.'</i> Was Not Found</h2>';
                 }
@@ -469,7 +488,7 @@ class Core
                 echo '<h2>The Components class <i>'.$class.' </i> does not exist</h2>';
             }
         } else {
-            echo '<h2>The Component File <i>'.$cPath.'</i> Was Not Found</h2>';
+            echo '<h2>The Component File <i>'.$cfile.'</i> Was Not Found</h2>';
         }
     }
 

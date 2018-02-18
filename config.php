@@ -19,7 +19,8 @@ class AdConfig{
 	public $db = 'coredb';
 	public $dbprefix = '';
 
-	public $live_site = '';
+	public $live_site = 'http://127.0.0.1/coreFramework/';
+  public $cdn = '';
 	public $secret = 'Pi1gS3vrtWvNq3O0';
   public $template ="simplex";
   public $routerPath="./app.router.php";

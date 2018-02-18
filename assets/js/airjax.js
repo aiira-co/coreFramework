@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-  var ajaxURL = $('base').attr('url') + 'cqured.php';
+  var ajaxURL = $('base').attr('url') + 'core/cqured.php';
   var wrapper = $('body');
 
   //to clear input forms after submission
@@ -228,21 +228,21 @@ $(document).ready(function () {
       $('ad-modal').load($(this).attr('(modal)'));
     }else{
       let = modalHTML = `<div class="ad-modal ad-show">
-                          
+
                           <div class="modal-content">
                             <div class="ad-card ad-round ad-shadow bg-white text-center is-loading">
                               <p>LOADING...</p>
-                            </div>  
+                            </div>
                           </div>
 
                           <button id='closeModal' class="ad-btn ad-icon ad-md ad-round btn-dark" style="position:absolute; top:-16px; right:-16px;">
                             <i class="fa fa-times"></i>
-                          </button> 
+                          </button>
                         </div>
                         <div class="ad-overlay"></div>`;
       wrapper.append(modalHTML);
       let outlet = $('.ad-modal>div.modal-content');
-      
+
       ajaxURL = $(this).attr('(modal)');
 
       requestAirJax(ajaxURL, {
@@ -258,7 +258,7 @@ $(document).ready(function () {
   // Close Modal
 
   wrapper.on('click','#closeModal',function(){
-    
+
     $('div.ad-modal').addClass('ad-closemodal');
 
     setTimeout(()=>{
@@ -455,7 +455,7 @@ $(document).ready(function () {
     }).fail(function (jqXHR, textStatus) {
       //do fail stuff
       console.error(textStatus, jqXHR.responseText);
-      
+
 
       if ($('ad-notify > p').length == 0) {
         wrapper.append('<ad-notify><p></p></ad-notify>');
@@ -538,7 +538,7 @@ $(document).ready(function () {
     // console.log(wrapper.find(pageTitle));
     if(routerLink){
       setTimeout(function () {
-  
+
         document.title = wrapper.find('pageTitle').attr('label');
       }, 1000);
     }

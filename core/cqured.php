@@ -53,12 +53,12 @@ declare(strict_types=1);
         //check if the page exists,
             //if yes, show page
                 //else, it show error page
+    define('DS', DIRECTORY_SEPARATOR);
 
-    require_once 'config.php';
+    require_once '..'.DS.'config.php';
     $adConfig = new AdConfig;
 
 
-    define('DS', DIRECTORY_SEPARATOR);
 
 
 
@@ -66,14 +66,14 @@ declare(strict_types=1);
 if ($adConfig->offline) {
     echo json_encode(["noti"=>"success","result"=>$adConfig->offline_message]);
 } else {
-    require_once 'libraries'.DS.'core'.DS.'core.php';
+    require_once 'core.php';
   //Check Restrictions
 
     if ($_SERVER['SERVER_NAME'] == $_SERVER['HTTP_HOST']) {
-        require_once 'libraries'.DS.'core'.DS.'airjax.php';
+        require_once 'airjax.php';
         $airJax = new AirJax();
     } elseif (authorization()) {
-        require_once 'libraries'.DS.'core'.DS.'airjax.php';
+        require_once 'airjax.php';
         $airJax = new AirJax();
     } else {
         die('WHO ARE YOU');

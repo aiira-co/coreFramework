@@ -15,8 +15,8 @@
 
 
 <!--Scritps-->
-<script src="<?=BaseUrl;?>libraries/design/js/jquery-3.2.1.min.js"></script>
-<script src="<?=BaseUrl;?>libraries/design/js/air.design.js"></script>
+<script src="<?=CDN;?>js/jquery-3.2.1.min.js"></script>
+<script src="<?=CDN;?>js/air.design.js"></script>
 <script src="<?=BaseUrl;?>templates/sleek/js/main.js"></script>
 
 <?php CORE::componentScript(); ?>
