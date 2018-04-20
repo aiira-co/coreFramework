@@ -111,7 +111,7 @@ $(document).ready(function () {
 
 
   // for keypress, to search, that is auto-complete
-  wrapper.on('change', 'input[\\(change\\)]', function (e) {
+  wrapper.on('change', 'input[\\(change\\)], select[\\(change\\)]', function (e) {
     e.preventDefault();
     wrapper.append('<ad-loading/>');
     var inputValue = $(this).serialize();
@@ -271,12 +271,12 @@ $(document).ready(function () {
   // adRouter now routerLink click event
 
   wrapper.on('click', '[routerLink]', function () {
-    routerLink($(this).attr('routerLink'));
+    routerLinkFx($(this).attr('routerLink'));
   });
 
 
 
-  function routerLink(url) {
+  function routerLinkFx(url) {
     var nextPage;
     var routerOutlet = $('router-outlet');
     var currentPageRouter = window.location.href;
@@ -529,8 +529,13 @@ $(document).ready(function () {
     if (clearFormInputs !== null) {
       clearForm(clearFormInputs);
     }
+
+     // For form action attr
     if (inputRouterLink !== null) {
-      routerLink(inputRouterLink);
+        routerLinkFx(inputRouterLink);
+        
+        // reset to null to prevent infinite loop
+        inputRouterLink = null
     }
 
 

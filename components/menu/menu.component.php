@@ -5,7 +5,7 @@ class MenuComponent
 
     public $title;
 
-    function constructor()
+    function onInit()
     {
     }
 }

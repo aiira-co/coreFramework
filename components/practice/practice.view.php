@@ -1,6 +1,3 @@
-
-
-
 <section class="ad-section ">
 
 <div class="wrapper">

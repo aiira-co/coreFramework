@@ -8,7 +8,7 @@ class CheckComponent
     private $model;
 
 
-    function constructor()
+    function onInit()
     {
 
         $this->model = CORE::getModel('check');

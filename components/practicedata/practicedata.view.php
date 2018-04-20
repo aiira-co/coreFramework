@@ -1,6 +1,5 @@
 
-
-    <tr <?php foreach($data as $row){ ?>>
+  <tr <?php foreach($data as $row){ ?>>
         <td> <div class="ad-icon-letter"><?=$row->name[0];?></div>
         <?=$row->name;?> </td>
         <td><?=$row->gender ? 'Male':'Female';?> </td>

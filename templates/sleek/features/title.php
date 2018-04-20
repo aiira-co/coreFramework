@@ -8,7 +8,7 @@
 
 
 
-    <title><?CORE::componentTitle();?></title>
+    <title><?=CORE::componentTitle();?></title>
 
 
     <!--Links-->
@@ -20,7 +20,7 @@
 
 
     <!-- Component Styles -->
-    <?CORE::componentStyle();?>
+    <?php CORE::componentStyle();?>
 
 
     <!--Favicon-->

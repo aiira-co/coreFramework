@@ -4,7 +4,7 @@ use CoreSession as Session;
 class LogoutComponent
 {
 
-    function constructor()
+    function onInit()
     {
         if (Session::IsLoggedIn()) {
             if (Session::SessionLogout()) {

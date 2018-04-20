@@ -17,7 +17,7 @@ class PracticeComponent
 
 
 
-    function constructor()
+    function onInit()
     {
         $this->model = CORE::getModel('practice');
         $this->params =  CORE::getInstance('params');
@@ -67,9 +67,9 @@ class PracticeComponent
           ];
 
         if ($this->model->addItem($data)) {
-            return 'Item <span class="colorTgreen">successfully</span> saved';
+            return 'Item <span class="color-tgreen">successfully</span> saved';
         } else {
-            return 'Item <span class="colorYellow">could not</span>be to saved. Please try again';
+            return 'Item <span class="color-yellow">could not</span>be to saved. Please try again';
         }
     }
 
@@ -80,12 +80,12 @@ class PracticeComponent
         $data = MW::filterPost($this->personData);
         if (!empty($data)) {
             if ($this->model->updateItem($data, $this->params->edit)) {
-                return 'Item Info has <span class="colorTgreen">successfully<span> been updated';
+                return 'Item Info has <span class="color-tgreen">successfully<span> been updated';
             } else {
-                return 'Item Info has <span class="colorYellow">could not<span> be updated. Please try again';
+                return 'Item Info has <span class="color-yellow">could not<span> be updated. Please try again';
             }
         } else {
-            return ' <span class="colorYellow">No Changes<span> were made to be updated.';
+            return ' <span class="color-yellow">No Changes<span> were made to be updated.';
         }
     }
 
@@ -94,9 +94,9 @@ class PracticeComponent
     function deleteItem($id)
     {
         if ($this->model->deleteItem($id)) {
-            return 'Item <span class="colorTgreen">successfully</span> deleted';
+            return 'Item <span class="color-tgreen">successfully</span> deleted';
         } else {
-            return 'Item <span class="colorYellow">could not</span> be deleted';
+            return 'Item <span class="color-yellow">could not</span> be deleted';
         }
     }
 }

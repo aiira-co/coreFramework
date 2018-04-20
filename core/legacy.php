@@ -37,8 +37,8 @@ class CoreComponent
     {
         $this->router = $router;
         $this->component = $component;
-        if (method_exists($component, 'constructor')) {
-            $component->constructor();
+        if (method_exists($component, 'onInit')) {
+            $component->onInit();
         }
         // echo 'hello controller';
            $this->component();
@@ -523,16 +523,19 @@ class CoreModel
 
 
     //This Method sets the ORDER in which the queried data should display.
-    // i.e ... ORDEY BY 'id' 'ASC'
+    // i.e ... ORDER BY 'id' 'ASC'
     //returns CoreModel
     function orderBy(string $field, int $order = 1): self
     {
 
-        for ($i = 0; $i < count(self::$s['table']); $i++) {
-            $fieldVerified = $this->fieldExists(self::$s['table'][$i], $field, self::$s['alias'][$i]);
+        // check if an alias or function exists in the query
+        if (!isset(explode('.', $field)[1]) || !isset(explode('(', $field)[1])) {
+            for ($i = 0; $i < count(self::$s['table']); $i++) {
+                $fieldVerified = $this->fieldExists(self::$s['table'][$i], $field, self::$s['alias'][$i]);
+            }
+            $field = $fieldVerified;
         }
 
-        $field = $fieldVerified;
 
         if ($order==1) {
             $o = 'DESC';

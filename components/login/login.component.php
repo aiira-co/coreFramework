@@ -8,7 +8,7 @@ class LoginComponent
     public $message;
     public $redirect;
 
-    function constructor()
+    function onInit()
     {
         $this->params = CORE::getInstance('Params');
         if (isset($this->params->redirect)) {

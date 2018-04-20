@@ -15,7 +15,7 @@ class Core
             $baseUrl = $adConfig->live_site;
         } else {
             // /check if its a secured connection
-            $http =isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']=='on' ? 'https://' : 'http://';
+            $http = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']=='on' ? 'https://' : 'http://';
             $serverName = $_SERVER['HTTP_HOST'] ?? $_SERVER['SERVER_NAME'];
 
             // echo 'Server Name'.$serverName.'<br>';
@@ -43,8 +43,7 @@ class Core
         }
 
         //CDN
-        $cdn = !empty($adConfig->cdn)?$adConfig->cdn:$baseUrl.'assets'.DS
-;
+        $cdn = !empty($adConfig->cdn)?$adConfig->cdn:$baseUrl.'assets'.DS;
         define('BaseUrl', $baseUrl);
         define('AirJax', $adConfig->airJax);
         define('CDN',$cdn);
@@ -159,8 +158,7 @@ class Core
 
 
     // Instantiate a Model
-    // This class requires attention
-    // First path must be 'components/model/[name].model.php'
+    // First, path must be '/model/[name].model.php'
     //Also set a second parameter for it to check the path
 
     public static function getModel($model, $path = null)
@@ -186,41 +184,6 @@ class Core
             }
         }
     }
-
-
-    // Instantiate a Plugin
-    //I have never used this plugin before. Work on it.
-    // public static function getPlugin($plugin)
-    // {
-    //     require_once 'plugins/index.php';
-    //     $plugins = new Plugins($plugin);
-    //
-    //
-    //     if (isset($plugins->$plugin)) {
-    //         $plugin = $plugins->$plugin;
-    //       // print_r($plugin);
-    //         $file = $plugin['path'];
-    //         $class = $plugin['class'];
-    //
-    //         if (self::autoload(filename)) {
-    //             require_once $file;
-    //
-    //             if (class_exists($class)) {
-    //                 return new $class;
-    //             } else {
-    //                 return null;
-    //             }
-    //         } else {
-    //             return null;
-    //         }
-    //     } else {
-    //         return null;
-    //     }
-    //
-    //   //  $plugins;
-    // }
-    //
-    //
 
 
 
@@ -355,7 +318,7 @@ class Core
                     $script ="";
 
                 for ($i =0; $i < count($legacy->scriptUrls); $i++) {
-                    $path = './components/'.$legacy->scriptUrls[$i];
+                    $path = '.'.DS.'components'.DS.$legacy->scriptUrls[$i];
                     if (file_exists($path)) {
                         $script .= require_once $path;
                     }
@@ -374,7 +337,7 @@ class Core
                     echo '<style>'.$legacy->style.'</style>';
             } elseif (isset($legacy->styleUrls)) {
                 for ($i =0; $i < count($legacy->styleUrls); $i++) {
-                    echo '<link rel="stylesheet" href="'.BaseUrl.'components/'.$legacy->styleUrls[$i].'">';
+                    echo '<link rel="stylesheet" href="'.BaseUrl.'components'.DS.$legacy->styleUrls[$i].'">';
                 }
             }
         } else {
@@ -458,8 +421,8 @@ class Core
                 if (file_exists($vPath) || file_exists('..'.DS.$vPath)) {
 
                   $vPath = file_exists($vPath)?$vPath:'..'.DS.$vPath;
-                    if (method_exists($routeComponent, 'constructor')) {
-                        $routeComponent->constructor();
+                    if (method_exists($routeComponent, 'onInit')) {
+                        $routeComponent->onInit();
                     }
                     // Make Component variable available to View
                     $routeComponentData = json_decode(json_encode($routeComponent), true);
@@ -537,7 +500,7 @@ class Core
                 echo '<style>'.$legacy->style.'</style>';
             } elseif (isset($legacy->styleUrls)) {
                 for ($i =0; $i < count($legacy->styleUrls); $i++) {
-                    echo '<link rel="stylesheet" href="'.BaseUrl.'components/'.$legacy->styleUrls[$i].'">';
+                    echo '<link rel="stylesheet" href="'.BaseUrl.'components'.DS.$legacy->styleUrls[$i].'">';
                 }
             }
         }
@@ -554,7 +517,7 @@ class Core
     public static function componentScript()
     {
         if (AirJax) {
-            echo '<script src="<?=BaseUrl;?>libraries/design/js/airjax.js"></script>';
+            echo '<script src="'.CDN.'js'.DS.'airjax.js"></script>';
         } else {
           // <!-- Component Scripts -->
 
@@ -562,7 +525,7 @@ class Core
                 echo '<script>'.$legacy->script.'</script>';
             } elseif (isset($legacy->scriptUrls)) {
                 for ($i =0; $i < count($legacy->scriptUrls); $i++) {
-                    echo '<script src="'.BaseUrl.'components/'.$legacy->scriptUrls[$i].'"></script>';
+                    echo '<script src="'.BaseUrl.'components'.DS.$legacy->scriptUrls[$i].'"></script>';
                 }
             }
         }
@@ -575,7 +538,7 @@ class Core
     // <!--First check if its db(Website CMS), if yes, then get the title of the page from the DB,
     // Else get the title of the Page from the $url-->
 
-    public static function componentTitle()
+    public static function componentTitle():string
     {
 
         $legacy = CORE::getInstance('Legacy');
@@ -601,11 +564,11 @@ class Core
   // Method for redirecting.
   // This method is also used in the node class for redirecting routes
 
-    public static function redirect($url, $redirectTo = false, $code = 302)
+    public static function redirect($url, $redirectTo = null, $code = 302)
     {
         $adConfig = new AdConfig;
 
-        if ($redirectTo) {
+        if (!is_null($redirectTo)) {
             $airJaxURL = '&api=airJax';
             $url = $adConfig->airJax ? $url.$redirectTo.$airJaxURL : $url.$redirectTo;
         } else {
@@ -644,66 +607,5 @@ class Core
         require_once 'legacy.php';
         $node = new node;
         $node->airJaxRouter();
-    }
-}
-
-    // import components and services(models)
-
-class import
-{
-    function __construct(string $n, string $p)
-    {
-        $file = getcwd().DS.'components'.DS.$p.'.php';
-
-        if (file_exists($file)) {
-            require_once $file;
-            $this->instance($n);
-        } else {
-            die('Importing file '.$n.' was not found!!');
-        }
-    }
-
-    private function instance(string $n)
-    {
-
-              $class = explode(',', trim($n, ' '));
-
-
-        for ($i = 0; $i < count($class); $i++) {
-            print_r($class[0]);
-            if (class_exists($class[$i])) {
-                $this->set($class[$i], new $class[$i]);
-            } else {
-                die('The Class '.$class[$i].' does not exist in the imported path');
-            }
-        }
-    }
-
-    private function set($key, $value)
-    {
-        $this->$key = $value;
-    }
-}
-
-function import(string $p)
-{
-    $file = getcwd().DS.'components'.DS.$p.'.php';
-
-    if (file_exists($file)) {
-        require_once $file;
-
-        // $class = explode(',',trim($n,' '));
-        //
-        //
-        // for($i = 0; $i < count($class); $i++){
-        //   print_r($class[0]);
-        //   if(class_exists($class[$i])){
-        //     return ${$class[$i]} = new $class[$i];
-        //   }else{
-        //     die('The Class '.$class[$i].' does not exist in the imported path');
-        //   }
-        // }
-    } else {
-        die('Importing file '.$p.' was not found!!');
     }
 }

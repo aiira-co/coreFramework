@@ -12,7 +12,7 @@ class PracticedataComponent
 
 
 
-    function constructor()
+    function onInit()
     {
         $this->model = CORE::getModel('practice');
         $this->params =  CORE::getInstance('Params');

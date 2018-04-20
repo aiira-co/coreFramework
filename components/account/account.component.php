@@ -4,7 +4,7 @@ class AccountComponent{
 
   public $data = 'Welcome back ';
 
-  function constructor(){
+  function onInit(){
     $this->data .= $_SESSION['user_session'];
   }
 }

@@ -9,13 +9,15 @@
 
     ?>
     <ad-right>
-      <ad-header class="ad-flat">
+      <ad-header class="ad-flat bg-white">
         <button type="button" name="button" class="ad-btn ad-flat" id="ad-menu-toggle"><i class="fa fa-bars"></i> &nbsp; &nbsp; MENU</button>
-        <div class="text-center logo" adRouter="<?=BaseUrl;?>">
-          <img src="<?=BaseUrl;?>assets/images/logo/logo.png" class="img-responsive" alt="">
+        <div class="text-center logo" routerLink="<?=BaseUrl;?>">
+          <img src="<?=CDN;?>images/logo/logo.png" class="img-responsive" alt="">
         </div>
 
-        <button type="button" name="button" class="ad-btn ad-flat rFloat" adRouter="<?=BaseUrl;?>practice"><i class="fa fa-user-circle"></i>&nbsp;  &nbsp; CLIENT</button>
+        <a href='http://www.github.com/air-Design' target="_blank" class="ad-btn ad-flat rFloat" >
+          <i class="fa fa-github"></i>&nbsp;  &nbsp; airDesign
+        </a>
       </ad-header>
         <?php
         echo AirJax?'<router-outlet  animate="true" >':null;

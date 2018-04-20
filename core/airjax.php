@@ -16,11 +16,11 @@ class AirJax
         if ($_SERVER['REQUEST_METHOD']== 'POST') {
             $data  = file_get_contents('php://input');
             self::$airJaxPath = $_POST['airJaxPath']??'/';
-            self::$method = $_POST['method']??'constructor';
+            self::$method = $_POST['method']??'onInit';
             self::$airParams = $_POST['airParams']??null;
         } elseif ($_SERVER['REQUEST_METHOD']== 'GET') {
             self::$airJaxPath = $_GET['airJaxPath']??'/';
-            self::$method = $_GET['method']??'constructor';
+            self::$method = $_GET['method']??'onInit';
             self::$airParams = $_GET['airParams']??null;
         }
 
@@ -45,8 +45,8 @@ class AirJax
 
         if (method_exists($class, $method)) {
             //call the constructor method if it exists
-            if (method_exists($class, 'constructor')) {
-                $class->constructor();
+            if (method_exists($class, 'onInit')) {
+                $class->onInit();
             }
 
             if (is_null($airParams) || empty($airParams)) {

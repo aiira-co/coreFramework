@@ -6,7 +6,7 @@ class ContactComponent
     public $test;
     public $title='Contact Form';
 
-    function constructor()
+    function onInit()
     {
         $this->params = CORE::getInstance('Params');
         // $this->test = $this->params->test;

@@ -49,9 +49,19 @@ class Node
         $routerPath = $coreRouter->getPath($airJaxPath);
 
       //Check if it has a authentication property
-        if (isset($routerPath['auth'])) {
-            if ($routerPath['auth'][0]) {
-                $coreRouter->checkSession($routerPath['auth'][1], $routerPath['path']);
+        if (isset($routerPath['authguard'])) {
+            // if ($routerPath['auth'][0]) {
+            //     $coreRouter->checkSession($routerPath['auth'][1], $routerPath['path']);
+            // }
+
+// echo 'authguard exists';
+            for($i= 0; $i < count($routerPath['authguard']); $i++){
+              //check if model exists.
+              $model = CORE::getModel($routerPath['authguard'][$i]);
+              if(!$model->canActivate( $routerPath['path'])){
+                break;
+              }
+
             }
         }
 
@@ -119,12 +129,21 @@ class Node
 
 
             //Check if it has a authentication property
-            if (isset($routerPath['auth'])) {
-                if ($routerPath['auth'][0]) {
-                    $coreRouter->checkSession($routerPath['auth'][1], $routerPath['path']);
+            if (isset($routerPath['authguard'])) {
+                // if ($routerPath['auth'][0]) {
+                //     $coreRouter->checkSession($routerPath['auth'][1], $routerPath['path']);
+                // }
+
+    // echo 'authguard exists';
+                for($i= 0; $i < count($routerPath['authguard']); $i++){
+                  //check if model exists.
+                  $model = CORE::getModel($routerPath['authguard'][$i]);
+                  if(!$model->canActivate( $routerPath['path'])){
+                    break;
+                  }
+
                 }
             }
-
 
 
             // $coreComponent = new CoreComponent($path['component'], $this->router);

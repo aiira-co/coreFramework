@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2017 airDesign.
+ * Copyright (c) 2018 airDesign.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,10 +33,10 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  *
- * @package     [ coreFramework ]
- * @subpackage  [ airCore ]
+ * @package     [ Project-AIR ]
+ * @subpackage  [ coreFramework ]
  * @author      Owusu-Afriyie Kofi <koathecedi@gmail.com>
- * @copyright   2017 airDesign.
+ * @copyright   2018 airDesign.
  * @license     http://www.opensource.org/licenses/bsd-license.php  BSD License
  * @link        http://airdesign.co.nf
  * @version     @@2.00@@

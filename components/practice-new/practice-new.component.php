@@ -10,12 +10,12 @@ class PracticeNewComponent
     private $params;
     private $model;
 
-    function constructor()
+    function onInit()
     {
         $this->model = CORE::getModel('practice');
         $this->params = CORE::getInstance('params');
 
-    
+
 
         if (isset($this->params->itemId)) {
             $this->title ="Edit Item Info";
