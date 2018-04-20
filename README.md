@@ -735,7 +735,7 @@ Each time an event fires, the ``return value`` from the method is displayed in a
 
   class NameComponent{
 
-    function newPerson(string $name){
+    public function newPerson(string $name){
       return 'my name is '.$name;
     }
   }
@@ -747,10 +747,14 @@ Each time an event fires, the ``return value`` from the method is displayed in a
 
   * At the [componentName].view.php file
 ```html
-  <button (click)="newPersonPage()" [outlet]="#summary" [data-type]="html">
-    Save New
+  <button (click)="newPersonPage()" [outlet]="summary" [data-type]="html">
+    Add New
   </button>
 
+  <!-- OR, you can ommit the data-type attrubute, and it will automatically assume html if outlet attribute is present-->
+  <button (click)="recordPage()" [outlet]="summary">
+    View Records
+  </button>
 
   <div id="summary">
     add or view person detail
@@ -763,10 +767,14 @@ Each time an event fires, the ``return value`` from the method is displayed in a
 
   class NameComponent{
 
-    function newPersonPage(){
+    public function newPersonPage(){
       // this will call the new-person.component.php with its view to render
       //  Therefore the return type of this action is an html
-      return CORE::component('new-person');
+       CORE::component('new-person');
+    }
+
+    public function recordPage(){
+      echo '<h1>Record Page</h1>';
     }
   }
 

@@ -75,7 +75,7 @@ $(document).ready(function () {
   wrapper.on('blur', 'input[\\(blur\\)]', function (e) {
     e.preventDefault();
     wrapper.append('<ad-loading/>');
-    var inputValue = $(this).serialize();
+    let inputValue = $(this).serialize();
     processEvent($(this), $(this).attr('(blur)'), inputValue);
   });
 
@@ -86,7 +86,7 @@ $(document).ready(function () {
   wrapper.on('keypress', 'input[\\(keypress\\)]', function () {
     // e.preventDefault();
     wrapper.append('<ad-loading/>');
-    var inputValue = $(this).serialize();
+    let inputValue = $(this).serialize();
     processEvent($(this), $(this).attr('(keypress)'), inputValue);
 
   });
@@ -95,7 +95,7 @@ $(document).ready(function () {
   wrapper.on('keydown', 'input[\\(keydown\\)]', function () {
     // e.preventDefault();
     wrapper.append('<ad-loading/>');
-    var inputValue = $(this).serialize();
+    let inputValue = $(this).serialize();
     processEvent($(this), $(this).attr('(keydown)'), inputValue);
 
   });
@@ -104,7 +104,7 @@ $(document).ready(function () {
   wrapper.on('keyup', 'input[\\(keyup\\)]', function () {
     // e.preventDefault();
     wrapper.append('<ad-loading/>');
-    var inputValue = $(this).serialize();
+    let inputValue = $(this).serialize();
     processEvent($(this), $(this).attr('(keyup)'), inputValue);
 
   });
@@ -114,7 +114,7 @@ $(document).ready(function () {
   wrapper.on('change', 'input[\\(change\\)], select[\\(change\\)]', function (e) {
     e.preventDefault();
     wrapper.append('<ad-loading/>');
-    var inputValue = $(this).serialize();
+    let inputValue = $(this).serialize();
     processEvent($(this), $(this).attr('(change)'), inputValue);
 
     // console.log('change event triggered');
@@ -125,7 +125,7 @@ $(document).ready(function () {
     // stop post to refresh page
     e.preventDefault();
     wrapper.append('<ad-loading/>');
-    var formData = $(this).serialize();
+    let formData = $(this).serialize();
 
     //Check to clear data after submit or to navigate
     if ($(this)[0].hasAttribute('ad-form')) {
@@ -163,10 +163,25 @@ $(document).ready(function () {
   //responsible for getting data to be airJax-ed
   function processEvent(trigger, eventData, triggerData = "") {
     // console.log(trigger);
-    var airData = $.param(airThod(eventData));
-    var data = airData + '&' + triggerData;
-    var outlet = trigger[0].hasAttribute('[outlet]') ? $('' + trigger.attr('[outlet]') + '') : 'ad-notify';
-    var dataType = trigger[0].hasAttribute('[data-type]') ? trigger.attr('[data-type]') : 'json';
+    let airData = $.param(airThod(eventData));
+    let data = airData + '&' + triggerData;
+      let outlet='';
+      let dataType ='';
+
+    if(trigger[0].hasAttribute('[outlet]')){
+          // console.log('outlet found');
+         outlet = $('#' + trigger.attr('[outlet]') + '');
+         dataType = trigger[0].hasAttribute('[data-type]') ? trigger.attr('[data-type]') : 'html';
+    }else{
+        // console.log('no outlet was found');
+         outlet = 'ad-notify';
+         dataType = trigger[0].hasAttribute('[data-type]') ? trigger.attr('[data-type]') : 'json';
+    }
+
+
+    // var outlet = trigger[0].hasAttribute('[outlet]') ? $('#' + trigger.attr('[outlet]') + '') : 'ad-notify';
+    // if outlet is set, then automatically the dataType should be html ubless specified
+
     requestAirJax(ajaxURL, data, 'POST', dataType, {
       'outlet': outlet,
       'animate': true
@@ -277,11 +292,11 @@ $(document).ready(function () {
 
 
   function routerLinkFx(url) {
-    var nextPage;
-    var routerOutlet = $('router-outlet');
-    var currentPageRouter = window.location.href;
-    var nextPageRouter = url;
-    var animate = $('router-outlet').attr('animate');
+    let nextPage;
+    let routerOutlet = $('router-outlet');
+    let currentPageRouter = window.location.href;
+    let nextPageRouter = url;
+    let animate = $('router-outlet').attr('animate');
 
     // console.log(nextPageRouter);
     // console.log(currentPageRouter);
@@ -311,7 +326,7 @@ $(document).ready(function () {
 
   // Apply class of the routerLinkActive to the element if the routerLink value matches the url
   function routerLinkActive(url) {
-    var lActive = $('[routerLinkActive]');
+    let lActive = $('[routerLinkActive]');
     lActive.each(function () {
 
       if ($(this)[0].hasAttribute('routerLink')) {
@@ -463,7 +478,7 @@ $(document).ready(function () {
       } else {
         outlet = $('ad-notify > p');
       }
-
+      $('ad-loading').remove();
       outlet.html('An Error Occured <span class="color-yellow">[Check Browser Console]</span>');
     });
 
@@ -533,7 +548,7 @@ $(document).ready(function () {
      // For form action attr
     if (inputRouterLink !== null) {
         routerLinkFx(inputRouterLink);
-        
+
         // reset to null to prevent infinite loop
         inputRouterLink = null
     }

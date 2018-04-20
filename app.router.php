@@ -45,24 +45,6 @@ $appRouter = [
   [
     'path'=>'account/logout',
     'component'=>'logout'
-  ],
-
-  [
-    'path'=>'math',
-    'title'=>'Mathematics',
-    'component'=>'math'
-  ],
-
-  [
-    'path'=>'add/:x/:y',
-    'title'=>'{{title}}',
-    'component'=>'add'
-  ],
-
-  [
-    'path'=>'check',
-    'component'=>'check',
-    'title'=>'{{title}}'
   ]
 
 ];

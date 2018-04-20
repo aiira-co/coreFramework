@@ -3,14 +3,21 @@
 <div class="wrapper">
     <div class="ad-row">
       <div class="ad-cols-8">
-          <form (submit)="searchItem()" [data-type]='html' [outlet]="tbody" method="POST">
+          <form (submit)="searchItem()" [outlet]="data" method="POST">
               <ad-table class="ad-block ad-flat bg-white">
                   <ad-header class="ad-flat">
                       <h2 class="title"><i class="fa fa-user-circle"></i> &nbsp; List of Clients</h2>
                       <span class="rFloat">
-                        <input type="search"  (keypress)="searchItem()" [data-type]='html' [outlet]="tbody" name="key" value="">
+                        <input type="search"  (keypress)="searchItem()" [outlet]="data" name="key" value="">
                         <button type="submit" name="button" class="ad-btn ad-flat"><i class="fa fa-search"></i></button>
-                        <button type="button" name="button" class="ad-btn ad-flat ad-tip" ad-tip="Add Item" (click)="createNew()" [data-type]='html' [outlet]="#summaryView"><i class="fa fa-plus"></i></button>
+                        <button type="button"
+                        name="button"
+                        class="ad-btn ad-flat ad-tip"
+                        ad-tip="Add Item"
+                        (click)="createNew()"
+                        [outlet]="summaryView">
+                        <i class="fa fa-plus"></i>
+                      </button>
                       </span>
                   </ad-header>
 
@@ -23,7 +30,7 @@
                               <th>Action</th>
                           </tr>
                       </thead>
-                      <tbody (adSync) ="<?=BaseUrl;?>persondata, countData()" >
+                      <tbody id='data' (adSync) ="<?=BaseUrl;?>persondata, countData()" >
                         <?php CORE::component('practicedata');?>
 
                       </tbody>
