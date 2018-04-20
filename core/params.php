@@ -3,19 +3,16 @@
 
 class Params
 {
-
-
-    function __construct()
+    public function __construct()
     {
-
         foreach ($_REQUEST as $key => $value) {
             $this->$key = $value;
         }
     }
 
-    function get($key)
+    public function get($key)
     {
-            return $this->$key ?? null;
+        return $this->$key ?? null;
     }
 
     // function set($key, $value){

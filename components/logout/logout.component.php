@@ -3,8 +3,7 @@ use CoreSession as Session;
 
 class LogoutComponent
 {
-
-    function onInit()
+    public function onInit()
     {
         if (Session::IsLoggedIn()) {
             if (Session::SessionLogout()) {

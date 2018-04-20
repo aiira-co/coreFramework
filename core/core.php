@@ -3,14 +3,12 @@
 
 class Core
 {
-
-
     private static $instance = [];
 
-    function __construct()
+    public function __construct()
     {
         $adConfig = new AdConfig;
-      // check if live_site is ot empty
+        // check if live_site is ot empty
         if (!empty($adConfig->live_site)) {
             $baseUrl = $adConfig->live_site;
         } else {
@@ -36,7 +34,7 @@ class Core
             } else {
                 if ($serverName == $dir) {
                     $baseUrl = $http.$serverName.'/';
-                }else {
+                } else {
                     $baseUrl = $http.$serverName.'/'.$dir.'/';
                 }
             }
@@ -46,13 +44,12 @@ class Core
         $cdn = !empty($adConfig->cdn)?$adConfig->cdn:$baseUrl.'assets'.DS;
         define('BaseUrl', $baseUrl);
         define('AirJax', $adConfig->airJax);
-        define('CDN',$cdn);
+        define('CDN', $cdn);
     }
     // This Method is called in the root index.php file.
     // the Method intanciates the node class for routing
-    function route()
+    public function route()
     {
-
         require_once 'core'.DS.'node.php';
         require_once 'core'.DS.'legacy.php';
         $node = CORE::getInstance('Node');
@@ -70,40 +67,41 @@ class Core
     // if class is not available, require the class file, then repeat the
     // process again to instantiate
 
-        public static function getInstance($class)
-        {
+    public static function getInstance($class)
+    {
 
 
             // check if instance of the class already exist
-            if (isset(self::$instance[$class])) {
-                return self::$instance[$class];
-            } else {
-              // check if class is available
-                if (!class_exists($class)) {
-                    self::Autoload($class);
-                }
-
-                // if the argument entered is PDO, then return the Database connection
-                if ($class == 'pdo') {
-                        self::connectionString($class);
-                } else {
-                    // $formatClass = ucfirst($class)
-                    self::$instance[$class] = new $class;
-                }
-
-                return self::$instance[$class];
+        if (isset(self::$instance[$class])) {
+            return self::$instance[$class];
+        } else {
+            // check if class is available
+            if (!class_exists($class)) {
+                self::Autoload($class);
             }
+
+            // if the argument entered is PDO, then return the Database connection
+            if ($class == 'pdo') {
+                self::connectionString($class);
+            } else {
+                // $formatClass = ucfirst($class)
+                self::$instance[$class] = new $class;
+            }
+
+            return self::$instance[$class];
         }
+    }
 
 
 
 
-        // Connection Iterator
-        private static function connectionString($class){
-          $adConfig = new AdConfig;
+    // Connection Iterator
+    private static function connectionString($class)
+    {
+        $adConfig = new AdConfig;
 
-          // check if the database values are Traversable or array
-          if(!(is_array($adConfig->db) || ($adConfig->db instanceof Traversable))){
+        // check if the database values are Traversable or array
+        if (!(is_array($adConfig->db) || ($adConfig->db instanceof Traversable))) {
             //Select the dbtype, whether mysql, mysqli,mssql, oracle, sqlite etc
             switch ($adConfig->dbtype) {
               case 'mysqli':
@@ -122,8 +120,7 @@ class Core
                 self::$instance[$class] = new PDO("mysql:host = $adConfig->host;dbname=$adConfig->db", $adConfig->user, $adConfig->password);
                 break;
             }
-
-          }else{
+        } else {
             //connection to multiple database
             $conType = 'mysql';
             switch ($adConfig->dbtype) {
@@ -142,18 +139,14 @@ class Core
                 $conType = 'mysql';
                 break;
             }
-            for($i =0; $i < count($adConfig->db); $i++){
-              // echo $adConfig->pass[$i];
-              $host = $adConfig->host[$i];
-              $db = $adConfig->db[$i];
-              self::$instance[$class][$i] = new PDO("$conType:host = $host;dbname=$db",$adConfig->user[$i],$adConfig->password[$i]);
+            for ($i =0; $i < count($adConfig->db); $i++) {
+                // echo $adConfig->pass[$i];
+                $host = $adConfig->host[$i];
+                $db = $adConfig->db[$i];
+                self::$instance[$class][$i] = new PDO("$conType:host = $host;dbname=$db", $adConfig->user[$i], $adConfig->password[$i]);
             }
-
-
-          }
-
-
         }
+    }
 
 
 
@@ -163,17 +156,15 @@ class Core
 
     public static function getModel($model, $path = null)
     {
+        $file =$model .'.model';
 
-            $file =$model .'.model';
-
-            $model = explode('-', $model);
-            $class = isset($model[1]) ? ucfirst($model[0]).ucfirst($model[1]).'Model' :ucfirst($model[0]).'Model';
-            // $class = ucfirst($model).'Model';
+        $model = explode('-', $model);
+        $class = isset($model[1]) ? ucfirst($model[0]).ucfirst($model[1]).'Model' :ucfirst($model[0]).'Model';
+        // $class = ucfirst($model).'Model';
         if (class_exists($class)) {
             return new $class;
         } else {
             if (self::autoload($file)) {
-
                 if (class_exists($class)) {
                     return new $class;
                 } else {
@@ -190,7 +181,7 @@ class Core
     // Automatically load required for to instatiate the class
     private static function autoload($class): bool
     {
-      // echo memory_get_usage();
+        // echo memory_get_usage();
         $node = CORE::getInstance('Node'); //check to see if you can reduced memory usage here
         $paths = [
           '.',
@@ -207,7 +198,7 @@ class Core
             // echo '<p>'.$file.'</p>';
 
             if (file_exists($file)) {
-              // echo'found';
+                // echo'found';
                 require_once $file;
                 return true;
             }
@@ -231,11 +222,11 @@ class Core
         $legacy = CORE::getInstance('Legacy');
         $node = CORE::getInstance('Node');
 
-    // Set view in Legacy for CoreApp()
+        // Set view in Legacy for CoreApp()
         $legacy->set('view', $view);
         $legacy->url = $url;
 
-    // Set component in  Legacy for CoreApp()
+        // Set component in  Legacy for CoreApp()
         if (!empty($component)) {
             $legacy->set('component', $component);
         }
@@ -247,8 +238,8 @@ class Core
         $params = CORE::getInstance('Params');
 
 
-    // Check Params to for template variable.
-    // i.e http://server.com/?template=[tmpName]
+        // Check Params to for template variable.
+        // i.e http://server.com/?template=[tmpName]
         if (($params->get('template')) != null) {
             $file = 'templates'.DS.$params->template.DS.'index.php';
             //check if it exists
@@ -259,32 +250,32 @@ class Core
             }
         }
 
-    // API for rendering
+        // API for rendering
 
-    //ajaxCall
+        //ajaxCall
         if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
-              $ajaxRequest = $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest' ? true:false;
+            $ajaxRequest = $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest' ? true:false;
         } else {
-              $ajaxRequest = false;
+            $ajaxRequest = false;
         }
 
         if (($params->get('api')) == 'json' && ($params->get('hash')) == ($adConfig->secret)) {
             echo json_encode($component);
-        } elseif (($ajaxRequest && $adConfig->airJax && $params->get('api') == 'airJax') || ( ($params->get('api')) == 'html' && ($params->get('hash')) == ($adConfig->secret) )) {
+        } elseif (($ajaxRequest && $adConfig->airJax && $params->get('api') == 'airJax') || (($params->get('api')) == 'html' && ($params->get('hash')) == ($adConfig->secret))) {
             $routeComponent= $component;
-      // print_r($routeComponent);
+            // print_r($routeComponent);
 
             $routeComponentData = json_decode(json_encode($routeComponent), true);
             $routeComponentLength = count($routeComponentData);
 
 
             if ($routeComponentLength > 0) {
-                    $routeComponentFields= array_keys($routeComponentData);
+                $routeComponentFields= array_keys($routeComponentData);
 
 
-                    // echo 'routeComponent is not empty';
+                // echo 'routeComponent is not empty';
 
-                    // Make Component variable available to View
+                // Make Component variable available to View
                 for ($i=0; $i < $routeComponentLength; $i++) {
                     ${$routeComponentFields[$i]} = (is_array($routeComponentData[$routeComponentFields[$i]]) || ($routeComponentData[$routeComponentFields[$i]] instanceof Traversable))
                     ? json_decode(json_encode($routeComponentData[$routeComponentFields[$i]])) : $routeComponentData[$routeComponentFields[$i]];
@@ -293,29 +284,29 @@ class Core
 
 
             if ($url || file_exists('components'.DS.$view.'.php')) {
-                    // print_r($legacy);
-                    require_once 'components'.DS.$view.'.php';
+                // print_r($legacy);
+                require_once 'components'.DS.$view.'.php';
             } else {
-                    // echo str_replace('{{'.$search.'}}', $replace, $coreLegacy->view);
-                    // Replace vairbles in template words with component vairbles
+                // echo str_replace('{{'.$search.'}}', $replace, $coreLegacy->view);
+                // Replace vairbles in template words with component vairbles
                 for ($i=0; $i < $routeComponentLength; $i++) {
-                  // echo ${$routeComponentData[$i]};
+                    // echo ${$routeComponentData[$i]};
                     $view = str_replace("{{".$routeComponentFields[$i]."}}", $routeComponentData[$routeComponentFields[$i]], $view);
                 }
-                  // echo $edited;
-                    echo '<br/>'.$view;
+                // echo $edited;
+                echo '<br/>'.$view;
             }
 
             //getPageTitle
             echo'<pageTitle label="'.self::componentTitle().'"></pageTitle>';
 
-      //check if scritps exists
+            //check if scritps exists
             if (isset($legacy->script)) {
-                    echo '<script>'.$legacy->script.'</script>';
+                echo '<script>'.$legacy->script.'</script>';
             } elseif (isset($legacy->scriptUrls)) {
-                    echo '<script  type="text/javascript" >';
+                echo '<script  type="text/javascript" >';
 
-                    $script ="";
+                $script ="";
 
                 for ($i =0; $i < count($legacy->scriptUrls); $i++) {
                     $path = '.'.DS.'components'.DS.$legacy->scriptUrls[$i];
@@ -324,17 +315,17 @@ class Core
                     }
                 }
 
-                    echo  '</script>';
+                echo  '</script>';
 
-                    // echo $scriptOpenTag.$script.$scriptCloseTag;
+                // echo $scriptOpenTag.$script.$scriptCloseTag;
             }
 
 
 
 
-      // check if styles exists
+            // check if styles exists
             if (isset($legacy->style)) {
-                    echo '<style>'.$legacy->style.'</style>';
+                echo '<style>'.$legacy->style.'</style>';
             } elseif (isset($legacy->styleUrls)) {
                 for ($i =0; $i < count($legacy->styleUrls); $i++) {
                     echo '<link rel="stylesheet" href="'.BaseUrl.'components'.DS.$legacy->styleUrls[$i].'">';
@@ -353,22 +344,22 @@ class Core
         $coreNode = CORE::getInstance('Node');
         $coreView = $coreLegacy->view;
 
-    // Make Component vairbles available to view
-    // self::componentVariables($coreLegacy->component);
+        // Make Component vairbles available to view
+        // self::componentVariables($coreLegacy->component);
         $routeComponent= $coreLegacy->component;
-    // print_r($routeComponent);
+        // print_r($routeComponent);
 
         $routeComponentData = json_decode(json_encode($routeComponent), true);
         $routeComponentLength = count($routeComponentData);
 
 
         if ($routeComponentLength > 0) {
-              $routeComponentFields= array_keys($routeComponentData);
+            $routeComponentFields= array_keys($routeComponentData);
 
 
-              // echo 'routeComponent is not empty';
+            // echo 'routeComponent is not empty';
 
-              // Make Component variable available to View
+            // Make Component variable available to View
             for ($i=0; $i < $routeComponentLength; $i++) {
                 ${$routeComponentFields[$i]} = (is_array($routeComponentData[$routeComponentFields[$i]]) || ($routeComponentData[$routeComponentFields[$i]] instanceof Traversable))
                 ? json_decode(json_encode($routeComponentData[$routeComponentFields[$i]])) : $routeComponentData[$routeComponentFields[$i]];
@@ -381,28 +372,28 @@ class Core
             $coreFile = 'components'.DS.strtolower($coreView).'.php';
 
             if (file_exists($coreFile)) {
-                  require_once $coreFile;
+                require_once $coreFile;
             } else {
-                  echo '<h2>The View File <i>'.$coreFile.'</i> Was Not Found</h2>';
+                echo '<h2>The View File <i>'.$coreFile.'</i> Was Not Found</h2>';
             }
         } else {
-                // echo str_replace('{{'.$search.'}}', $replace, $coreLegacy->view);
-                // Replace vairbles in template words with component vairbles
+            // echo str_replace('{{'.$search.'}}', $replace, $coreLegacy->view);
+            // Replace vairbles in template words with component vairbles
             for ($i=0; $i < $routeComponentLength; $i++) {
-              // echo ${$routeComponentData[$i]};
+                // echo ${$routeComponentData[$i]};
                 $coreLegacy->view = str_replace("{{".$routeComponentFields[$i]."}}", $routeComponentData[$routeComponentFields[$i]], $coreLegacy->view);
             }
-              // echo $edited;
-                echo '<br/>'.$coreLegacy->view;
+            // echo $edited;
+            echo '<br/>'.$coreLegacy->view;
         }
     }
 
 
-  //
-  // First get check if componet exists.
-  // then check if class is available,
-  // if yes, instantiate and render
-  // else require component and display its view with its component exploding
+    //
+    // First get check if componet exists.
+    // then check if class is available,
+    // if yes, instantiate and render
+    // else require component and display its view with its component exploding
 
     public static function component($component)
     {
@@ -411,7 +402,7 @@ class Core
         $cfile =$component.DS.$component.'.component';
         $vfile =$component.DS.$component.'.view';
         // echo getcwd();
-        if (self::autoload($cfile) ) {
+        if (self::autoload($cfile)) {
             // require_once $cPath;
             $component = explode('-', $component);
             $class = isset($component[1]) ? ucfirst($component[0]).ucfirst($component[1]).'Component' :ucfirst($component[0]).'Component';
@@ -419,8 +410,7 @@ class Core
                 $routeComponent = new $class;
 
                 if (file_exists($vPath) || file_exists('..'.DS.$vPath)) {
-
-                  $vPath = file_exists($vPath)?$vPath:'..'.DS.$vPath;
+                    $vPath = file_exists($vPath)?$vPath:'..'.DS.$vPath;
                     if (method_exists($routeComponent, 'onInit')) {
                         $routeComponent->onInit();
                     }
@@ -442,8 +432,7 @@ class Core
                         }
                     }
 
-                require_once $vPath;
-
+                    require_once $vPath;
                 } else {
                     echo '<h2>The View File <i>'.$vPath.'</i> Was Not Found</h2>';
                 }
@@ -465,7 +454,7 @@ class Core
     private static function componentVariables($component = null)
     {
         $routeComponent= $component;
-      // print_r($routeComponent);
+        // print_r($routeComponent);
 
         $routeComponentData = json_decode(json_encode($routeComponent), true);
         $routeComponentLength = count($routeComponentData);
@@ -519,7 +508,7 @@ class Core
         if (AirJax) {
             echo '<script src="'.CDN.'js'.DS.'airjax.js"></script>';
         } else {
-          // <!-- Component Scripts -->
+            // <!-- Component Scripts -->
 
             if (isset($legacy->script)) {
                 echo '<script>'.$legacy->script.'</script>';
@@ -540,7 +529,6 @@ class Core
 
     public static function componentTitle():string
     {
-
         $legacy = CORE::getInstance('Legacy');
         if (isset($legacy->routerPath['title'])) {
             $title=$legacy->routerPath['title'];
@@ -561,8 +549,8 @@ class Core
 
 
 
-  // Method for redirecting.
-  // This method is also used in the node class for redirecting routes
+    // Method for redirecting.
+    // This method is also used in the node class for redirecting routes
 
     public static function redirect($url, $redirectTo = null, $code = 302)
     {
@@ -602,7 +590,6 @@ class Core
 
     public static function airJax()
     {
-
         require_once 'node.php';
         require_once 'legacy.php';
         $node = new node;

@@ -4,11 +4,9 @@ use CoreModel as DB;
 
 class CheckModel
 {
-
-
     private $table='persons';
 
-    function getPersons()
+    public function getPersons()
     {
         return DB::table($this->table)
                     ->where('gender', 1)
@@ -17,7 +15,7 @@ class CheckModel
                     ->get();
     }
 
-    function getSQL()
+    public function getSQL()
     {
         return DB::$sql;
     }

@@ -67,7 +67,7 @@ if ($adConfig->offline) {
     echo json_encode(["noti"=>"success","result"=>$adConfig->offline_message]);
 } else {
     require_once 'core.php';
-  //Check Restrictions
+    //Check Restrictions
 
     if ($_SERVER['SERVER_NAME'] == $_SERVER['HTTP_HOST']) {
         require_once 'airjax.php';

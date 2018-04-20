@@ -3,12 +3,11 @@
 
 class LoginComponent
 {
-
     private $params;
     public $message;
     public $redirect;
 
-    function onInit()
+    public function onInit()
     {
         $this->params = CORE::getInstance('Params');
         if (isset($this->params->redirect)) {
@@ -32,7 +31,7 @@ class LoginComponent
         }
     }
 
-    function verify()
+    public function verify()
     {
 
       //  echo password_hash($_POST['upass'], PASSWORD_DEFAULT);

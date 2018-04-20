@@ -3,16 +3,14 @@
 
 class AirJax
 {
-
     private static $method;
     private static $airParams;
     private static $airJaxPath;
     private static $type="application/json";
 
 
-    function __construct()
+    public function __construct()
     {
-
         if ($_SERVER['REQUEST_METHOD']== 'POST') {
             $data  = file_get_contents('php://input');
             self::$airJaxPath = $_POST['airJaxPath']??'/';
@@ -35,9 +33,8 @@ class AirJax
 
 
 
-    static function processAjaxToPHP($class)
+    public static function processAjaxToPHP($class)
     {
-
         $method = trim(self::$method, ' ');
         $airParams =self::$airParams;
 
@@ -90,9 +87,8 @@ class AirJax
 
 
 
-    static function renderJSON($result)
+    public static function renderJSON($result)
     {
-
         header('Content-type:'.self::$type);
         return json_encode($result);
     }

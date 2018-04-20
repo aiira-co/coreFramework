@@ -2,7 +2,6 @@
 
 class PracticeNewComponent
 {
-
     public $title ="Add New Item";
     public $method = "saveItem()";
     public $item;
@@ -10,7 +9,7 @@ class PracticeNewComponent
     private $params;
     private $model;
 
-    function onInit()
+    public function onInit()
     {
         $this->model = CORE::getModel('practice');
         $this->params = CORE::getInstance('params');
@@ -25,7 +24,7 @@ class PracticeNewComponent
     }
 
 
-    function getItem(int $id)
+    public function getItem(int $id)
     {
         $this->item = $this->model->getItem($id);
     }

@@ -2,10 +2,9 @@
 
 class MenuComponent
 {
-
     public $title;
 
-    function onInit()
+    public function onInit()
     {
     }
 }

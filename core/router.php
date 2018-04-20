@@ -2,162 +2,158 @@
 
  class Router
  {
-
      private $routers = [];
      private $path = [];
 
-     function setRouter(array $r)
+     public function setRouter(array $r)
      {
          $this->routers = $r;
-        }
+     }
 
-        function getRouter():array
-        {
-              return $this->routers;
-        }
+     public function getRouter():array
+     {
+         return $this->routers;
+     }
 
-        function getPath(string $url)
-        {
+     public function getPath(string $url)
+     {
+         $gen = $this->pathGen();
+         $gen->send($url);
+         $val = $gen->current();
+         if ($val) {
+             // echo $val;
+             // echo $gen->getReturn();
+             // echo 'path is found at text ONE';
+             return $this->path;
+         }
 
-              $gen = $this->pathGen();
-              $gen->send($url);
-              $val = $gen->current();
-            if ($val) {
-                // echo $val;
-                // echo $gen->getReturn();
-                // echo 'path is found at text ONE';
-                return $this->path;
-            }
+         $gen->next();
 
-              $gen->next();
-
-               $val = $gen->current();
-
-
-            if ($val) {
-              //  echo $val;
-               // echo $gen->getReturn();
-              //  echo 'path is found at text TWO';
-
-                $gen->next();
-
-                $val = $gen->current();
-                if ($val) {
-                   // echo $val;
-                   // echo $gen->getReturn();
-                   // echo 'path is found at text THREE';
-                    return $this->path;
-                } else {
-                    return null;
-                }
-            } else {
-                return null;
-            }
-        }
+         $val = $gen->current();
 
 
+         if ($val) {
+             //  echo $val;
+             // echo $gen->getReturn();
+             //  echo 'path is found at text TWO';
 
-        function pathGen()
-        {
+             $gen->next();
+
+             $val = $gen->current();
+             if ($val) {
+                 // echo $val;
+                 // echo $gen->getReturn();
+                 // echo 'path is found at text THREE';
+                 return $this->path;
+             } else {
+                 return null;
+             }
+         } else {
+             return null;
+         }
+     }
+
+
+
+     public function pathGen()
+     {
 
               // /case ONE
-              $path = [];
-              $found = false;
+         $path = [];
+         $found = false;
 
 
-              // get the url
-              $url = yield;
+         // get the url
+         $url = yield;
 
-            for ($i = 0; $i < count($this->routers); $i++) {
-                // echo $this->routers[$i]['path'].' </br>';
-                if ($this->routers[$i]['path'] == $url) {
-                      $this->path =  $this->routers[$i];
-                      $found = true;
-                }
-            }
-
-
-
-              yield $found;
+         for ($i = 0; $i < count($this->routers); $i++) {
+             // echo $this->routers[$i]['path'].' </br>';
+             if ($this->routers[$i]['path'] == $url) {
+                 $this->path =  $this->routers[$i];
+                 $found = true;
+             }
+         }
 
 
 
-
-              // case 2
-              $url = explode('/', $url);
-              // print_r($url);
-
-
-
-            for ($i = 0; $i < count($this->routers); $i++) {
-                // echo $this->routers[$i]['path'].' </br>';
-                $pathX = explode('/', $this->routers[$i]['path']);
-
-                if ($pathX[0] == $url[0]) {
-                      $this->path =  $this->routers[$i];
-                      $pathM = $pathX;
-                      $found = true;
-                }
-            }
+         yield $found;
 
 
 
 
-
-              yield $found;
-
-              // case 3
-
-
-              $urlCount = count($url);
-              $pathCount = count($pathM);
-            if ($urlCount == $pathCount) {
-                // print_r($pathM);
-
-                //assign parameters
-                //check is it has a params property
-                $xPath = explode('/:', $this->path['path']);
-                if (isset($xPath[1])) {
-                    $this->checkParams($url, $xPath);
-                }
+         // case 2
+         $url = explode('/', $url);
+         // print_r($url);
 
 
 
-                yield $found;
-            } else {
-                yield false;
-            }
+         for ($i = 0; $i < count($this->routers); $i++) {
+             // echo $this->routers[$i]['path'].' </br>';
+             $pathX = explode('/', $this->routers[$i]['path']);
 
-
-                return $path;
-        }
+             if ($pathX[0] == $url[0]) {
+                 $this->path =  $this->routers[$i];
+                 $pathM = $pathX;
+                 $found = true;
+             }
+         }
 
 
 
 
-    //going to make use of a generator
+
+         yield $found;
+
+         // case 3
 
 
-        function checkParams(array $u, array $p)
-        {
+         $urlCount = count($url);
+         $pathCount = count($pathM);
+         if ($urlCount == $pathCount) {
+             // print_r($pathM);
 
-            for ($i = 1; $i < count($p); $i++) {
-                if (isset($u[$i])) {
-                    // To be called with the params
-                    $_REQUEST[$p[$i]] = $u[$i];
-                } else {
-                    die('The Parameter <b>'.$p[$i].'</b> is not set. <h2>Not found <i>$_GET['.$p[$i].']</i></h2>');
-                }
-            }
-        }
-
+             //assign parameters
+             //check is it has a params property
+             $xPath = explode('/:', $this->path['path']);
+             if (isset($xPath[1])) {
+                 $this->checkParams($url, $xPath);
+             }
 
 
-        function checkSession($url, $returnTo)
-        {
 
-            if (!CoreSession::IsLoggedIn()) {
-                Core::redirect(BaseUrl.$url, $returnTo);
-            }
-        }
-    }
+             yield $found;
+         } else {
+             yield false;
+         }
+
+
+         return $path;
+     }
+
+
+
+
+     //going to make use of a generator
+
+
+     public function checkParams(array $u, array $p)
+     {
+         for ($i = 1; $i < count($p); $i++) {
+             if (isset($u[$i])) {
+                 // To be called with the params
+                 $_REQUEST[$p[$i]] = $u[$i];
+             } else {
+                 die('The Parameter <b>'.$p[$i].'</b> is not set. <h2>Not found <i>$_GET['.$p[$i].']</i></h2>');
+             }
+         }
+     }
+
+
+
+     public function checkSession($url, $returnTo)
+     {
+         if (!CoreSession::IsLoggedIn()) {
+             Core::redirect(BaseUrl.$url, $returnTo);
+         }
+     }
+ }

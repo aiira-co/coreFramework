@@ -5,7 +5,6 @@ use middleWare as MW;
 
 class PracticeComponent
 {
-
     public $title ='Add New Item';
     public $clear = false;
     public $count;
@@ -17,19 +16,19 @@ class PracticeComponent
 
 
 
-    function onInit()
+    public function onInit()
     {
         $this->model = CORE::getModel('practice');
         $this->params =  CORE::getInstance('params');
     }
 
-    function searchItem()
+    public function searchItem()
     {
         $this->params->key = $_POST['key'];
         return CORE::component('practicedata');
     }
 
-    function countData()
+    public function countData()
     {
         $this->count = $this->model->countItems();
 
@@ -41,7 +40,7 @@ class PracticeComponent
 
 
 
-    function createNew(int $id = null)
+    public function createNew(int $id = null)
     {
         if (!empty($id)) {
             $this->params->itemId = $id;
@@ -53,9 +52,8 @@ class PracticeComponent
 
 
 
-    function saveItem()
+    public function saveItem()
     {
-
         $name = isset($_POST['name']) ? $_POST['name'] : null;
         $gender = isset($_POST['gender']) ? $_POST['gender'] : null;
         $email = isset($_POST['email']) ? $_POST['email'] : null;
@@ -75,7 +73,7 @@ class PracticeComponent
 
 
 
-    function updateItem()
+    public function updateItem()
     {
         $data = MW::filterPost($this->personData);
         if (!empty($data)) {
@@ -91,7 +89,7 @@ class PracticeComponent
 
 
 
-    function deleteItem($id)
+    public function deleteItem($id)
     {
         if ($this->model->deleteItem($id)) {
             return 'Item <span class="color-tgreen">successfully</span> deleted';

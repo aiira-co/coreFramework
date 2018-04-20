@@ -1,10 +1,10 @@
 <?php
 
-class AboutComponent{
+class AboutComponent
+{
+    public $title = " About Us";
 
-  public $title = " About Us";
-
-  function onInit(){
-
-  }
-} ?>
+    public function onInit()
+    {
+    }
+}

@@ -3,7 +3,6 @@
 
 class Node
 {
-
     private $route = ['0'=>'aleph','1'=>'beth','2'=>'gimmel','3'=>'daleth','4'=>'hey'];
     public $router = [];
     private $adConfig;
@@ -11,18 +10,18 @@ class Node
 
 
     // Setters & Getters
-    function set($key, $value)
+    public function set($key, $value)
     {
         $this->$key = $value;
     }
 
-    function get($key)
+    public function get($key)
     {
         return $this->$key ?? null;
     }
 
 
-    function router()
+    public function router()
     {
         $this->adConfig  =  new AdConfig;
 
@@ -36,11 +35,11 @@ class Node
 
 
 
-    function airJaxRouter()
+    public function airJaxRouter()
     {
         $this->adConfig  =  new AdConfig;
 
-          require_once '../'.$this->adConfig->routerPath;
+        require_once '../'.$this->adConfig->routerPath;
 
         $coreRouter = CORE::getInstance('Router');
 
@@ -48,20 +47,19 @@ class Node
         $airJaxPath =empty($airJaxPath)?'/':$airJaxPath;
         $routerPath = $coreRouter->getPath($airJaxPath);
 
-      //Check if it has a authentication property
+        //Check if it has a authentication property
         if (isset($routerPath['authguard'])) {
             // if ($routerPath['auth'][0]) {
             //     $coreRouter->checkSession($routerPath['auth'][1], $routerPath['path']);
             // }
 
-// echo 'authguard exists';
-            for($i= 0; $i < count($routerPath['authguard']); $i++){
-              //check if model exists.
-              $model = CORE::getModel($routerPath['authguard'][$i]);
-              if(!$model->canActivate( $routerPath['path'])){
-                break;
-              }
-
+            // echo 'authguard exists';
+            for ($i= 0; $i < count($routerPath['authguard']); $i++) {
+                //check if model exists.
+                $model = CORE::getModel($routerPath['authguard'][$i]);
+                if (!$model->canActivate($routerPath['path'])) {
+                    break;
+                }
             }
         }
 
@@ -77,12 +75,12 @@ class Node
         if (file_exists($path)) {
             // echo'file exists';
             require_once $path;
-              $i = explode('-', $aleph);
+            $i = explode('-', $aleph);
 
-              $class = isset($i[1]) ? ucfirst($i[0]).ucfirst($i[1]) : ucfirst($i[0]);
+            $class = isset($i[1]) ? ucfirst($i[0]).ucfirst($i[1]) : ucfirst($i[0]);
 
 
-                      // $aleph;
+            // $aleph;
             $class = $class.'Component';
             // echo $class;
 
@@ -104,12 +102,12 @@ class Node
 
     private function airRoute()
     {
-      // echo ' app router file exists';
+        // echo ' app router file exists';
         require_once $this->adConfig->routerPath;
         $coreRouter = CORE::getInstance('Router');
-      // print_r($r->getRouter());
+        // print_r($r->getRouter());
 
-      // Get URL and Formate it
+        // Get URL and Formate it
         $url = $_GET['url']??'/';
         $url = $url!='/' ? rtrim($url, '/'):'/';
 
@@ -119,7 +117,7 @@ class Node
         $this->adConfig  =  new AdConfig;
 
 
-      // Check if url was found in the coreRouter
+        // Check if url was found in the coreRouter
         if ($routerPath != null) {
             //Check if it has a redirect property
             if (isset($routerPath['redirectTo'])) {
@@ -134,14 +132,13 @@ class Node
                 //     $coreRouter->checkSession($routerPath['auth'][1], $routerPath['path']);
                 // }
 
-    // echo 'authguard exists';
-                for($i= 0; $i < count($routerPath['authguard']); $i++){
-                  //check if model exists.
-                  $model = CORE::getModel($routerPath['authguard'][$i]);
-                  if(!$model->canActivate( $routerPath['path'])){
-                    break;
-                  }
-
+                // echo 'authguard exists';
+                for ($i= 0; $i < count($routerPath['authguard']); $i++) {
+                    //check if model exists.
+                    $model = CORE::getModel($routerPath['authguard'][$i]);
+                    if (!$model->canActivate($routerPath['path'])) {
+                        break;
+                    }
                 }
             }
 
@@ -168,7 +165,7 @@ class Node
                 $class = isset($i[1]) ? ucfirst($i[0]).ucfirst($i[1]) : ucfirst($i[0]);
 
 
-                        // $aleph;
+                // $aleph;
                 $class = $class.'Component';
 
                 //echo '<br/>'.$class;

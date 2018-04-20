@@ -4,7 +4,6 @@ use middleWare as MW;
 
 class PracticedataComponent
 {
-
     public $model;
     public $data;
     public $personData;
@@ -12,7 +11,7 @@ class PracticedataComponent
 
 
 
-    function onInit()
+    public function onInit()
     {
         $this->model = CORE::getModel('practice');
         $this->params =  CORE::getInstance('Params');
@@ -20,9 +19,8 @@ class PracticedataComponent
         $this->items();
     }
 
-    function items()
+    public function items()
     {
-
         $this->data = $this->model->getItems($this->key);
     }
 }

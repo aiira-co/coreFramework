@@ -1,12 +1,11 @@
 <?php
 
-class AccountComponent{
+class AccountComponent
+{
+    public $data = 'Welcome back ';
 
-  public $data = 'Welcome back ';
-
-  function onInit(){
-    $this->data .= $_SESSION['user_session'];
-  }
+    public function onInit()
+    {
+        $this->data .= $_SESSION['user_session'];
+    }
 }
-
-?>

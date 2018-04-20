@@ -19,16 +19,18 @@
 <script src="<?=CDN;?>js/air.design.js"></script>
 <script src="<?=BaseUrl;?>templates/simplex/js/main.js"></script>
 
-<?php if (AirJax) { ?>
-  <script src="<?=CDN;?>js/airjax.js"></script>
+<?php if (AirJax) {
+    ?>
+  <script src="<?=CDN; ?>js/airjax.js"></script>
 
 <!-- Component Scripts -->
-<?php } else {
-    if (isset($legacy->script)) {
-        echo '<script>'.$legacy->script.'</script>';
-    } elseif (isset($legacy->scriptUrls)) {
-        for ($i =0; $i < count($legacy->scriptUrls); $i++) {
-            echo '<script src="'.BaseUrl.'components/'.$legacy->scriptUrls[$i].'"></script>';
+<?php
+} else {
+        if (isset($legacy->script)) {
+            echo '<script>'.$legacy->script.'</script>';
+        } elseif (isset($legacy->scriptUrls)) {
+            for ($i =0; $i < count($legacy->scriptUrls); $i++) {
+                echo '<script src="'.BaseUrl.'components/'.$legacy->scriptUrls[$i].'"></script>';
+            }
         }
-    }
-} ?>
+    } ?>

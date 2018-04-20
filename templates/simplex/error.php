@@ -1,6 +1,6 @@
 <html>
     <head>
-         <link rel="stylesheet" href="<?=BaseUrl;?>libraries/design/css/air.design.css">  
+         <link rel="stylesheet" href="<?=BaseUrl;?>libraries/design/css/air.design.css">
         <title>Page Not Found</title>
         <style>
             body{

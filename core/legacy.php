@@ -2,15 +2,12 @@
 // declare(strict_types=1);
 class Legacy
 {
-
-
-
-    function set($key, $value)
+    public function set($key, $value)
     {
         $this->$key = $value;
     }
 
-    function get($key)
+    public function get($key)
     {
         return $this->$key ?? null;
     }
@@ -33,7 +30,7 @@ class CoreComponent
 
     private static $c = [];
 
-    function __construct($component, $router)
+    public function __construct($component, $router)
     {
         $this->router = $router;
         $this->component = $component;
@@ -41,15 +38,15 @@ class CoreComponent
             $component->onInit();
         }
         // echo 'hello controller';
-           $this->component();
+        $this->component();
     }
 
-    static function Init(array $c)
+    public static function Init(array $c)
     {
 
       //Get the keys of the passed component
         $cFields = array_keys($c);
-      //Get the length of the passed component
+        //Get the length of the passed component
         $cLength = count($c);
 
         for ($i = 0; $i < $cLength; $i++) {
@@ -60,9 +57,8 @@ class CoreComponent
     }
 
     // The component function must have an array as an argument not just variables
-    function component()
+    public function component()
     {
-
         $legacy = CORE::getInstance('Legacy');
 
         // Set Title if {{title}
@@ -78,7 +74,7 @@ class CoreComponent
             $legacy->styleUrls = self::$c['styleUrls'];
         }
 
-      // Set SCRIPT
+        // Set SCRIPT
         if (isset(self::$c['script'])) {
             $legacy->script = self::$c['script'];
         } elseif (isset(self::$c['scriptUrls'])) {
@@ -127,7 +123,6 @@ class CoreComponent
 
 class CoreModel
 {
-
     public static $pdo;
     public static $connections;
     public static $prefix;
@@ -149,14 +144,15 @@ class CoreModel
     //This method is used to store raw sql statement for query
     // Not tested yet
     public static function sql($sql):self
-    {   self::$pdo = CORE::getInstance('pdo');
+    {
+        self::$pdo = CORE::getInstance('pdo');
 
-                if (!class_exists('AdConfig')) {
-                    require_once 'config.php';
-                }
-                self::$prefix  = (new AdConfig)->dbprefix;
+        if (!class_exists('AdConfig')) {
+            require_once 'config.php';
+        }
+        self::$prefix  = (new AdConfig)->dbprefix;
 
-                self::$s =[];
+        self::$s =[];
 
         self::$s['sql'] =  $sql ;
         return new CoreModel;
@@ -174,10 +170,10 @@ class CoreModel
     {
         self::$connections = CORE::getInstance('pdo');
         // CHeck FOr mulyidatabse connections
-        if(is_array(self::$connections) || (self::$connections instanceof Traversable)){
-          self::$pdo = self::$connections[0];
-        }else{
-          self::$pdo = self::$connections;
+        if (is_array(self::$connections) || (self::$connections instanceof Traversable)) {
+            self::$pdo = self::$connections[0];
+        } else {
+            self::$pdo = self::$connections;
         }
 
 
@@ -197,7 +193,7 @@ class CoreModel
             if (!empty($tables['alias'])) {
                 self::$s['alias'] = $tables['alias'];
 
-              // print_r($tables['alias']);
+                // print_r($tables['alias']);
             }
         } else {
             die('The Table '.self::$prefix.$table.' does not exists');
@@ -214,7 +210,6 @@ class CoreModel
     //return self
     public function fields(string $fields): self
     {
-
         if (!isset(explode('.', $fields)[1])) {
             $fieldss ='';
             for ($i=0; $i<count(self::$s['table']); $i++) {
@@ -262,7 +257,7 @@ class CoreModel
                    $opValue == "BETWEEN" ||
                    $opValue == "IN" ||
                    $opValue == "NOT IN" ||
-                   $opValue == "LIKE" ) {
+                   $opValue == "LIKE") {
                 if ($value==null) {
                     echo 'fill third arg';
                 } else {
@@ -276,7 +271,7 @@ class CoreModel
             }
         }
 
-      // echo self::$dbWhere;
+        // echo self::$dbWhere;
 
         return new CoreModel;
     }
@@ -291,7 +286,7 @@ class CoreModel
     // returns CoreModel
     public function orWhere(string $field, string $opValue, string $value = null): self
     {
-      //checek if where is already set
+        //checek if where is already set
         if (self::$s['where'] == null) {
             die('Call the method Where(\'id\',$id) before calling this method "orWhere()"');
         }
@@ -316,7 +311,7 @@ class CoreModel
                    $opValue == "BETWEEN" ||
                    $opValue == "IN" ||
                    $opValue == "NOT IN" ||
-                   $opValue == "LIKE" ) {
+                   $opValue == "LIKE") {
                 if ($value==null) {
                     echo 'fill third arg';
                 } else {
@@ -331,7 +326,7 @@ class CoreModel
             }
         }
 
-      // echo self::$dbWhere;
+        // echo self::$dbWhere;
 
         return new CoreModel;
     }
@@ -374,7 +369,7 @@ class CoreModel
                    $opValue == "BETWEEN" ||
                    $opValue == "IN" ||
                    $opValue == "NOT IN" ||
-                   $opValue == "LIKE" ) {
+                   $opValue == "LIKE") {
                 if ($value==null) {
                     echo 'fill third arg';
                 } else {
@@ -389,7 +384,7 @@ class CoreModel
             }
         }
 
-      // echo self::$dbWhere;
+        // echo self::$dbWhere;
 
         return new CoreModel;
     }
@@ -403,7 +398,6 @@ class CoreModel
     //it returns an array of objects
     public function get() : ?array
     {
-
         $sql = self::$s['sql'] ?? $this->createStatement();
         return $this->query($sql);
     }
@@ -427,7 +421,7 @@ class CoreModel
 
 
 
-        // This Method returns the Average results of a query.
+    // This Method returns the Average results of a query.
     // i.e SELECT AVG(*) ...
     // returns an integer
 
@@ -455,7 +449,7 @@ class CoreModel
     //This Method is to set LIMIT for the statement, taking the last ID
     // i.e ... LIMIT 1 ORDER BY id ACS
     // Hence it will limit it to one, order by ID
-    function first()
+    public function first()
     {
         self::$s['limit'] = 1;
         $sql = $this->createStatement();
@@ -469,7 +463,7 @@ class CoreModel
     // This Method is no different from the first() on
     // i.e ... LIMIT 1 ORDER BY id ASC
     // returns an object
-    function single()
+    public function single()
     {
         return $this->first();
     }
@@ -482,7 +476,7 @@ class CoreModel
     // i.e ... LIMIT 1 ORDER BY id DESC
     // Hence it will limit it to one, order by ID
     // returns an object
-    function last()
+    public function last()
     {
         self::$s['limit'] = 1;
         $this->OrderBy('id');
@@ -494,9 +488,9 @@ class CoreModel
 
 
     //This Method is to set LIMIT for the statement
-  // i.e ... LIMIT 5
+    // i.e ... LIMIT 5
     // returns CoreModel for chaining methods
-    function limit(int $limit): self
+    public function limit(int $limit): self
     {
         self::$s['limit'] = $limit;
         return new CoreModel;
@@ -509,7 +503,7 @@ class CoreModel
     //This Method is used to set OFFSET for the SQL statement
     // i.e ... OFFSET 5
     //returns objects. used for pagination
-    function offset(int $n)
+    public function offset(int $n)
     {
         self::$s['offset'] = $n;
         if (!isset(self::$s['order'])) {
@@ -525,7 +519,7 @@ class CoreModel
     //This Method sets the ORDER in which the queried data should display.
     // i.e ... ORDER BY 'id' 'ASC'
     //returns CoreModel
-    function orderBy(string $field, int $order = 1): self
+    public function orderBy(string $field, int $order = 1): self
     {
 
         // check if an alias or function exists in the query
@@ -572,9 +566,8 @@ class CoreModel
 
     // Joining Tables
     // /INNER JOIN
-    function join(string $table, string $alias):self
+    public function join(string $table, string $alias):self
     {
-
         if (self::tableExists($table)) {
             $join = [' INNER JOIN '.self::$prefix.$table.' '.$alias];
             if (!isset(self::$s['joinTables'])) {
@@ -588,27 +581,25 @@ class CoreModel
         return new CoreModel;
     }
 
-   // innerJoin
-   function innerJoin(string $table, string $alias):self
-   {
-
-    if (self::tableExists($table)) {
-        $join = [' INNER JOIN '.self::$prefix.$table.' '.$alias];
-        if (!isset(self::$s['joinTables'])) {
-            self::$s['joinTables'] =[];
+    // innerJoin
+    public function innerJoin(string $table, string $alias):self
+    {
+        if (self::tableExists($table)) {
+            $join = [' INNER JOIN '.self::$prefix.$table.' '.$alias];
+            if (!isset(self::$s['joinTables'])) {
+                self::$s['joinTables'] =[];
+            }
+            self::$s['joinTables'] = array_merge(self::$s['joinTables'], $join);
+        } else {
+            die('The Table '.$table.' does not exists');
         }
-        self::$s['joinTables'] = array_merge(self::$s['joinTables'], $join);
-    } else {
-        die('The Table '.$table.' does not exists');
+
+        return new CoreModel;
     }
 
-       return new CoreModel;
-   }
-
     // fullJoin
-    function fullJoin(string $table, string $alias):self
+    public function fullJoin(string $table, string $alias):self
     {
-
         if (self::tableExists($table)) {
             $join = [' FULL JOIN '.self::$prefix.$table.' '.$alias];
             if (!isset(self::$s['joinTables'])) {
@@ -623,9 +614,8 @@ class CoreModel
     }
 
     // /LEFT JOIN
-    function leftJoin(string $table, string $alias):self
+    public function leftJoin(string $table, string $alias):self
     {
-
         if (self::tableExists($table)) {
             if (!isset(self::$s['joinTables'])) {
                 self::$s['joinTables'] =[];
@@ -645,9 +635,8 @@ class CoreModel
 
 
     // /RIGHT JOIN
-    function rightJoin(string $table, string $alias):self
+    public function rightJoin(string $table, string $alias):self
     {
-
         if (self::tableExists($table)) {
             if (!isset(self::$s['joinTables'])) {
                 self::$s['joinTables'] =[];
@@ -666,9 +655,9 @@ class CoreModel
 
     //Used after a join method to set the condition of the joint table
     //i.e JOIN 'table2' q ON t.q_id = q.id
-    function on(string $jField, string $tField):self
+    public function on(string $jField, string $tField):self
     {
-      // check if fields exists
+        // check if fields exists
         $on = [' ON '.$jField.' = '.$tField];
         if (!isset(self::$s['joinOn'])) {
             self::$s['joinOn'] =[];
@@ -688,9 +677,8 @@ class CoreModel
     //This Method is to ADD / INSERT row(s) of a table`
     //Last to be called at the end of a chain.
 
-    function add(array $data):bool
+    public function add(array $data):bool
     {
-
         $fields = array_keys($data);
         $length = count($fields);
 
@@ -712,15 +700,15 @@ class CoreModel
         $sql = 'INSERT INTO '.self::$prefix;
         $sql .=explode(' ', self::genFieldsTables('tables'))[0].' (';
         $sql .= $field.') VALUES ('.$values.')';
-      // echo $sql;
+        // echo $sql;
 
         for ($i=0; $i < $length; $i++) {
             self::$bindParam[':'.$fields[$i].''] = $data[$fields[$i]];
         }
 
-      // print_r(self::$bindParam);
+        // print_r(self::$bindParam);
 
-      // return true;
+        // return true;
         self::$sql = $sql;
 
 
@@ -741,15 +729,15 @@ class CoreModel
     //Last to be called at the end of a chain.
     //mostly used with where() to specify the id of the table to update.
 
-    function update(array $data):bool
+    public function update(array $data):bool
     {
         $fields = array_keys($data);
 
-      // $basket->set("filds", $fields);
+        // $basket->set("filds", $fields);
 
         $length = count($fields);
 
-      // $basket->set("length", $length);
+        // $basket->set("length", $length);
 
         $field="";
         $values="";
@@ -771,12 +759,12 @@ class CoreModel
         self::$sql = $sql;
 
 
-      // SET bindParam
+        // SET bindParam
         for ($i=0; $i < $length; $i++) {
             self::$bindParam[':'.$fields[$i].''] = $data[$fields[$i]];
         }
-      // echo $sql;
-      // print_r(self::$bindParam);
+        // echo $sql;
+        // print_r(self::$bindParam);
 
 
         if ($this->query($sql)) {
@@ -794,7 +782,7 @@ class CoreModel
     //Last to be called at the end of a chain.
     //mostly used with where() to specify the id of the table to delete.
 
-    function delete():bool
+    public function delete():bool
     {
         $sql = 'DELETE FROM '.self::$prefix;
         $sql .= explode(' ', self::genFieldsTables('tables'))[0];
@@ -803,9 +791,9 @@ class CoreModel
         }
 
         $sql .= (self::$s['where'] == null) ? '' :' WHERE '.str_replace('t.', '', self::$s['where']);
-      // echo self::$s['where'];
+        // echo self::$s['where'];
 
-      // echo $sql;
+        // echo $sql;
         self::$sql = $sql;
 
         if ($this->query($sql)) {
@@ -819,7 +807,7 @@ class CoreModel
 
     private static function genFieldsTables(string $get):string
     {
-      //table iteration
+        //table iteration
         $tables ="";
         $fields ="";
         if (isset(self::$s['table'])) {
@@ -852,13 +840,13 @@ class CoreModel
 
 
       // $tableAlias = isset($alias)?'':' t';
-      // $sql .=' FROM '.self::$prefix.self::$s['table'].$tableAlias;
+        // $sql .=' FROM '.self::$prefix.self::$s['table'].$tableAlias;
 
         $sql = 'SELECT '.self::genFieldsTables('fields');
 
         $sql .= ' FROM '.self::genFieldsTables('tables');
 
-      // Jion iteration
+        // Jion iteration
 
 
         if (isset(self::$s['joinTables'])) {
@@ -873,7 +861,7 @@ class CoreModel
         $sql .= isset(self::$s['limit']) ? ' LIMIT '.self::$s['limit'] : '';
         $sql .= isset(self::$s['offset']) ? ' OFFSET '.self::$s['offset'] : '';
         self::$sql = $sql; //want to have this static
-    //   echo $sql;
+        //   echo $sql;
         return $sql;
     }
 
@@ -895,14 +883,13 @@ class CoreModel
 
     private function query(string $sql, bool $fetchAll = true)
     {
-
         try {
             $query = self::$pdo->prepare($sql);
 
             // Use bindParam to prevent injection
 
-              $fields = array_keys(self::$bindParam);
-              $length = count($fields);
+            $fields = array_keys(self::$bindParam);
+            $length = count($fields);
 
             for ($i=0; $i < $length; $i++) {
                 $query->bindParam($fields[$i], self::$bindParam[$fields[$i]]);
@@ -910,16 +897,16 @@ class CoreModel
 
 
             //   print_r(self::$bindParam);
-              //Empty bindParam;
-              self::$bindParam = [];
+            //Empty bindParam;
+            self::$bindParam = [];
 
             if ($query->execute()) {
                 // If its a SELECT statment
                 if ($sql[0]=='S') {
-                  // $query->rowCount() > 1
+                    // $query->rowCount() > 1
                     return   $fetchAll ? $query->fetchAll(5): $query->fetch(5);
                 } else {
-                  // If its an INSERT statment
+                    // If its an INSERT statment
                     if ($sql[0]=='I') {
                         self::$postId = self::$pdo->lastInsertId();
                     }
@@ -938,8 +925,8 @@ class CoreModel
 
 
 
-  //Method to check if a table exist,
-  // if it does, it querys with it else it takes it out of the fields
+    //Method to check if a table exist,
+    // if it does, it querys with it else it takes it out of the fields
     private static function tableExists($tables):array
     {
         //explode to see how many tables are being queried
@@ -950,10 +937,10 @@ class CoreModel
         $tableAlias =[];
 
         for ($i = 0; $i < $length; $i++) {
-          // Now trim off any whitespaces
+            // Now trim off any whitespaces
             $indexTable = trim($tables[$i], ' ');
 
-          // Explode with DOT '.' to see if the databasename is attached to the table
+            // Explode with DOT '.' to see if the databasename is attached to the table
             $indexTable = explode('.', $indexTable);
             if (isset($indexTable[1])) {
                 $dbname= $indexTable[0].'.';
@@ -966,7 +953,7 @@ class CoreModel
                 $fromDB = '';
             }
 
-          //now see if th table already has an alias set to it, then remove it.
+            //now see if th table already has an alias set to it, then remove it.
             $aliasTable = explode(' ', $table);
             if (isset($aliasTable[1])) {
                 // alias exists
@@ -982,36 +969,34 @@ class CoreModel
             }
 
             // SHOW TABLES FROM suiteinventory LIKE 'person'
-            if(is_array(self::$connections) || (self::$connections instanceof Traversable)){
-              $exists = false;
-              // check all the connnections untill its true;
-              for($j = 0; $j < count(self::$connections); $j++){
-                  // print_r(self::$connections[$j]);
-                if(self::checkTableField('table',self::$connections[$j], $fromDB, $table)){
-                  $exists = true;
+            if (is_array(self::$connections) || (self::$connections instanceof Traversable)) {
+                $exists = false;
+                // check all the connnections untill its true;
+                for ($j = 0; $j < count(self::$connections); $j++) {
+                    // print_r(self::$connections[$j]);
+                    if (self::checkTableField('table', self::$connections[$j], $fromDB, $table)) {
+                        $exists = true;
+                    }
                 }
-              }
 
 
 
-              if ($exists) {
-                  $tablesExist[$i]=$dbname.self::$prefix.$table;
-                  $tableAlias[$i] = $alias;
-              } else {
-                  die('The Table '.$dbname.$table.' does not exist in the database');
-              }
-
-            }else{
+                if ($exists) {
+                    $tablesExist[$i]=$dbname.self::$prefix.$table;
+                    $tableAlias[$i] = $alias;
+                } else {
+                    die('The Table '.$dbname.$table.' does not exist in the database');
+                }
+            } else {
 
               //Single Connection
-              if (self::checkTableField('table',self::$pdo, $fromDB, $table)) {
-                  $tablesExist[$i]=$dbname.self::$prefix.$table;
-                  $tableAlias[$i] = $alias;
-              } else {
-                  die('The Table '.$dbname.$table.' does not exist in the database');
-              }
+                if (self::checkTableField('table', self::$pdo, $fromDB, $table)) {
+                    $tablesExist[$i]=$dbname.self::$prefix.$table;
+                    $tableAlias[$i] = $alias;
+                } else {
+                    die('The Table '.$dbname.$table.' does not exist in the database');
+                }
             }
-
         }
 
 
@@ -1021,9 +1006,9 @@ class CoreModel
 
 
     // Iterator Method to query for the existence of fields and tables
-    private static function checkTableField($type,$con, $subject, $table):bool
+    private static function checkTableField($type, $con, $subject, $table):bool
     {
-    switch ($type) {
+        switch ($type) {
       case 'field':
         return $con->query("SHOW COLUMNS FROM ".self::$prefix.$table." LIKE '".$subject."'") != null;
         break;
@@ -1034,7 +1019,7 @@ class CoreModel
         break;
     }
 
-    return false;
+        return false;
     }
 
 
@@ -1054,9 +1039,9 @@ class CoreModel
 
         for ($i = 0; $i < $length; $i++) {
             // var_dump($field);
-            if (self::checkTableField('field',self::$pdo, $field[$i], $table)) {
+            if (self::checkTableField('field', self::$pdo, $field[$i], $table)) {
                 $exist .= ','.$alias.'.'.trim($field[$i], ' ');
-            // echo $field[$i].'<br/>';
+                // echo $field[$i].'<br/>';
             }
         }
 
@@ -1095,9 +1080,9 @@ class CoreSession
 
 // ==================================================================
 //
-// User Login
+    // User Login
 //
-// ------------------------------------------------------------------
+    // ------------------------------------------------------------------
     private static $user_id;
     private static $table;
     private static $emailField;
@@ -1108,7 +1093,7 @@ class CoreSession
 
 
     // Method for initializing Session
-    static function SessionInit($table = 'user', $emailField = 'email', $usernameField = 'username', $hashField = 'hashword')
+    public static function SessionInit($table = 'user', $emailField = 'email', $usernameField = 'username', $hashField = 'hashword')
     {
         self::$table = $table;
         self::$emailField = $emailField;
@@ -1119,12 +1104,11 @@ class CoreSession
     // Method to Login User
     public static function SessionLogin($uname, $umail, $upass):bool
     {
-
         try {
             $pdo = CORE::getInstance('pdo');
 
             if (self::$table =='') {
-                 self::$SessionInit();
+                self::$SessionInit();
             }
 
             require_once 'config.php';
@@ -1137,8 +1121,8 @@ class CoreSession
 
 
             if ($query->rowCount() > 0) {
-               // check if account is active
-               // echo $userRow->acount_enabled;
+                // check if account is active
+                // echo $userRow->acount_enabled;
                 if ($userRow->account_enabled) {
                     // check is the accout is on lockout
                     if ($userRow->lockout_enabled) {
@@ -1161,7 +1145,7 @@ class CoreSession
                             return false;
                         }
                     } else {
-                       // verify password
+                        // verify password
                         if (password_verify($upass, $userRow->{self::$hashField})) {
                             CoreModel::table(self::$table)
                             ->where('id', $userRow->id)
@@ -1173,10 +1157,10 @@ class CoreSession
                               ]
                                   );
 
-                              $_SESSION['user_session'] = $userRow->id;
-                              $_SESSION['count'] = 0;
-                              self::$user_id = $userRow->id;
-                              return true;
+                            $_SESSION['user_session'] = $userRow->id;
+                            $_SESSION['count'] = 0;
+                            self::$user_id = $userRow->id;
+                            return true;
                         } else {
                             self::$error = 'passwordError';
                             echo 'failed:: '.$userRow->access_failed_count;
@@ -1229,11 +1213,11 @@ class CoreSession
 
 
 
-// ==================================================================
+    // ==================================================================
 //
-// Check If User is logged in
+    // Check If User is logged in
 //
-// ------------------------------------------------------------------
+    // ------------------------------------------------------------------
 
     public static function IsLoggedIn():bool
     {
@@ -1258,11 +1242,11 @@ class CoreSession
 
 
 
-// ==================================================================
+    // ==================================================================
 //
-// Logs User Out
+    // Logs User Out
 //
-// ------------------------------------------------------------------
+    // ------------------------------------------------------------------
 
 
 
@@ -1300,8 +1284,7 @@ class CoreSession
 
 class middleWare
 {
-
-    static function filterPost($default, array $post = null):array
+    public static function filterPost($default, array $post = null):array
     {
         // Set $post to default if its null
         $post = $post??$_POST;
@@ -1336,7 +1319,7 @@ class middleWare
             // $update = array();
 
             if (in_array($postKeys[$i], $defaultKeys)) {
-              // echo $postKeys[$i].' --> '.$post[$postKeys[$i]].'<br/>';
+                // echo $postKeys[$i].' --> '.$post[$postKeys[$i]].'<br/>';
                 $key =$postKeys[$i];
                 $value = $post[$key];
                 if ($post[$key] != $default[$key]) {
