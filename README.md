@@ -186,7 +186,7 @@ $appRouter = [
   //App Component does not contain any Authorization
   ['path'=>'/', 'component'=>'app', 'title'=>'Welcome Home'],
 
-  //Users Component does contains Authorization
+  //Users Component contains Authorization
   [
   'path'=>'users',
   'component'=>'users',
@@ -230,7 +230,8 @@ class AuthenticateModel{
 * The $url parameter of the method is automatically passed in by coreFramework: That is, the path you are trying to access.
 
 * CoreSession::IsLoggedIn() is a static method in coreFramework used to check if a users is LoggedIn.
-* This method specifically checks if the $_SESSION['id'] isset.
+  - This method specifically checks if the $_SESSION['id'] isset.
+  - Apart from using tghe in-build authentication at CoreSession you could write your own code to check if a user is logged in.
 
 
 ## MODELS FOLDER
@@ -747,7 +748,7 @@ Each time an event fires, the ``return value`` from the method is displayed in a
 
   * At the [componentName].view.php file
 ```html
-  <button (click)="newPersonPage()" [outlet]="summary" [data-type]="html">
+  <button (click)="recordPage()" [outlet]="summary" [data-type]="html">
     Add New
   </button>
 
