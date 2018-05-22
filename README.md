@@ -1,5 +1,5 @@
 # coreFramework (PHP7.1.9+)
-
+![alt text](https://raw.githubusercontent.com/air-Design/airUI-Design-and-Media-.Tutorial-Example/media/clientapp.JPG)
 A PHP 7 Framework for both Website and Application Development. We have also added 'airJax' a javascript framework for Single Page Application experience. It also enables you to call php functions or methods with events from the component of the view's file.
 * eg
 
@@ -33,6 +33,8 @@ If the value of "$live_site" is_empty, the framwork will automatically generate 
 * The value of the variable is used throughout the framework as a constant called BaseUrl. This is used to reference image directory, CSS and Script files, routing etc.
 Open your browser and make sure your Server(Apache) is running and open the site or app.
 Remember that the framework is written in PHP7 so your server must run PHP7 and above for your app to function.
+
+![alt text](https://raw.githubusercontent.com/air-Design/airUI-Design-and-Media-.Tutorial-Example/media/reel.JPG)
 
 # SETTING UP THE DATABASE
 The app contains tow(2) pages which requires a database connection (pratice page and the login page). In the app(coreFramework) folder, there is a coredb.sql file in a folder called (database file). Open your database management studio. In XAMPP open the PHPMYADMIN page and create a database called coredb. Import the sql file (coredb.sql) into the database.
