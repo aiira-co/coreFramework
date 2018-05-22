@@ -1,6 +1,9 @@
 # coreFramework (PHP7.1.9+)
 ![alt text](https://raw.githubusercontent.com/air-Design/airUI-Design-and-Media-.Tutorial-Example/media/clientapp.JPG)
-A PHP 7 Framework for both Website and Application Development. We have also added 'airJax' a javascript framework for Single Page Application experience. It also enables you to call php functions or methods with events from the component of the view's file.
+CoreFramework is a Modular PHP 7.2+ Component Framework for both Website and Application Development. 
+Experience Single Page Application just by enabling 'airJax' in the config.php file. 
+The framework comes with a lite-JavaScript framework 'airJax' which makes it possible 
+for you to call PHP functions/methods from your active component by binding an event to any HTML element.
 * eg
 
 ```html
@@ -10,11 +13,14 @@ A PHP 7 Framework for both Website and Application Development. We have also add
 ```
 
 This will call the addPerson() method in the component when a user clicks of the button.
-This function or framework will only work when its enabled in the 'confile.php' file
+This function or framework will only work when its enabled in the 'confile.php' file.
+
+Query data from database with our in-built library CoreModel with ease.
+eg. DB::table('persons')->where('id',3)->get();
 
 ## GETTING STARTED
 
-Core-Framework is a PHP7 MVC framework. It follows a component based approach where a component contains the component file and its view. A separate file which is a model handles database queries which is used by the component to render data into the browser through the view file.
+Core-Framework is a PHP7 MVC framework. It follows a Component based approach where a component contains the component file and its view. A separate file which is a model handles database queries which is used by the component to render data into the browser through the view file.
 
 ### INSTALLATION
 Download the framework from this page(github), it comes bundled in a zip file format.
