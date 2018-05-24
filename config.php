@@ -16,7 +16,7 @@ class AdConfig
     public $dbtype = 'mysqli';
     public $host = 'localhost';
     public $user = 'root';
-    public $password = '';
+    public $password = 'glory';
     public $db = 'coredb';
     public $dbprefix = '';
 
