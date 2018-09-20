@@ -1,0 +1,11 @@
+{
+ "autoload":{
+   "psr-4":{
+     "Lynq\\Core\\":"vendor/projectair/lynq/core/",
+     "Lynq\\Router\\":"vendor/projectair/lynq/router/",
+     "Lynq\\Entity\\":"vendor/projectair/lynq/entity/",
+     "App\\Models\\":"app/models/"
+   }
+
+ }
+}

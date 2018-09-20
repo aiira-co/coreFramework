@@ -1,70 +1,28 @@
-<?php
+<!DOCTYPE html>
 
-/**
- * Copyright (c) 2018 airDesign.
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *
- *   * Redistributions of source code must retain the above copyright
- *     notice, this list of conditions and the following disclaimer.
- *
- *   * Redistributions in binary form must reproduce the above copyright
- *     notice, this list of conditions and the following disclaimer in
- *     the documentation and/or other materials provided with the
- *     distribution.
- *
- *   * Neither the names of the copyright holders nor the names of the
- *     contributors may be used to endorse or promote products derived
- *     from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
- * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
- * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
- * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
- * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
- * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- *
- * @package     [ Project-AIR ]
- * @subpackage  [ coreFramework ]
- * @author      Owusu-Afriyie Kofi <koathecedi@gmail.com>
- * @copyright   2018 airDesign.
- * @license     http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @link        http://airdesign.co.nf
- * @version     @@2.00@@
- */
-declare(strict_types=1);
+<html lang="en">
 
-    session_start();
+<head>
+  <meta charset="utf-8">
+  <title>ZenoFramework</title>
+  <base href="http://127.0.0.1/framework/">
 
-    //check if the site is offline,
-    //if yes, show offline page and account login,
-        //if login, display site
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="style.css">
 
-    //else if no, show the default page that is set as home.
-        //check if the page exists,
-            //if yes, show page
-                //else, it show error page
+</head>
 
-    require_once 'config.php';
-    $adConfig = new AdConfig;
+<body id='airJax'>
+
+  <?php require_once 'startup.php';?>
 
 
-    define('DS', DIRECTORY_SEPARATOR);
+  <script src="./assets/js/jquery-3.2.1.min.js"></script>
+  <script src="./assets/js/air.design.js"></script>
+  <script src="./assets/js/air.media.js"></script>
+  <script src="./assets/js/airjax.js"></script>
 
-if ($adConfig->offline) {
-    require_once 'templates'.DS.$adConfig->template.DS.'offline.php';
-} else {
-    require_once 'core'.DS.'core.php';
-    $site = new Core;
+</body>
 
-    $site->Route();
-}
+</html>

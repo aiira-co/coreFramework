@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
-  var ajaxURL = $('base').attr('url') + 'core/cqured.php';
-  var wrapper = $('body');
+  var ajaxURL = $('base').attr('href') + 'startup.php';
+  var wrapper = $('#airJax');
 
   //to clear input forms after submission
   var clearFormInputs = null;
@@ -11,6 +11,24 @@ $(document).ready(function () {
   var url;
   // MOUSE EVENTS
   //Responsible for handling click Events
+
+
+
+
+  // first off all, after loading content,check if router-outlet $exists
+
+  if ($('router-outlet').length) {
+    console.log('initialize router-outlet');
+    // send a routerRequest.
+    // hence
+    // search routerLinkActive on Load
+    let urlRoute = window.location.href.split($('base').attr('href'))[1];
+    console.log(urlRoute);
+    routerLinkFx(urlRoute);
+  }
+  // routerLinkActive(urlRoute);
+
+
 
   wrapper.on('click', '[\\(click\\)]', function (e) {
     e.preventDefault();
@@ -153,7 +171,7 @@ $(document).ready(function () {
   function clearForm(form) {
     // after submission, empty the inputs
     form.find('[ad-clear]').each(function () {
-      $(this)[0].value='';
+      $(this)[0].value = '';
       // console.log($(this));
 
     });
@@ -165,17 +183,17 @@ $(document).ready(function () {
     // console.log(trigger);
     let airData = $.param(airThod(eventData));
     let data = airData + '&' + triggerData;
-      let outlet='';
-      let dataType ='';
+    let outlet = '';
+    let dataType = '';
 
-    if(trigger[0].hasAttribute('[outlet]')){
-          // console.log('outlet found');
-         outlet = $('#' + trigger.attr('[outlet]') + '');
-         dataType = trigger[0].hasAttribute('[data-type]') ? trigger.attr('[data-type]') : 'html';
-    }else{
-        // console.log('no outlet was found');
-         outlet = 'ad-notify';
-         dataType = trigger[0].hasAttribute('[data-type]') ? trigger.attr('[data-type]') : 'json';
+    if (trigger[0].hasAttribute('[outlet]')) {
+      // console.log('outlet found');
+      outlet = $('#' + trigger.attr('[outlet]') + '');
+      dataType = trigger[0].hasAttribute('[data-type]') ? trigger.attr('[data-type]') : 'html';
+    } else {
+      // console.log('no outlet was found');
+      outlet = 'ad-notify';
+      dataType = trigger[0].hasAttribute('[data-type]') ? trigger.attr('[data-type]') : 'json';
     }
 
 
@@ -196,7 +214,8 @@ $(document).ready(function () {
 
     method = split[0];
     airParams = split[1].trim().replace(')', ''); //trim the side ) off
-    url = window.location.href.split($('base').attr('url'))[1];
+    url = window.location.href.split($('base').attr('href'))[1];
+    url = url == '' ? '/' : url;
     // console.log(airParams.length);
     if (airParams.length != 0) {
 
@@ -215,8 +234,7 @@ $(document).ready(function () {
 
 
       return {
-        'airJaxPath': url,
-        'method': method,
+        'airJaxPath': url + ':' + method,
         'airParams': airParams
       };
     }
@@ -226,8 +244,7 @@ $(document).ready(function () {
 
     // console.log(url);
     return {
-      'airJaxPath': url,
-      'method': method
+      'airJaxPath': url + ':' + method
     };
 
   }
@@ -237,11 +254,11 @@ $(document).ready(function () {
 
   wrapper.on('click', '[\\(modal\\)]', function (e) {
     e.preventDefault();
-    if($('ad-modal').length != 0){
+    if ($('ad-modal').length != 0) {
 
       $('ad-modal').addClass('ad-show');
       $('ad-modal').load($(this).attr('(modal)'));
-    }else{
+    } else {
       let = modalHTML = `<div class="ad-modal ad-show">
 
                           <div class="modal-content">
@@ -272,14 +289,14 @@ $(document).ready(function () {
 
   // Close Modal
 
-  wrapper.on('click','#closeModal',function(){
+  wrapper.on('click', '#closeModal', function () {
 
     $('div.ad-modal').addClass('ad-closemodal');
 
-    setTimeout(()=>{
+    setTimeout(() => {
       $('div.ad-modal').remove();
       $('div.ad-overlay').remove();
-    },1000);
+    }, 1000);
   });
 
 
@@ -295,7 +312,7 @@ $(document).ready(function () {
     let nextPage;
     let routerOutlet = $('router-outlet');
     let currentPageRouter = window.location.href;
-    let nextPageRouter = url;
+    let nextPageRouter = $('base').attr('href') + url;
     let animate = $('router-outlet').attr('animate');
 
     // console.log(nextPageRouter);
@@ -308,18 +325,19 @@ $(document).ready(function () {
     // Just add loader for 2G networks
     wrapper.append('<ad-loading/>');
     // }
-
-    requestAirJax(nextPageRouter, {
+    verifyUrl = url == '' ? '/' : url;
+    console.log(verifyUrl);
+    requestAirJax(ajaxURL + '?zenoUrlQuery=' + verifyUrl, {
       "api": 'airJax'
     }, 'GET', 'html', {
       'outlet': routerOutlet,
       'animate': animate,
-      'routerLink':true
+      'routerLink': true
     });
     history.pushState(null, null, nextPageRouter);
 
     // check any routerLinkActive to apply class
-    routerLinkActive(nextPageRouter);
+    routerLinkActive(url);
   }
 
 
@@ -361,10 +379,7 @@ $(document).ready(function () {
 
   }
 
-  // search routerLinkActive on Load
-  routerLinkActive(window.location.href);
-
-
+  // console.log(window.location.href.split($('base').attr('href'))[1]==''?);
 
   // AUTOREFRESH DATA
 
@@ -399,12 +414,17 @@ $(document).ready(function () {
         if (oldCount != newCount) {
           // loadPage
           autoLoad.attr('ad_count', newCount);
-          requestAirJax(html, {
+
+          console.log(ajaxURL + '?zenoUrlQuery=' + html);
+
+          requestAirJax(ajaxURL + '?zenoUrlQuery=' + html, {
             "api": 'airJax'
           }, 'GET', 'html', {
             'outlet': autoLoad,
             'animate': true
           });
+
+
         }
 
         // console.log('result is : '+newCount);
@@ -545,18 +565,18 @@ $(document).ready(function () {
       clearForm(clearFormInputs);
     }
 
-     // For form action attr
+    // For form action attr
     if (inputRouterLink !== null) {
-        routerLinkFx(inputRouterLink);
+      routerLinkFx(inputRouterLink);
 
-        // reset to null to prevent infinite loop
-        inputRouterLink = null
+      // reset to null to prevent infinite loop
+      inputRouterLink = null
     }
 
 
     //update the browser tab title to page title if ajax call is the page
     // console.log(wrapper.find(pageTitle));
-    if(routerLink){
+    if (routerLink) {
       setTimeout(function () {
 
         document.title = wrapper.find('pageTitle').attr('label');
